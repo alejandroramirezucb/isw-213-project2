@@ -1,0 +1,8 @@
+{
+  "name": "psicoraiden",
+  "version": "1.0.0",
+  "description": "Sistema de gestión de citas psicológicas",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}

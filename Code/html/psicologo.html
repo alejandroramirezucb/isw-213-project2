@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Psicoraiden - Panel del Psicólogo</title>
+    <link
+      rel="stylesheet"
+      href="../css/base.css" />
+    <link
+      rel="stylesheet"
+      href="../css/componentes.css" />
+    <link
+      rel="stylesheet"
+      href="../css/psicologo.css" />
+  </head>
+  <body class="pagina pagina--dashboard">
+    <header class="encabezado">
+      <div class="encabezado__contenido">
+        <h1 class="encabezado__logo">Psicoraiden</h1>
+        <nav class="navegacion">
+          <button
+            class="navegacion__boton navegacion__boton--activo"
+            data-vista="panel">
+            <span>Panel</span>
+          </button>
+          <button
+            class="navegacion__boton"
+            data-vista="configuracion">
+            <span>Horarios</span>
+          </button>
+          <button
+            class="navegacion__boton"
+            data-vista="historial">
+            <span>Historial</span>
+          </button>
+        </nav>
+        <div class="encabezado__usuario">
+          <span
+            class="encabezado__nombre"
+            id="nombre-usuario"
+            >Psicólogo</span
+          >
+          <button
+            class="boton boton--secundario boton--pequeno"
+            id="btn-cerrar-sesion">
+            Salir
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="contenido-principal">
+      <section
+        class="vista vista--activa"
+        id="vista-panel">
+        <header class="vista__encabezado">
+          <h2 class="vista__titulo">Panel de Citas</h2>
+          <p class="vista__descripcion">Gestiona tus citas del día y semana</p>
+        </header>
+
+        <div class="periodo">
+          <button
+            class="periodo__boton periodo__boton--activo"
+            data-periodo="hoy">
+            Hoy
+          </button>
+          <button
+            class="periodo__boton"
+            data-periodo="semana">
+            Esta Semana
+          </button>
+        </div>
+
+        <article
+          class="resumen"
+          id="resumen-dia">
+          <div class="resumen__tarjeta">
+            <span
+              class="resumen__numero"
+              id="total-citas-dia"
+              >0</span
+            >
+            <span class="resumen__texto">Citas hoy</span>
+          </div>
+          <div class="resumen__tarjeta">
+            <span
+              class="resumen__numero"
+              id="siguiente-cita-hora"
+              >--:--</span
+            >
+            <span class="resumen__texto">Siguiente</span>
+          </div>
+        </article>
+
+        <section
+          class="panel-citas"
+          id="panel-citas">
+          <h3 class="panel-citas__encabezado">
+            <span id="titulo-periodo">Citas de Hoy</span>
+            <span
+              class="panel-citas__fecha"
+              id="fecha-actual"></span>
+          </h3>
+          <div
+            class="panel-citas__lista"
+            id="lista-citas-panel"></div>
+          <p
+            class="mensaje-vacio mensaje-vacio--oculto"
+            id="sin-citas-panel">
+            No hay citas programadas para este período.
+          </p>
+        </section>
+      </section>
+
+      <section
+        class="vista"
+        id="vista-configuracion">
+        <header class="vista__encabezado">
+          <h2 class="vista__titulo">Configuración de Horarios</h2>
+          <p class="vista__descripcion">
+            Define tus días y horarios de atención
+          </p>
+        </header>
+
+        <form
+          class="formulario-horarios"
+          id="formulario-horarios">
+          <div
+            class="configuracion"
+            id="dias-semana">
+            <article
+              class="configuracion__dia"
+              data-dia="1">
+              <label class="configuracion__toggle">
+                <input
+                  type="checkbox"
+                  class="configuracion__checkbox"
+                  data-dia="1" />
+                <span class="configuracion__nombre">Lunes</span>
+              </label>
+              <div
+                class="configuracion__horarios configuracion__horarios--oculto">
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Inicio</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="inicio"
+                    value="08:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Fin</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="fin"
+                    value="17:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Duración</label>
+                  <select class="configuracion__duracion">
+                    <option value="30">30 min</option>
+                    <option value="45">45 min</option>
+                    <option
+                      value="60"
+                      selected>
+                      60 min
+                    </option>
+                    <option value="90">90 min</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+            <article
+              class="configuracion__dia"
+              data-dia="2">
+              <label class="configuracion__toggle">
+                <input
+                  type="checkbox"
+                  class="configuracion__checkbox"
+                  data-dia="2" />
+                <span class="configuracion__nombre">Martes</span>
+              </label>
+              <div
+                class="configuracion__horarios configuracion__horarios--oculto">
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Inicio</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="inicio"
+                    value="08:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Fin</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="fin"
+                    value="17:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Duración</label>
+                  <select class="configuracion__duracion">
+                    <option value="30">30 min</option>
+                    <option value="45">45 min</option>
+                    <option
+                      value="60"
+                      selected>
+                      60 min
+                    </option>
+                    <option value="90">90 min</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+            <article
+              class="configuracion__dia"
+              data-dia="3">
+              <label class="configuracion__toggle">
+                <input
+                  type="checkbox"
+                  class="configuracion__checkbox"
+                  data-dia="3" />
+                <span class="configuracion__nombre">Miércoles</span>
+              </label>
+              <div
+                class="configuracion__horarios configuracion__horarios--oculto">
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Inicio</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="inicio"
+                    value="08:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Fin</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="fin"
+                    value="17:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Duración</label>
+                  <select class="configuracion__duracion">
+                    <option value="30">30 min</option>
+                    <option value="45">45 min</option>
+                    <option
+                      value="60"
+                      selected>
+                      60 min
+                    </option>
+                    <option value="90">90 min</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+            <article
+              class="configuracion__dia"
+              data-dia="4">
+              <label class="configuracion__toggle">
+                <input
+                  type="checkbox"
+                  class="configuracion__checkbox"
+                  data-dia="4" />
+                <span class="configuracion__nombre">Jueves</span>
+              </label>
+              <div
+                class="configuracion__horarios configuracion__horarios--oculto">
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Inicio</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="inicio"
+                    value="08:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Fin</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="fin"
+                    value="17:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Duración</label>
+                  <select class="configuracion__duracion">
+                    <option value="30">30 min</option>
+                    <option value="45">45 min</option>
+                    <option
+                      value="60"
+                      selected>
+                      60 min
+                    </option>
+                    <option value="90">90 min</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+            <article
+              class="configuracion__dia"
+              data-dia="5">
+              <label class="configuracion__toggle">
+                <input
+                  type="checkbox"
+                  class="configuracion__checkbox"
+                  data-dia="5" />
+                <span class="configuracion__nombre">Viernes</span>
+              </label>
+              <div
+                class="configuracion__horarios configuracion__horarios--oculto">
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Inicio</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="inicio"
+                    value="08:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Fin</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="fin"
+                    value="17:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Duración</label>
+                  <select class="configuracion__duracion">
+                    <option value="30">30 min</option>
+                    <option value="45">45 min</option>
+                    <option
+                      value="60"
+                      selected>
+                      60 min
+                    </option>
+                    <option value="90">90 min</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+            <article
+              class="configuracion__dia"
+              data-dia="6">
+              <label class="configuracion__toggle">
+                <input
+                  type="checkbox"
+                  class="configuracion__checkbox"
+                  data-dia="6" />
+                <span class="configuracion__nombre">Sábado</span>
+              </label>
+              <div
+                class="configuracion__horarios configuracion__horarios--oculto">
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Inicio</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="inicio"
+                    value="09:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Fin</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="fin"
+                    value="13:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Duración</label>
+                  <select class="configuracion__duracion">
+                    <option value="30">30 min</option>
+                    <option value="45">45 min</option>
+                    <option
+                      value="60"
+                      selected>
+                      60 min
+                    </option>
+                    <option value="90">90 min</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+            <article
+              class="configuracion__dia"
+              data-dia="0">
+              <label class="configuracion__toggle">
+                <input
+                  type="checkbox"
+                  class="configuracion__checkbox"
+                  data-dia="0" />
+                <span class="configuracion__nombre">Domingo</span>
+              </label>
+              <div
+                class="configuracion__horarios configuracion__horarios--oculto">
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Inicio</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="inicio"
+                    value="09:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Fin</label>
+                  <input
+                    type="time"
+                    class="configuracion__tiempo"
+                    data-tipo="fin"
+                    value="12:00" />
+                </div>
+                <div class="configuracion__rango">
+                  <label class="configuracion__etiqueta">Duración</label>
+                  <select class="configuracion__duracion">
+                    <option value="30">30 min</option>
+                    <option value="45">45 min</option>
+                    <option
+                      value="60"
+                      selected>
+                      60 min
+                    </option>
+                    <option value="90">90 min</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <section class="bloques">
+            <h3 class="bloques__titulo">Generar Bloques de Horario</h3>
+            <p class="bloques__descripcion">
+              Genera los bloques de citas disponibles para las próximas semanas.
+            </p>
+            <div class="bloques__rango">
+              <div class="formulario__grupo">
+                <label class="formulario__etiqueta">Desde</label>
+                <input
+                  type="date"
+                  class="formulario__campo"
+                  id="fecha-desde" />
+              </div>
+              <div class="formulario__grupo">
+                <label class="formulario__etiqueta">Hasta</label>
+                <input
+                  type="date"
+                  class="formulario__campo"
+                  id="fecha-hasta" />
+              </div>
+            </div>
+          </section>
+
+          <div class="formulario__acciones">
+            <button
+              type="submit"
+              class="boton boton--primario">
+              Guardar Configuración y Generar Bloques
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <div
+        class="modal modal--oculto"
+        id="modal-detalle-cita">
+        <div class="modal__contenido">
+          <header class="modal__encabezado">
+            <h3 class="modal__titulo">Detalle de Cita</h3>
+            <button
+              class="modal__cerrar"
+              id="btn-cerrar-detalle">
+              &times;
+            </button>
+          </header>
+          <div class="modal__cuerpo">
+            <div class="detalle-cita">
+              <p class="detalle-cita__item">
+                <strong>Paciente:</strong> <span id="detalle-paciente"></span>
+              </p>
+              <p class="detalle-cita__item">
+                <strong>Correo:</strong> <span id="detalle-correo"></span>
+              </p>
+              <p class="detalle-cita__item">
+                <strong>Teléfono:</strong> <span id="detalle-telefono"></span>
+              </p>
+              <p class="detalle-cita__item">
+                <strong>Fecha:</strong> <span id="detalle-fecha"></span>
+              </p>
+              <p class="detalle-cita__item">
+                <strong>Hora:</strong> <span id="detalle-hora"></span>
+              </p>
+              <p class="detalle-cita__item">
+                <strong>Estado:</strong> <span id="detalle-estado"></span>
+              </p>
+            </div>
+          </div>
+          <footer class="modal__pie">
+            <button
+              class="boton boton--peligro"
+              id="btn-cancelar-cita-psicologo">
+              Cancelar Cita
+            </button>
+            <button
+              class="boton boton--secundario"
+              id="btn-bloquear-paciente">
+              Bloquear Paciente
+            </button>
+            <button
+              class="boton boton--secundario"
+              id="btn-cerrar-detalle-2">
+              Cerrar
+            </button>
+          </footer>
+        </div>
+      </div>
+
+      <section
+        class="vista"
+        id="vista-historial">
+        <header class="vista__encabezado">
+          <h2 class="vista__titulo">Historial de Pacientes</h2>
+          <p class="vista__descripcion">Registro de citas por paciente</p>
+        </header>
+        <div class="formulario__grupo">
+          <input
+            type="text"
+            class="formulario__campo"
+            id="busqueda-paciente"
+            placeholder="Buscar paciente por nombre..." />
+        </div>
+        <div
+          class="lista-citas"
+          id="lista-historial"></div>
+        <p
+          class="mensaje-vacio mensaje-vacio--oculto"
+          id="sin-historial">
+          No se encontraron pacientes.
+        </p>
+      </section>
+
+      <div
+        class="modal modal--oculto"
+        id="modal-historial-paciente">
+        <div class="modal__contenido">
+          <header class="modal__encabezado">
+            <h3
+              class="modal__titulo"
+              id="historial-nombre-paciente"></h3>
+            <button
+              class="modal__cerrar"
+              id="btn-cerrar-historial-paciente">
+              &times;
+            </button>
+          </header>
+          <div class="modal__cuerpo">
+            <div
+              class="lista-citas"
+              id="lista-historial-paciente"></div>
+          </div>
+          <footer class="modal__pie">
+            <button
+              class="boton boton--secundario"
+              id="btn-descargar-historial">
+              Descargar Historial
+            </button>
+            <button
+              class="boton boton--primario"
+              id="btn-cerrar-historial-paciente-2">
+              Cerrar
+            </button>
+          </footer>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="mensaje mensaje--oculto mensaje--flotante"
+      id="mensaje-estado">
+      <p class="mensaje__texto"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/env.js"></script>
+    <script src="../js/nucleo/ClienteSupabase.js"></script>
+    <script src="../js/nucleo/FormateadorFecha.js"></script>
+    <script src="../js/nucleo/FormateadorHora.js"></script>
+    <script src="../js/nucleo/GestorMensajes.js"></script>
+    <script src="../js/nucleo/GestorVistas.js"></script>
+    <script src="../js/nucleo/GestorModales.js"></script>
+    <script src="../js/nucleo/ServicioAutenticacionPagina.js"></script>
+    <script src="../js/nucleo/funciones.js"></script>
+    <script src="../js/psicologo/EstadoPsicologo.js"></script>
+    <script src="../js/psicologo/RepositorioConfiguracion.js"></script>
+    <script src="../js/psicologo/RepositorioCitasPsicologo.js"></script>
+    <script src="../js/psicologo/GestorConfiguracionUI.js"></script>
+    <script src="../js/psicologo/GestorHorarios.js"></script>
+    <script src="../js/psicologo/RenderizadorCitas.js"></script>
+    <script src="../js/psicologo/GestorDetalleCita.js"></script>
+    <script src="../js/psicologo/GestorHistorial.js"></script>
+    <script src="../js/psicologo/GestorRestriccion.js"></script>
+    <script src="../js/psicologo/ControladorEventosPsicologo.js"></script>
+    <script src="../js/psicologo/AplicacionPsicologo.js"></script>
+  </body>
+</html>

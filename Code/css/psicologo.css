@@ -1,0 +1,293 @@
+.periodo {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.25rem;
+  background: var(--fondo);
+  padding: 3px;
+  border-radius: var(--radio-sm);
+  width: fit-content;
+}
+
+.periodo__boton {
+  padding: 0.4rem 0.85rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transicion);
+  color: var(--texto-sec);
+  font-family: var(--fuente);
+}
+
+.periodo__boton:hover {
+  color: var(--texto);
+}
+
+.periodo__boton--activo {
+  background: var(--superficie);
+  color: var(--texto);
+  box-shadow: var(--sombra);
+}
+
+.resumen {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.resumen__tarjeta {
+  flex: 1;
+  background: var(--superficie);
+  padding: 1rem;
+  border-radius: var(--radio);
+  text-align: center;
+  box-shadow: var(--sombra);
+}
+
+.resumen__numero {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primario);
+  letter-spacing: -0.02em;
+}
+
+.resumen__texto {
+  font-size: 0.8rem;
+  color: var(--texto-sec);
+  margin-top: 0.1rem;
+}
+
+.panel-citas {
+  background: var(--superficie);
+  border-radius: var(--radio);
+  padding: 1.15rem;
+  box-shadow: var(--sombra);
+}
+
+.panel-citas__encabezado {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-citas__fecha {
+  color: var(--texto-sec);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.panel-citas__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.configuracion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.configuracion__dia {
+  background: var(--superficie);
+  border-radius: var(--radio);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--sombra);
+}
+
+.configuracion__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.configuracion__checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primario);
+}
+
+.configuracion__nombre {
+  font-weight: 500;
+  font-size: 0.93rem;
+}
+
+.configuracion__horarios {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--borde);
+  flex-wrap: wrap;
+}
+
+.configuracion__horarios--oculto {
+  display: none;
+}
+
+.configuracion__rango {
+  flex: 1;
+  min-width: 90px;
+}
+
+.configuracion__etiqueta {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--texto-sec);
+  margin-bottom: 0.2rem;
+}
+
+.configuracion__tiempo,
+.configuracion__duracion {
+  width: 100%;
+  padding: 0.45rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  font-size: 0.88rem;
+  font-family: var(--fuente);
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.configuracion__tiempo:focus,
+.configuracion__duracion:focus {
+  outline: none;
+  border-color: var(--primario);
+  box-shadow: 0 0 0 3px var(--primario-light);
+}
+
+.bloques {
+  background: var(--fondo);
+  border-radius: var(--radio);
+  padding: 1.15rem;
+  margin-bottom: 1.25rem;
+}
+
+.bloques__titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.bloques__descripcion {
+  font-size: 0.85rem;
+  color: var(--texto-sec);
+  margin-bottom: 1rem;
+}
+
+.bloques__rango {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.bloques__rango .formulario__grupo {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.formulario-horarios {
+  max-width: 560px;
+}
+
+@media (max-width: 768px) {
+  .bloques__rango {
+    flex-direction: column;
+  }
+
+  .configuracion__horarios {
+    flex-direction: column;
+  }
+
+  .resumen {
+    flex-direction: column;
+  }
+}
+
+.historial-paciente {
+  background: var(--superficie);
+  border-radius: var(--radio);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--borde);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.historial-paciente--bloqueado {
+  border-color: var(--peligro);
+  background: var(--peligro-fondo, #fff5f5);
+}
+
+.historial-paciente__info {
+  flex: 1;
+}
+
+.historial-paciente__nombre {
+  font-weight: 600;
+  color: var(--texto);
+  font-size: 0.95rem;
+}
+
+.historial-paciente__estado {
+  font-size: 0.78rem;
+  color: var(--peligro);
+  font-weight: 500;
+  margin-top: 0.1rem;
+}
+
+.historial-paciente__resumen {
+  font-size: 0.82rem;
+  color: var(--texto-sec);
+  margin-top: 0.25rem;
+}
+
+.historial-paciente__completadas {
+  color: var(--exito, #16a34a);
+  font-weight: 500;
+}
+
+.historial-paciente__canceladas {
+  color: var(--peligro);
+  font-weight: 500;
+}
+
+.historial-paciente__acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.historial-item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--borde);
+  font-size: 0.88rem;
+  color: var(--texto);
+}
+
+.historial-item:last-child {
+  border-bottom: none;
+}
+
+.historial-item__fecha {
+  font-weight: 600;
+}
+
+.historial-item__estado--completada {
+  color: var(--exito, #16a34a);
+}
+
+.historial-item__estado--cancelada {
+  color: var(--peligro);
+}

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Psicoraiden</title>
+    <link
+      rel="stylesheet"
+      href="../css/base.css" />
+    <link
+      rel="stylesheet"
+      href="../css/componentes.css" />
+    <link
+      rel="stylesheet"
+      href="../css/login.css" />
+  </head>
+  <body class="pagina pagina--auth">
+    <main class="contenedor-auth">
+      <section
+        class="auth"
+        id="seccion-login">
+        <header class="auth__encabezado">
+          <h1 class="auth__titulo">Psicoraiden</h1>
+          <p class="auth__subtitulo">
+            Sistema de gestión de citas psicológicas
+          </p>
+        </header>
+
+        <form
+          class="formulario"
+          id="formulario-login">
+          <div class="formulario__grupo">
+            <label
+              class="formulario__etiqueta"
+              for="correo-login"
+              >Correo electrónico</label
+            >
+            <input
+              type="email"
+              class="formulario__campo"
+              id="correo-login"
+              name="correo"
+              placeholder="tu@correo.com"
+              required />
+          </div>
+
+          <div class="formulario__grupo">
+            <label
+              class="formulario__etiqueta"
+              for="contrasena-login"
+              >Contraseña</label
+            >
+            <input
+              type="password"
+              class="formulario__campo"
+              id="contrasena-login"
+              name="contrasena"
+              placeholder="••••••••"
+              required />
+          </div>
+
+          <div class="formulario__acciones">
+            <button
+              type="submit"
+              class="boton boton--primario boton--completo">
+              Iniciar sesión
+            </button>
+          </div>
+
+          <p class="formulario__enlace">
+            ¿No tienes cuenta?
+            <a
+              href="#"
+              class="enlace"
+              id="btn-mostrar-registro"
+              >Regístrate aquí</a
+            >
+          </p>
+        </form>
+      </section>
+
+      <section
+        class="auth auth--oculto"
+        id="seccion-registro">
+        <header class="auth__encabezado">
+          <h1 class="auth__titulo">Crear cuenta</h1>
+          <p class="auth__subtitulo">Únete a Psicoraiden</p>
+        </header>
+
+        <form
+          class="formulario"
+          id="formulario-registro">
+          <div class="formulario__fila">
+            <div class="formulario__grupo formulario__grupo--mitad">
+              <label
+                class="formulario__etiqueta"
+                for="nombre-registro"
+                >Nombre</label
+              >
+              <input
+                type="text"
+                class="formulario__campo"
+                id="nombre-registro"
+                name="nombre"
+                placeholder="Tu nombre"
+                required />
+            </div>
+            <div class="formulario__grupo formulario__grupo--mitad">
+              <label
+                class="formulario__etiqueta"
+                for="apellido-registro"
+                >Apellido</label
+              >
+              <input
+                type="text"
+                class="formulario__campo"
+                id="apellido-registro"
+                name="apellido"
+                placeholder="Tu apellido"
+                required />
+            </div>
+          </div>
+
+          <div class="formulario__grupo">
+            <label
+              class="formulario__etiqueta"
+              for="correo-registro"
+              >Correo electrónico</label
+            >
+            <input
+              type="email"
+              class="formulario__campo"
+              id="correo-registro"
+              name="correo"
+              placeholder="tu@correo.com"
+              required />
+          </div>
+
+          <div class="formulario__grupo">
+            <label
+              class="formulario__etiqueta"
+              for="telefono-registro"
+              >Teléfono</label
+            >
+            <input
+              type="tel"
+              class="formulario__campo"
+              id="telefono-registro"
+              name="telefono"
+              placeholder="+591 70000000" />
+          </div>
+
+          <div class="formulario__grupo">
+            <label
+              class="formulario__etiqueta"
+              for="contrasena-registro"
+              >Contraseña</label
+            >
+            <input
+              type="password"
+              class="formulario__campo"
+              id="contrasena-registro"
+              name="contrasena"
+              placeholder="Mínimo 6 caracteres"
+              minlength="6"
+              required />
+          </div>
+
+          <div class="formulario__grupo">
+            <label class="formulario__etiqueta">Tipo de cuenta</label>
+            <div class="formulario__opciones">
+              <label class="formulario__opcion">
+                <input
+                  type="radio"
+                  name="tipo-cuenta"
+                  value="paciente"
+                  checked />
+                <span class="formulario__opcion-texto">Paciente</span>
+              </label>
+              <label class="formulario__opcion">
+                <input
+                  type="radio"
+                  name="tipo-cuenta"
+                  value="psicologo" />
+                <span class="formulario__opcion-texto">Psicólogo</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="formulario__acciones">
+            <button
+              type="submit"
+              class="boton boton--primario boton--completo">
+              Crear cuenta
+            </button>
+          </div>
+
+          <p class="formulario__enlace">
+            ¿Ya tienes cuenta?
+            <a
+              href="#"
+              class="enlace"
+              id="btn-mostrar-login"
+              >Inicia sesión</a
+            >
+          </p>
+        </form>
+      </section>
+
+      <div
+        class="mensaje mensaje--oculto"
+        id="mensaje-estado">
+        <p class="mensaje__texto"></p>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/env.js"></script>
+    <script src="../js/nucleo/ClienteSupabase.js"></script>
+    <script src="../js/auth/GestorMensajesAuth.js"></script>
+    <script src="../js/auth/GestorFormularios.js"></script>
+    <script src="../js/auth/ServicioSesion.js"></script>
+    <script src="../js/auth/ServicioAutenticacion.js"></script>
+    <script src="../js/auth/ControladorEventosAuth.js"></script>
+    <script src="../js/auth/inicio.js"></script>
+  </body>
+</html>

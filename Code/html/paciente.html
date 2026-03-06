@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Psicoraiden - Portal del Paciente</title>
+    <link
+      rel="stylesheet"
+      href="../css/base.css" />
+    <link
+      rel="stylesheet"
+      href="../css/componentes.css" />
+    <link
+      rel="stylesheet"
+      href="../css/paciente.css" />
+  </head>
+  <body class="pagina pagina--dashboard">
+    <header class="encabezado">
+      <div class="encabezado__contenido">
+        <h1 class="encabezado__logo">Psicoraiden</h1>
+        <nav class="navegacion">
+          <button
+            class="navegacion__boton navegacion__boton--activo"
+            data-vista="calendario">
+            <span>Agendar</span>
+          </button>
+          <button
+            class="navegacion__boton"
+            data-vista="mis-citas">
+            <span>Mis Citas</span>
+          </button>
+        </nav>
+        <div class="encabezado__usuario">
+          <span
+            class="encabezado__nombre"
+            id="nombre-usuario"
+            >Usuario</span
+          >
+          <button
+            class="boton boton--secundario boton--pequeno"
+            id="btn-cerrar-sesion">
+            Salir
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="contenido-principal">
+      <section
+        class="vista vista--activa"
+        id="vista-calendario">
+        <header class="vista__encabezado">
+          <h2 class="vista__titulo">Agendar Cita</h2>
+          <p class="vista__descripcion">
+            Selecciona un día y horario disponible
+          </p>
+        </header>
+
+        <article
+          class="tarjeta-cita tarjeta-cita--oculta"
+          id="proxima-cita">
+          <div class="tarjeta-cita__contenido">
+            <span class="tarjeta-cita__etiqueta">Tu próxima cita</span>
+            <p
+              class="tarjeta-cita__fecha"
+              id="proxima-cita-fecha"></p>
+            <p
+              class="tarjeta-cita__hora"
+              id="proxima-cita-hora"></p>
+          </div>
+          <div class="tarjeta-cita__acciones">
+            <button
+              class="boton boton--secundario boton--pequeno"
+              id="btn-reprogramar-proxima">
+              Reprogramar
+            </button>
+            <button
+              class="boton boton--secundario boton--pequeno"
+              id="btn-cancelar-proxima">
+              Cancelar
+            </button>
+          </div>
+        </article>
+
+        <div
+          class="banner-reprogramacion banner-reprogramacion--oculto"
+          id="banner-reprogramacion">
+          <span id="texto-reprogramacion">Reprogramando cita...</span>
+          <button
+            class="boton boton--secundario boton--pequeno"
+            id="btn-cancelar-reprogramacion">
+            Cancelar
+          </button>
+        </div>
+
+        <div
+          class="calendario"
+          id="calendario">
+          <header class="calendario__encabezado">
+            <button
+              class="calendario__nav"
+              id="btn-mes-anterior">
+              &#8249;
+            </button>
+            <h3
+              class="calendario__mes"
+              id="calendario-mes"></h3>
+            <button
+              class="calendario__nav"
+              id="btn-mes-siguiente">
+              &#8250;
+            </button>
+          </header>
+          <div class="calendario__dias-semana">
+            <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span
+            ><span>Jue</span><span>Vie</span><span>Sáb</span>
+          </div>
+          <div
+            class="calendario__dias"
+            id="calendario-dias"></div>
+        </div>
+
+        <section
+          class="horarios horarios--oculto"
+          id="seccion-horarios">
+          <h3 class="horarios__titulo">
+            Horarios disponibles para <span id="fecha-seleccionada"></span>
+          </h3>
+          <div
+            class="horarios__lista"
+            id="lista-horarios"></div>
+          <p
+            class="horarios__vacio horarios__vacio--oculto"
+            id="sin-horarios">
+            No hay horarios disponibles para este día.
+          </p>
+          <div
+            class="lista-espera lista-espera--oculta"
+            id="contenedor-lista-espera">
+            <button
+              class="boton boton--secundario"
+              id="btn-lista-espera">
+              Avisarme si se libera un turno
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section
+        class="vista"
+        id="vista-mis-citas">
+        <header class="vista__encabezado">
+          <h2 class="vista__titulo">Mis Citas</h2>
+          <p class="vista__descripcion">Historial y citas programadas</p>
+        </header>
+
+        <div class="filtros">
+          <button
+            class="filtros__boton filtros__boton--activo"
+            data-filtro="proximas">
+            Próximas
+          </button>
+          <button
+            class="filtros__boton"
+            data-filtro="pasadas">
+            Pasadas
+          </button>
+          <button
+            class="filtros__boton"
+            data-filtro="canceladas">
+            Canceladas
+          </button>
+        </div>
+
+        <div
+          class="lista-citas"
+          id="lista-mis-citas"></div>
+        <p
+          class="mensaje-vacio mensaje-vacio--oculto"
+          id="sin-citas">
+          No tienes citas en esta categoría.
+        </p>
+      </section>
+
+      <div
+        class="modal modal--oculto"
+        id="modal-reserva">
+        <div class="modal__contenido">
+          <header class="modal__encabezado">
+            <h3
+              class="modal__titulo"
+              id="titulo-modal-reserva">
+              Confirmar Reserva
+            </h3>
+            <button
+              class="modal__cerrar"
+              id="btn-cerrar-modal">
+              &times;
+            </button>
+          </header>
+          <div class="modal__cuerpo">
+            <div class="resumen-reserva">
+              <p class="resumen-reserva__item">
+                <strong>Fecha:</strong> <span id="resumen-fecha"></span>
+              </p>
+              <p class="resumen-reserva__item">
+                <strong>Hora:</strong> <span id="resumen-hora"></span>
+              </p>
+            </div>
+            <p
+              class="modal__confirmacion"
+              id="texto-confirmacion-reserva">
+              ¿Deseas confirmar esta cita?
+            </p>
+          </div>
+          <footer class="modal__pie">
+            <button
+              class="boton boton--secundario"
+              id="btn-cancelar-reserva">
+              Cancelar
+            </button>
+            <button
+              class="boton boton--primario"
+              id="btn-confirmar-reserva">
+              Confirmar Reserva
+            </button>
+          </footer>
+        </div>
+      </div>
+
+      <div
+        class="modal modal--oculto"
+        id="modal-cancelacion">
+        <div class="modal__contenido">
+          <header class="modal__encabezado">
+            <h3 class="modal__titulo">Cancelar Cita</h3>
+            <button
+              class="modal__cerrar"
+              id="btn-cerrar-modal-cancelacion">
+              &times;
+            </button>
+          </header>
+          <div class="modal__cuerpo">
+            <p class="modal__advertencia">
+              ¿Estás seguro de que deseas cancelar esta cita?
+            </p>
+            <p class="modal__info">
+              El horario quedará disponible para otros pacientes.
+            </p>
+          </div>
+          <footer class="modal__pie">
+            <button
+              class="boton boton--secundario"
+              id="btn-no-cancelar">
+              No, mantener cita
+            </button>
+            <button
+              class="boton boton--peligro"
+              id="btn-si-cancelar">
+              Sí, cancelar
+            </button>
+          </footer>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="mensaje mensaje--oculto mensaje--flotante"
+      id="mensaje-estado">
+      <p class="mensaje__texto"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/env.js"></script>
+    <script src="../js/nucleo/ClienteSupabase.js"></script>
+    <script src="../js/nucleo/FormateadorFecha.js"></script>
+    <script src="../js/nucleo/FormateadorHora.js"></script>
+    <script src="../js/nucleo/GestorMensajes.js"></script>
+    <script src="../js/nucleo/GestorVistas.js"></script>
+    <script src="../js/nucleo/GestorModales.js"></script>
+    <script src="../js/nucleo/ServicioAutenticacionPagina.js"></script>
+    <script src="../js/nucleo/funciones.js"></script>
+    <script src="../js/paciente/EstadoPaciente.js"></script>
+    <script src="../js/paciente/RepositorioBloques.js"></script>
+    <script src="../js/paciente/RepositorioCitas.js"></script>
+    <script src="../js/paciente/RepositorioListaEspera.js"></script>
+    <script src="../js/paciente/RenderizadorCalendario.js"></script>
+    <script src="../js/paciente/RenderizadorHorarios.js"></script>
+    <script src="../js/paciente/GestorReservas.js"></script>
+    <script src="../js/paciente/GestorReprogramacion.js"></script>
+    <script src="../js/paciente/GestorProximaCita.js"></script>
+    <script src="../js/paciente/GestorMisCitas.js"></script>
+    <script src="../js/paciente/GestorCancelacion.js"></script>
+    <script src="../js/paciente/GestorListaEspera.js"></script>
+    <script src="../js/paciente/ControladorEventosPaciente.js"></script>
+    <script src="../js/paciente/AplicacionPaciente.js"></script>
+  </body>
+</html>
