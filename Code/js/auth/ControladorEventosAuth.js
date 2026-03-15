@@ -1,41 +1,79 @@
 class ControladorEventosAuth {
-  static inicializar() {
-    const btnMostrarRegistro = document.getElementById('btn-mostrar-registro');
-    const btnMostrarLogin = document.getElementById('btn-mostrar-login');
-    const formularioLogin = document.getElementById('formulario-login');
-    const formularioRegistro = document.getElementById('formulario-registro');
+  static #SELECTORS = {
+    btnMostrarRegistro: '#btn-mostrar-registro',
+    btnMostrarLogin: '#btn-mostrar-login',
+    formularioLogin: '#formulario-login',
+    formularioRegistro: '#formulario-registro',
+    correoLogin: '#correo-login',
+    contrasenaLogin: '#contrasena-login',
+    nombreRegistro: '#nombre-registro',
+    apellidoRegistro: '#apellido-registro',
+    correoRegistro: '#correo-registro',
+    telefonoRegistro: '#telefono-registro',
+    contrasenaRegistro: '#contrasena-registro',
+    tipoCuenta: 'input[name="tipo-cuenta"]:checked',
+  };
 
-    btnMostrarRegistro?.addEventListener('click', (e) => {
+  static inicializar() {
+    this.#configurarEventosCambioFormulario();
+    this.#configurarEventosFormularios();
+  }
+
+  static #configurarEventosCambioFormulario() {
+    const btnRegistro = document.querySelector(
+      this.#SELECTORS.btnMostrarRegistro,
+    );
+    const btnLogin = document.querySelector(this.#SELECTORS.btnMostrarLogin);
+
+    btnRegistro?.addEventListener('click', (e) => {
       e.preventDefault();
       GestorFormularios.mostrarRegistro();
     });
 
-    btnMostrarLogin?.addEventListener('click', (e) => {
+    btnLogin?.addEventListener('click', (e) => {
       e.preventDefault();
       GestorFormularios.mostrarLogin();
     });
+  }
+
+  static #configurarEventosFormularios() {
+    const formularioLogin = document.querySelector(
+      this.#SELECTORS.formularioLogin,
+    );
+    const formularioRegistro = document.querySelector(
+      this.#SELECTORS.formularioRegistro,
+    );
 
     formularioLogin?.addEventListener('submit', (e) => {
       e.preventDefault();
-      ServicioAutenticacion.iniciarSesion(
-        document.getElementById('correo-login').value,
-        document.getElementById('contrasena-login').value,
-      );
+      this.#manejarLogin();
     });
 
     formularioRegistro?.addEventListener('submit', (e) => {
       e.preventDefault();
-      const tipoSeleccionado = document.querySelector(
-        'input[name="tipo-cuenta"]:checked',
-      );
-      ServicioAutenticacion.registrar({
-        nombre: document.getElementById('nombre-registro').value,
-        apellido: document.getElementById('apellido-registro').value,
-        correo: document.getElementById('correo-registro').value,
-        telefono: document.getElementById('telefono-registro').value,
-        contrasena: document.getElementById('contrasena-registro').value,
-        tipoCuenta: tipoSeleccionado ? tipoSeleccionado.value : 'paciente',
-      });
+      this.#manejarRegistro();
     });
+  }
+
+  static #manejarLogin() {
+    const correo = document.querySelector(this.#SELECTORS.correoLogin).value;
+    const contrasena = document.querySelector(
+      this.#SELECTORS.contrasenaLogin,
+    ).value;
+    ServicioAutenticacion.iniciarSesion(correo, contrasena);
+  }
+
+  static #manejarRegistro() {
+    const tipoSeleccionado = document.querySelector(this.#SELECTORS.tipoCuenta);
+    const datos = {
+      nombre: document.querySelector(this.#SELECTORS.nombreRegistro).value,
+      apellido: document.querySelector(this.#SELECTORS.apellidoRegistro).value,
+      correo: document.querySelector(this.#SELECTORS.correoRegistro).value,
+      telefono: document.querySelector(this.#SELECTORS.telefonoRegistro).value,
+      contrasena: document.querySelector(this.#SELECTORS.contrasenaRegistro)
+        .value,
+      tipoCuenta: tipoSeleccionado ? tipoSeleccionado.value : 'paciente',
+    };
+    ServicioAutenticacion.registrar(datos);
   }
 }

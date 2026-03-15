@@ -1,3 +1,129 @@
+.calendario {
+  background: var(--superficie);
+  border-radius: var(--radio);
+  padding: 1.25rem;
+  box-shadow: var(--sombra);
+  margin-bottom: 1.25rem;
+}
+
+.calendario__encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.calendario__mes {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.calendario__nav {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--primario);
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radio-sm);
+  transition: var(--transicion);
+}
+
+.calendario__nav:hover {
+  background: var(--fondo);
+}
+
+.calendario__dias-semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.calendario__dias-semana span {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--texto-ter);
+  padding: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.calendario__dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendario__dia {
+  aspect-ratio: 1;
+  width: 2.2rem;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: var(--transicion);
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-weight: 400;
+}
+
+.calendario__dia:hover:not(.calendario__dia--vacio):not(
+    .calendario__dia--sin-disponibilidad
+  ):not(.calendario__dia--pasado) {
+  background: var(--primario-light);
+  color: var(--primario);
+}
+
+.calendario__dia--vacio {
+  background: transparent;
+  cursor: default;
+}
+
+.calendario__dia--hoy {
+  background: var(--acento);
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.calendario__dia--hoy:hover {
+  background: var(--acento) !important;
+  color: #fff !important;
+}
+
+.calendario__dia--seleccionado {
+  background: var(--primario);
+  color: #fff;
+  font-weight: 600;
+}
+
+.calendario__dia--seleccionado:hover {
+  background: var(--primario-hover) !important;
+  color: #fff !important;
+}
+
+.calendario__dia--sin-disponibilidad {
+  color: var(--texto-ter);
+  cursor: not-allowed;
+}
+
+.calendario__dia--pasado {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.calendario__dia--con-citas {
+  box-shadow: inset 0 0 0 2px var(--primario);
+}
+
 .periodo {
   display: flex;
   gap: 0.25rem;

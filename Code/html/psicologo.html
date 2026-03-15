@@ -7,6 +7,9 @@
       content="width=device-width, initial-scale=1.0" />
     <title>Psicoraiden - Panel del Psicólogo</title>
     <link
+      rel="icon"
+      href="../assets/psicoraiden-logo.png" />
+    <link
       rel="stylesheet"
       href="../css/base.css" />
     <link
@@ -104,6 +107,34 @@
               class="panel-citas__fecha"
               id="fecha-actual"></span>
           </h3>
+
+          <div
+            class="calendario"
+            id="calendario-psicologo">
+            <header class="calendario__encabezado">
+              <button
+                class="calendario__nav"
+                id="btn-mes-anterior">
+                &#8249;
+              </button>
+              <h3
+                class="calendario__mes"
+                id="calendario-mes"></h3>
+              <button
+                class="calendario__nav"
+                id="btn-mes-siguiente">
+                &#8250;
+              </button>
+            </header>
+            <div class="calendario__dias-semana">
+              <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span
+              ><span>Jue</span><span>Vie</span><span>Sáb</span>
+            </div>
+            <div
+              class="calendario__dias"
+              id="calendario-dias"></div>
+          </div>
+
           <div
             class="panel-citas__lista"
             id="lista-citas-panel"></div>
@@ -588,23 +619,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/env.js"></script>
-    <script src="../js/nucleo/ClienteSupabase.js"></script>
-    <script src="../js/nucleo/FormateadorFecha.js"></script>
-    <script src="../js/nucleo/FormateadorHora.js"></script>
-    <script src="../js/nucleo/GestorMensajes.js"></script>
-    <script src="../js/nucleo/GestorVistas.js"></script>
-    <script src="../js/nucleo/GestorModales.js"></script>
-    <script src="../js/nucleo/ServicioAutenticacionPagina.js"></script>
-    <script src="../js/nucleo/funciones.js"></script>
-    <script src="../js/psicologo/EstadoPsicologo.js"></script>
-    <script src="../js/psicologo/RepositorioConfiguracion.js"></script>
-    <script src="../js/psicologo/RepositorioCitasPsicologo.js"></script>
-    <script src="../js/psicologo/GestorConfiguracionUI.js"></script>
-    <script src="../js/psicologo/GestorHorarios.js"></script>
-    <script src="../js/psicologo/RenderizadorCitas.js"></script>
-    <script src="../js/psicologo/GestorDetalleCita.js"></script>
-    <script src="../js/psicologo/GestorHistorial.js"></script>
-    <script src="../js/psicologo/GestorRestriccion.js"></script>
+    <script src="../js/config/ClienteSupabase.js"></script>
+    <script src="../js/core/FormateadorFecha.js"></script>
+    <script src="../js/core/FormateadorHora.js"></script>
+    <script src="../js/core/GestorMensajes.js"></script>
+    <script src="../js/core/GestorVistas.js"></script>
+    <script src="../js/core/GestorModales.js"></script>
+    <script src="../js/core/ServicioAutenticacionPagina.js"></script>
+    <script src="../js/core/FormateadorFachada.js"></script>
+    <script src="../js/core/MensajesFachada.js"></script>
+    <script src="../js/core/NavigacionFachada.js"></script>
+    <script src="../js/core/AutenticacionFachada.js"></script>
+    <script src="../js/core/CalendarioUtil.js"></script>
+    <script src="../js/psicologo/estado/EstadoPsicologo.js"></script>
+    <script src="../js/psicologo/repositorio/RepositorioConfiguracion.js"></script>
+    <script src="../js/psicologo/repositorio/RepositorioCitasPsicologo.js"></script>
+    <script src="../js/psicologo/repositorio/RepositorioPacientes.js"></script>
+    <script src="../js/psicologo/gestor/GestorConfiguracionUI.js"></script>
+    <script src="../js/psicologo/gestor/GestorHorarios.js"></script>
+    <script src="../js/psicologo/renderizador/RenderizadorCitas.js"></script>
+    <script src="../js/psicologo/renderizador/RenderizadorCalendarioPsicologo.js"></script>
+    <script src="../js/psicologo/gestor/GestorDetalleCita.js"></script>
+    <script src="../js/psicologo/gestor/GestorHistorial.js"></script>
+    <script src="../js/psicologo/gestor/GestorRestriccion.js"></script>
     <script src="../js/psicologo/ControladorEventosPsicologo.js"></script>
     <script src="../js/psicologo/AplicacionPsicologo.js"></script>
   </body>

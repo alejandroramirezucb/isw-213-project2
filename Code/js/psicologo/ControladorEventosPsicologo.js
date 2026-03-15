@@ -2,7 +2,7 @@ class ControladorEventosPsicologo {
   static inicializar() {
     document.querySelectorAll('.navegacion__boton').forEach((boton) => {
       boton.addEventListener('click', () => {
-        Fachada.cambiarVista(boton.dataset.vista);
+        NavigacionFachada.cambiarVista(boton.dataset.vista);
         if (boton.dataset.vista === 'historial') {
           GestorHistorial.cargar();
         }
@@ -21,7 +21,7 @@ class ControladorEventosPsicologo {
 
     document
       .getElementById('btn-cerrar-sesion')
-      ?.addEventListener('click', () => Fachada.cerrarSesion());
+      ?.addEventListener('click', () => AutenticacionFachada.cerrarSesion());
 
     document
       .getElementById('formulario-horarios')
@@ -39,12 +39,12 @@ class ControladorEventosPsicologo {
     document
       .getElementById('btn-cerrar-detalle')
       ?.addEventListener('click', () =>
-        Fachada.cerrarModal('modal-detalle-cita'),
+        NavigacionFachada.cerrarModal('modal-detalle-cita'),
       );
     document
       .getElementById('btn-cerrar-detalle-2')
       ?.addEventListener('click', () =>
-        Fachada.cerrarModal('modal-detalle-cita'),
+        NavigacionFachada.cerrarModal('modal-detalle-cita'),
       );
     document
       .getElementById('btn-cancelar-cita-psicologo')
@@ -69,7 +69,7 @@ class ControladorEventosPsicologo {
     document
       .getElementById('btn-cerrar-historial-paciente')
       ?.addEventListener('click', () =>
-        Fachada.cerrarModal('modal-historial-paciente'),
+        NavigacionFachada.cerrarModal('modal-historial-paciente'),
       );
   }
 }

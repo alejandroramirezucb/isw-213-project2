@@ -1,9 +1,9 @@
 class AplicacionPsicologo {
   static async inicializar() {
-    const sesion = await Fachada.verificarAutenticacion();
+    const sesion = await ServicioAutenticacionPagina.verificar();
     if (!sesion) return;
 
-    const usuario = await Fachada.obtenerUsuarioActual();
+    const usuario = await ServicioAutenticacionPagina.obtenerUsuario();
     if (!usuario || usuario.rol !== 'psicologo') {
       window.location.href = 'index.html';
       return;
@@ -18,6 +18,8 @@ class AplicacionPsicologo {
     }
 
     GestorHistorial.inicializar();
+    RenderizadorCitas.inicializar();
+    RenderizadorCalendarioPsicologo.inicializar();
     GestorConfiguracionUI.establecerFechasPorDefecto();
     ControladorEventosPsicologo.inicializar();
     await GestorConfiguracionUI.cargarConfiguracion();

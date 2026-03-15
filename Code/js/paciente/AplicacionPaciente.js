@@ -1,9 +1,9 @@
 class AplicacionPaciente {
   static async inicializar() {
-    const sesion = await Fachada.verificarAutenticacion();
+    const sesion = await AutenticacionFachada.verificar();
     if (!sesion) return;
 
-    const usuario = await Fachada.obtenerUsuarioActual();
+    const usuario = await AutenticacionFachada.obtenerUsuario();
     if (!usuario || usuario.rol !== 'paciente') {
       window.location.href = 'index.html';
       return;
@@ -18,7 +18,7 @@ class AplicacionPaciente {
     }
 
     if (usuario.pacientes?.bloqueado) {
-      Fachada.mostrarMensaje(
+      MensajesFachada.mostrar(
         'No es posible agendar en este momento, comuníquese directamente con administración.',
         'error',
         10000,
@@ -33,6 +33,7 @@ class AplicacionPaciente {
 
     await RenderizadorCalendario.renderizar();
     await GestorProximaCita.cargar();
+    await GestorMisCitas.cargar('proximas');
   }
 }
 

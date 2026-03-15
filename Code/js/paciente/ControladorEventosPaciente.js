@@ -2,7 +2,7 @@ class ControladorEventosPaciente {
   static inicializar() {
     document.querySelectorAll('.navegacion__boton').forEach((boton) => {
       boton.addEventListener('click', () => {
-        Fachada.cambiarVista(boton.dataset.vista);
+        NavigacionFachada.cambiarVista(boton.dataset.vista);
         if (boton.dataset.vista === 'mis-citas') {
           GestorMisCitas.cargar('proximas');
         }
@@ -27,7 +27,7 @@ class ControladorEventosPaciente {
 
     document
       .getElementById('btn-cerrar-sesion')
-      ?.addEventListener('click', () => Fachada.cerrarSesion());
+      ?.addEventListener('click', () => AutenticacionFachada.cerrarSesion());
 
     document
       .getElementById('btn-cerrar-modal')
@@ -46,12 +46,12 @@ class ControladorEventosPaciente {
     document
       .getElementById('btn-cerrar-modal-cancelacion')
       ?.addEventListener('click', () =>
-        Fachada.cerrarModal('modal-cancelacion'),
+        NavigacionFachada.cerrarModal('modal-cancelacion'),
       );
     document
       .getElementById('btn-no-cancelar')
       ?.addEventListener('click', () =>
-        Fachada.cerrarModal('modal-cancelacion'),
+        NavigacionFachada.cerrarModal('modal-cancelacion'),
       );
     document
       .getElementById('btn-si-cancelar')
@@ -66,10 +66,6 @@ class ControladorEventosPaciente {
     document
       .getElementById('btn-cancelar-reprogramacion')
       ?.addEventListener('click', () => GestorReprogramacion.salir());
-
-    document
-      .getElementById('btn-lista-espera')
-      ?.addEventListener('click', () => GestorListaEspera.inscribir());
 
     document.querySelectorAll('.filtros__boton').forEach((boton) => {
       boton.addEventListener('click', () => {
