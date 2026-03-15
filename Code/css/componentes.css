@@ -286,9 +286,12 @@
   background: var(--superficie);
   border-radius: var(--radio-lg);
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
+  max-height: 80vh;
   box-shadow: var(--sombra-lg);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal__encabezado {
@@ -327,6 +330,9 @@
 
 .modal__cuerpo {
   padding: 1.25rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .modal__confirmacion {
@@ -399,14 +405,14 @@
 .lista-citas {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
 .cita-item {
-  background: var(--superficie);
-  border-radius: var(--radio);
-  padding: 0.85rem 1rem;
-  box-shadow: var(--sombra);
+  background: var(--fondo);
+  border-radius: var(--radio-sm);
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--borde);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -415,7 +421,9 @@
 }
 
 .cita-item:hover {
-  box-shadow: var(--sombra-md);
+  background: var(--superficie);
+  border-color: var(--primario);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .cita-item__info {
@@ -426,14 +434,14 @@
 
 .cita-item__fecha {
   font-weight: 600;
-  font-size: 0.93rem;
+  font-size: 0.88rem;
   color: var(--texto);
 }
 
 .cita-item__hora {
   color: var(--primario);
   font-weight: 500;
-  font-size: 0.88rem;
+  font-size: 0.8rem;
 }
 
 .cita-item__paciente {
@@ -448,10 +456,11 @@
 }
 
 .cita-item__estado {
-  padding: 0.2rem 0.6rem;
+  padding: 0.15rem 0.5rem;
   border-radius: var(--radio-pill);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .cita-item__estado--confirmada {
@@ -471,20 +480,22 @@
 
 .filtros {
   display: flex;
-  gap: 0.25rem;
+  gap: 0;
   margin-bottom: 1.5rem;
-  background: var(--fondo);
-  padding: 3px;
-  border-radius: var(--radio-sm);
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
   width: fit-content;
+  border-bottom: 1px solid var(--borde);
 }
 
 .filtros__boton {
-  padding: 0.4rem 0.85rem;
+  padding: 0.35rem 0.75rem;
   border: none;
   background: transparent;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  font-size: 0.83rem;
   font-weight: 500;
   cursor: pointer;
   transition: var(--transicion);
@@ -497,9 +508,10 @@
 }
 
 .filtros__boton--activo {
-  background: var(--superficie);
-  color: var(--texto);
-  box-shadow: var(--sombra);
+  background: transparent;
+  color: var(--primario);
+  border-bottom-color: var(--primario);
+  box-shadow: none;
 }
 
 .resumen-reserva {

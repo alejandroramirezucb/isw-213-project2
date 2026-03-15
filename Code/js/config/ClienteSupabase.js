@@ -12,5 +12,5 @@ class ClienteSupabase {
   }
 }
 
-// Exportar instancia global
+
 window.clienteSupabase = ClienteSupabase.obtener();

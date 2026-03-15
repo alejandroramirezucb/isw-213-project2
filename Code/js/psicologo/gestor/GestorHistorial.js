@@ -117,29 +117,132 @@ class GestorHistorial {
   }
 
   static #descargarHistorial(item) {
-    const lineas = [
-      `Historial de Citas - ${item.paciente.nombre} ${item.paciente.apellido}`,
-      `Correo: ${item.paciente.correo}`,
-      `Generado: ${new Date().toLocaleDateString('es-ES')}`,
-      '',
-      'Fecha\t\t\tHora\t\tEstado',
-      '─'.repeat(50),
-    ];
-
-    item.citas.forEach((cita) => {
-      lineas.push(
-        `${FormateadorFecha.aTexto(new Date(cita.fecha + 'T00:00:00'))}\t${FormateadorHora.formatear(cita.hora)}\t${cita.estado}`,
+    const pdfLib = window.jspdf;
+    if (!pdfLib || !pdfLib.jsPDF) {
+      MensajesFachada.mostrar(
+        'No se pudo generar el PDF (biblioteca no cargada)',
+        'error',
       );
+      return;
+    }
+
+    const { jsPDF } = pdfLib;
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 15;
+    let cursorY = margin;
+
+    doc.setFillColor(66, 133, 244);
+    doc.rect(0, 0, pageWidth, 45, 'F');
+
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(24);
+    doc.setFont(undefined, 'bold');
+    doc.text('HISTORIAL DE CITAS', margin, 20);
+
+    doc.setFontSize(11);
+    doc.setFont(undefined, 'normal');
+    doc.text(
+      `Paciente: ${item.paciente.nombre} ${item.paciente.apellido}`,
+      margin,
+      32,
+    );
+    doc.text(`Correo: ${item.paciente.correo}`, margin, 38);
+    doc.text(`Generado: ${new Date().toLocaleDateString('es-ES')}`, margin, 44);
+
+    cursorY = 55;
+
+    const tableData = item.citas.map((cita) => [
+      FormateadorFecha.aTexto(new Date(cita.fecha + 'T00:00:00')),
+      FormateadorHora.formatear(cita.hora),
+      cita.estado.charAt(0).toUpperCase() + cita.estado.slice(1),
+    ]);
+
+    if (tableData.length === 0) {
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(12);
+      doc.text('No hay citas para mostrar', margin, cursorY);
+      doc.save(
+        `historial_${item.paciente.apellido}_${item.paciente.nombre}.pdf`,
+      );
+      return;
+    }
+
+    if (doc.autoTable) {
+      doc.autoTable({
+        startY: cursorY,
+        head: [['Fecha', 'Hora', 'Estado']],
+        body: tableData,
+        margin: { left: margin, right: margin },
+        headStyles: {
+          fillColor: [66, 133, 244],
+          textColor: 255,
+          fontStyle: 'bold',
+          halign: 'center',
+        },
+        bodyStyles: {
+          textColor: 0,
+          halign: 'center',
+        },
+        alternateRowStyles: {
+          fillColor: [242, 242, 242],
+        },
+        columnStyles: {
+          0: { halign: 'center', cellWidth: 60 },
+          1: { halign: 'center', cellWidth: 40 },
+          2: { halign: 'center', cellWidth: 40 },
+        },
+      });
+
+      cursorY = doc.lastAutoTable.finalY + 10;
+    } else {
+      doc.setFontSize(11);
+      doc.setFont(undefined, 'bold');
+      doc.setFillColor(66, 133, 244);
+      doc.setTextColor(255, 255, 255);
+
+      const colWidths = [60, 40, 40];
+      const headers = ['Fecha', 'Hora', 'Estado'];
+
+      headers.forEach((header, i) => {
+        const xPos = margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0);
+        doc.rect(xPos, cursorY, colWidths[i], 8, 'F');
+        doc.text(header, xPos + 2, cursorY + 5);
+      });
+
+      cursorY += 10;
+      doc.setFont(undefined, 'normal');
+      doc.setTextColor(0, 0, 0);
+
+      tableData.forEach((row, idx) => {
+        if (cursorY > pageHeight - 20) {
+          doc.addPage();
+          cursorY = margin;
+        }
+
+        if (idx % 2 === 0) {
+          doc.setFillColor(242, 242, 242);
+          doc.rect(margin, cursorY - 3, 140, 8, 'F');
+        }
+
+        row.forEach((cell, i) => {
+          const xPos =
+            margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0);
+          doc.text(cell, xPos + 2, cursorY + 2);
+        });
+
+        cursorY += 8;
+      });
+    }
+
+    doc.setFontSize(9);
+    doc.setTextColor(128, 128, 128);
+    const footerText = `Documento generado automáticamente - ${new Date().toLocaleString()}`;
+    doc.text(footerText, pageWidth / 2, pageHeight - 10, {
+      align: 'center',
     });
 
-    const blob = new Blob([lineas.join('\n')], {
-      type: 'text/plain;charset=utf-8',
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `historial_${item.paciente.apellido}_${item.paciente.nombre}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
+    doc.save(`historial_${item.paciente.apellido}_${item.paciente.nombre}.pdf`);
   }
 }

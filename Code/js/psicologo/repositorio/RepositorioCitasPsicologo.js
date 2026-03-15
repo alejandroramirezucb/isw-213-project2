@@ -1,7 +1,7 @@
 class RepositorioCitasPsicologo {
   static #citasCache = new Map();
   static #historialesCache = new Map();
-  static #DURACION_CACHE = 300000; // 5 minutos
+  static #DURACION_CACHE = 300000; 
 
   static #obtenerClaveCache(psicologoId, fechaInicio, fechaFin) {
     return `${psicologoId}:${fechaInicio}:${fechaFin}`;
