@@ -20,7 +20,10 @@ class ServicioAutenticacionPagina {
       .eq('id', resultado.data.user.id)
       .single();
 
-    return consulta.data;
+    return {
+      ...consulta.data,
+      email: resultado.data.user.email,
+    };
   }
 
   static async cerrarSesion() {

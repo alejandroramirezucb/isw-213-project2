@@ -1,7 +1,7 @@
 class RepositorioCitasPsicologo {
   static #citasCache = new Map();
   static #historialesCache = new Map();
-  static #DURACION_CACHE = 60000;
+  static #DURACION_CACHE = 300000; // 5 minutos
 
   static #obtenerClaveCache(psicologoId, fechaInicio, fechaFin) {
     return `${psicologoId}:${fechaInicio}:${fechaFin}`;
@@ -52,7 +52,7 @@ class RepositorioCitasPsicologo {
 
     if (!resultado.error && datos.pacienteId) {
       await this.crearNotificacion(datos.pacienteId, citaId);
-      this.#limpiarCache();
+      this.#invalidarCacheCompleto(datos.psicologoId);
     }
 
     return !resultado.error;
@@ -61,11 +61,16 @@ class RepositorioCitasPsicologo {
   static async #obtenerDatosCita(citaId) {
     const resultado = await clienteSupabase
       .from('citas')
-      .select('paciente_id')
+      .select('paciente_id, psicologo_id')
       .eq('id', citaId)
       .single();
 
-    return resultado.data ? { pacienteId: resultado.data.paciente_id } : null;
+    return resultado.data
+      ? {
+          pacienteId: resultado.data.paciente_id,
+          psicologoId: resultado.data.psicologo_id,
+        }
+      : null;
   }
 
   static async crearNotificacion(pacienteId, citaId) {
@@ -118,6 +123,15 @@ class RepositorioCitasPsicologo {
       });
     });
     return Object.values(porPaciente);
+  }
+
+  static #invalidarCacheCompleto(psicologoId) {
+    for (const clave of this.#citasCache.keys()) {
+      if (clave.startsWith(psicologoId)) {
+        this.#citasCache.delete(clave);
+      }
+    }
+    this.#historialesCache.delete(psicologoId);
   }
 
   static #limpiarCache() {

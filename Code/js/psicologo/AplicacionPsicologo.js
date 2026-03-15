@@ -18,6 +18,7 @@ class AplicacionPsicologo {
     }
 
     GestorHistorial.inicializar();
+    GestorPerfil.inicializar();
     RenderizadorCitas.inicializar();
     RenderizadorCalendarioPsicologo.inicializar();
     GestorConfiguracionUI.establecerFechasPorDefecto();

@@ -29,6 +29,7 @@ class AplicacionPaciente {
     RenderizadorHorarios.inicializar();
     GestorProximaCita.inicializar();
     GestorMisCitas.inicializar();
+    GestorPerfil.inicializar();
     ControladorEventosPaciente.inicializar();
 
     await RenderizadorCalendario.renderizar();
