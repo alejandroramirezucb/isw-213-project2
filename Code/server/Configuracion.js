@@ -18,8 +18,9 @@ class Configuracion {
     let rawEnv = '';
     try {
       rawEnv = fs.readFileSync('.env', 'utf8');
+      console.log('  → .env encontrado, usando variables del archivo');
     } catch (err) {
-      console.log('  → .env no encontrado, usando variables de entorno');
+      console.log('  → .env no encontrado, usando process.env (Render)');
       rawEnv = '';
     }
 
@@ -31,20 +32,27 @@ class Configuracion {
       return acc;
     }, {});
 
+    this.#env = { ...this.#env, ...process.env };
+
     this.#envJs = `var ENV=${JSON.stringify({
-      SUPABASE_URL: this.#env.SUPABASE_URL,
-      SUPABASE_ANON_KEY: this.#env.SUPABASE_ANON_KEY,
+      SUPABASE_URL: this.#obtener('SUPABASE_URL'),
+      SUPABASE_ANON_KEY: this.#obtener('SUPABASE_ANON_KEY'),
     })};`;
   }
 
+  #obtener(clave) {
+    return this.#env[clave] || '';
+  }
+
   get supabaseUrl() {
-    return this.#env.SUPABASE_URL;
+    return this.#obtener('SUPABASE_URL');
   }
   get supabaseHost() {
-    return this.#env.SUPABASE_URL.replace('https://', '');
+    const url = this.#obtener('SUPABASE_URL');
+    return url.replace('https://', '');
   }
   get serviceRoleKey() {
-    return this.#env.SUPABASE_SERVICE_ROLE_KEY;
+    return this.#obtener('SUPABASE_SERVICE_ROLE_KEY');
   }
   get envJs() {
     return this.#envJs;
