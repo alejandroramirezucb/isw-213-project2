@@ -106,9 +106,8 @@ class RenderizadorCalendario {
     EstadoPaciente.establecer('fechaSeleccionada', fecha);
 
     if (this.#fechaSelectElement) {
-      this.#fechaSelectElement.textContent = formatearFechaCorta(
-        new Date(fecha + 'T00:00:00'),
-      );
+      this.#fechaSelectElement.textContent =
+        FormateadorFachada.formatearFechaCorta(new Date(fecha + 'T00:00:00'));
     }
 
     await RenderizadorHorarios.cargar(fecha);

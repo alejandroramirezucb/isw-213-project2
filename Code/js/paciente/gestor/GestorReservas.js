@@ -6,7 +6,10 @@ class GestorReservas {
     const pacienteId = EstadoPaciente.obtener('pacienteId');
     const usuario = EstadoPaciente.obtener('usuario');
 
-    if (!bloqueId || !pacienteId) return;
+    if (!bloqueId || !pacienteId) {
+      MensajesFachada.mostrar('Error: datos de reserva incompletos', 'error');
+      return;
+    }
 
     if (usuario?.pacientes?.bloqueado) {
       MensajesFachada.mostrar('No es posible agendar en este momento', 'error');
@@ -26,6 +29,10 @@ class GestorReservas {
 
       const bloque = await RepositorioBloques.obtenerProfesional(bloqueId);
 
+      if (!bloque || !bloque.psicologo_id) {
+        throw new Error('Bloque no válido o profesional no encontrado');
+      }
+
       const citaCreada = await RepositorioCitas.crear(
         pacienteId,
         bloque.psicologo_id,
@@ -39,8 +46,8 @@ class GestorReservas {
 
       await RepositorioCitas.crearNotificacion(
         pacienteId,
-        'confirmacion',
-        null,
+        'confirmacion_reserva',
+        citaCreada,
       );
 
       if (esReprogramacion) {

@@ -46,7 +46,7 @@ class RenderizadorHorarios {
 
     let html = '';
     bloques.forEach((bloque) => {
-      const hora = formatearHora(bloque.hora_inicio);
+      const hora = FormateadorFachada.formatearHora(bloque.hora_inicio);
       const estaBloqueado = bloque.estado === 'bloqueado_temporal';
       const clases = `horarios__boton${
         estaBloqueado ? ` ${this.#CLASE_BOTON_BLOQUEADO}` : ''
@@ -96,7 +96,7 @@ class RenderizadorHorarios {
     boton.classList.add(this.#CLASE_BOTON_SELECT);
 
     const fechaSel = EstadoPaciente.obtener('fechaSeleccionada');
-    this.#resumenFecha.textContent = formatearFecha(
+    this.#resumenFecha.textContent = FormateadorFachada.formatearFecha(
       new Date(fechaSel + 'T00:00:00'),
     );
     this.#resumenHora.textContent = boton.textContent;
@@ -111,6 +111,6 @@ class RenderizadorHorarios {
       this.#textoConf.textContent = '¿Deseas confirmar esta cita?';
     }
 
-    abrirModal('modal-reserva');
+    NavigacionFachada.abrirModal('modal-reserva');
   }
 }

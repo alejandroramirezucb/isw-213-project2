@@ -10,14 +10,28 @@ class RepositorioCitas {
   static #DURACION_CACHE = 30000;
 
   static async crear(pacienteId, profesionalId, bloqueId) {
-    const resultado = await clienteSupabase.from(this.#TABLA_CITAS).insert({
-      paciente_id: pacienteId,
-      psicologo_id: profesionalId,
-      bloque_id: bloqueId,
-      estado: this.#ESTADO_CONFIRMADA,
-    });
+    const resultado = await clienteSupabase
+      .from(this.#TABLA_CITAS)
+      .insert({
+        paciente_id: pacienteId,
+        psicologo_id: profesionalId,
+        bloque_id: bloqueId,
+        estado: this.#ESTADO_CONFIRMADA,
+      })
+      .select('id');
+
+    if (resultado.error) {
+      console.error(
+        'Error al crear cita:',
+        resultado.error.message ||
+          resultado.error.details ||
+          JSON.stringify(resultado.error),
+      );
+      return null;
+    }
+
     this.#citasCache = null;
-    return !resultado.error;
+    return resultado.data?.[0]?.id || null;
   }
 
   static async obtenerProxima(pacienteId) {
@@ -106,12 +120,33 @@ class RepositorioCitas {
   }
 
   static async crearNotificacion(pacienteId, tipo, citaId) {
-    await clienteSupabase.from(this.#TABLA_NOTIF).insert({
+    const payload = {
       destinatario_tipo: 'paciente',
       destinatario_id: pacienteId,
       cita_id: citaId,
       tipo: tipo,
       canal: 'email',
-    });
+    };
+
+    console.log('📧 Creando notificación con payload:', payload);
+
+    const resultado = await clienteSupabase
+      .from(this.#TABLA_NOTIF)
+      .insert(payload);
+
+    if (resultado.error) {
+      console.error(
+        '❌ Error al crear notificación:',
+        resultado.error.message,
+        'Detalles:',
+        resultado.error.details,
+        'Hint:',
+        resultado.error.hint,
+      );
+    } else {
+      console.log('✅ Notificación creada exitosamente');
+    }
+
+    return !resultado.error;
   }
 }

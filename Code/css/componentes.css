@@ -238,7 +238,7 @@
   right: 1.5rem;
   left: auto;
   transform: none;
-  z-index: 1000;
+  z-index: 9999;
   min-width: 280px;
   max-width: 90vw;
   box-shadow: var(--sombra-lg);
