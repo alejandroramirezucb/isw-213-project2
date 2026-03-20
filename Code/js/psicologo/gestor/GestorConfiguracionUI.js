@@ -47,13 +47,17 @@ class GestorConfiguracionUI {
       const checkbox = diaArticle.querySelector('.configuracion__checkbox');
 
       if (checkbox.checked) {
-        const horaInicio = diaArticle.querySelector(
-          '[data-tipo="inicio"]',
-        ).value;
-        const horaFin = diaArticle.querySelector('[data-tipo="fin"]').value;
+        let horaInicio = diaArticle.querySelector('[data-tipo="inicio"]').value;
+        let horaFin = diaArticle.querySelector('[data-tipo="fin"]').value;
         const duracion = parseInt(
           diaArticle.querySelector('.configuracion__duracion').value,
         );
+
+        if (horaInicio && !horaInicio.includes(':')) horaInicio += ':00';
+        if (horaInicio && horaInicio.split(':').length === 2)
+          horaInicio += ':00';
+        if (horaFin && !horaFin.includes(':')) horaFin += ':00';
+        if (horaFin && horaFin.split(':').length === 2) horaFin += ':00';
 
         configuraciones.push({
           psicologo_id: psicologoId,

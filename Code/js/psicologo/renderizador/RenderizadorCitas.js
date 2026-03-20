@@ -50,12 +50,12 @@ class RenderizadorCitas {
         (c) => c.bloques_horario.hora_inicio.substring(0, 5) > horaActual,
       );
       this.#siguienteCita.textContent = siguienteCita
-        ? FormateadorHora.formatear(siguienteCita.bloques_horario.hora_inicio)
+        ? `${FormateadorFecha.aTextoCorto(new Date(siguienteCita.bloques_horario.fecha + 'T00:00:00'))} - ${FormateadorHora.formatear(siguienteCita.bloques_horario.hora_inicio)}`
         : 'Ninguna';
     } else {
       this.#siguienteCita.textContent =
         citas.length > 0
-          ? FormateadorHora.formatear(citas[0].bloques_horario.hora_inicio)
+          ? `${FormateadorFecha.aTextoCorto(new Date(citas[0].bloques_horario.fecha + 'T00:00:00'))} - ${FormateadorHora.formatear(citas[0].bloques_horario.hora_inicio)}`
           : '--:--';
     }
   }

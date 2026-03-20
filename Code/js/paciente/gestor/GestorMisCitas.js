@@ -101,7 +101,7 @@ class GestorMisCitas {
       ? `${usuario.pacientes.nombre} ${usuario.pacientes.apellido}`
       : 'Paciente';
 
-    doc.setFillColor(66, 133, 244); 
+    doc.setFillColor(66, 133, 244);
     doc.rect(0, 0, pageWidth, 45, 'F');
 
     doc.setTextColor(255, 255, 255);
@@ -112,11 +112,14 @@ class GestorMisCitas {
     doc.setFontSize(11);
     doc.setFont(undefined, 'normal');
     doc.text(`Paciente: ${nombrePaciente}`, margin, 32);
-    doc.text(`Exportado: ${new Date().toLocaleDateString()}`, margin, 38);
+    doc.text(
+      `Exportado: ${new Date().toLocaleDateString('es-ES')}`,
+      margin,
+      38,
+    );
 
     cursorY = 55;
 
-    
     const tableData = this.#citasActuales
       .map((cita) => {
         if (!cita.bloques_horario) return null;
@@ -143,7 +146,6 @@ class GestorMisCitas {
       return;
     }
 
-    
     if (doc.autoTable) {
       doc.autoTable({
         startY: cursorY,
@@ -172,7 +174,6 @@ class GestorMisCitas {
 
       cursorY = doc.lastAutoTable.finalY + 10;
     } else {
-      
       doc.setFontSize(11);
       doc.setFont(undefined, 'bold');
       doc.setFillColor(66, 133, 244);
@@ -212,7 +213,6 @@ class GestorMisCitas {
       });
     }
 
-    
     doc.setFontSize(9);
     doc.setTextColor(128, 128, 128);
     const footerText = `Documento generado automáticamente - ${new Date().toLocaleString()}`;

@@ -31,7 +31,10 @@ class FormateadorFecha {
 
   static aTextoCorto(fecha) {
     const f = typeof fecha === 'string' ? new Date(fecha) : fecha;
-    return `${f.getDate()} de ${this.MESES[f.getMonth()]}`;
+    const d = String(f.getDate()).padStart(2, '0');
+    const m = String(f.getMonth() + 1).padStart(2, '0');
+    const a = f.getFullYear();
+    return `${d}/${m}/${a}`;
   }
 
   static aISO(fecha) {

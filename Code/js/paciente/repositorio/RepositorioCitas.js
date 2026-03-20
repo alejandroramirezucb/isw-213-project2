@@ -75,7 +75,7 @@ class RepositorioCitas {
         .gte('bloques_horario.fecha', hoy);
     } else if (filtro === 'pasadas') {
       query = query
-        .in('estado', [this.#ESTADO_COMPLETADA, this.#ESTADO_CONFIRMADA])
+        .eq('estado', this.#ESTADO_COMPLETADA)
         .lt('bloques_horario.fecha', hoy);
     } else if (filtro === 'canceladas') {
       query = query.eq('estado', this.#ESTADO_CANCELADA);
@@ -101,9 +101,8 @@ class RepositorioCitas {
         );
       if (filtro === 'pasadas')
         return (
-          [this.#ESTADO_COMPLETADA, this.#ESTADO_CONFIRMADA].includes(
-            cita.estado,
-          ) && cita.bloques_horario?.fecha < hoy
+          cita.estado === this.#ESTADO_COMPLETADA &&
+          cita.bloques_horario?.fecha < hoy
         );
       if (filtro === 'canceladas')
         return cita.estado === this.#ESTADO_CANCELADA;
@@ -132,9 +131,14 @@ class RepositorioCitas {
 
     const resultado = await clienteSupabase
       .from(this.#TABLA_NOTIF)
-      .insert(payload);
+      .insert(payload)
+      .select();
 
     if (resultado.error) {
+      if (resultado.error.code === '23505') {
+        console.log('ℹ️ Notificación duplicada, ignorando');
+        return true;
+      }
       console.error(
         '❌ Error al crear notificación:',
         resultado.error.message,
