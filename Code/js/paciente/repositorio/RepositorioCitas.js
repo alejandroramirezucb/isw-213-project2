@@ -55,6 +55,10 @@ class RepositorioCitas {
     const hoy = FormateadorFecha.aISO(new Date());
     const ahora = Date.now();
 
+    if (filtro !== 'proximas') {
+      this.#citasCache = null;
+    }
+
     if (
       this.#citasCache &&
       ahora - this.#tiempoUltimoCacheCitas < this.#DURACION_CACHE
@@ -76,7 +80,7 @@ class RepositorioCitas {
     } else if (filtro === 'pasadas') {
       query = query
         .eq('estado', this.#ESTADO_COMPLETADA)
-        .lt('bloques_horario.fecha', hoy);
+        .lte('bloques_horario.fecha', hoy);
     } else if (filtro === 'canceladas') {
       query = query.eq('estado', this.#ESTADO_CANCELADA);
     }
@@ -85,9 +89,12 @@ class RepositorioCitas {
       ascending: filtro === 'proximas',
     });
 
-    this.#citasCache = resultado.data || [];
-    this.#tiempoUltimoCacheCitas = ahora;
-    return this.#citasCache;
+    if (filtro === 'proximas') {
+      this.#citasCache = resultado.data || [];
+      this.#tiempoUltimoCacheCitas = ahora;
+    }
+
+    return resultado.data || [];
   }
 
   static #filtrarCitasLocal(pacienteId, filtro, hoy) {
