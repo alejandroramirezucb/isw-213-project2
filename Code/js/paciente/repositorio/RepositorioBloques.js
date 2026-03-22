@@ -70,8 +70,12 @@ class RepositorioBloques {
       .eq('id', bloqueId)
       .single();
     
+    if (resultado.error) {
+      throw new Error('Bloque no encontrado');
+    }
+    
     if (resultado.data?.estado !== 'bloqueado_temporal') {
-      throw new Error('El bloque no está disponible o ya fue ocupado');
+      throw new Error('El bloque no está disponible o ya fue ocupado por otro usuario');
     }
     
     return resultado.data;

@@ -15,6 +15,7 @@
         <button class="navegacion__boton navegacion__boton--activo" data-vista="panel"><span>Panel</span></button>
         <button class="navegacion__boton" data-vista="configuracion"><span>Horarios</span></button>
         <button class="navegacion__boton" data-vista="historial"><span>Historial</span></button>
+        <button class="navegacion__boton" data-vista="notificaciones"><span>Notificaciones</span><span class="notificaciones__contador" id="contador-notificaciones" style="display: none;"></span></button>
         <button class="navegacion__boton" data-vista="perfil"><span>Perfil</span></button>
       </nav>
       <div class="encabezado__usuario">
@@ -28,11 +29,42 @@
     <section class="vista vista--activa" id="vista-panel"></section>
     <section class="vista" id="vista-configuracion"></section>
     <section class="vista" id="vista-historial"></section>
+    <section class="vista" id="vista-notificaciones">
+      <h1 class="vista-titulo">Notificaciones</h1>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div></div>
+        <button class="boton boton--blanco" id="btn-limpiar-notificaciones" style="display: none;">Limpiar</button>
+      </div>
+      <div id="contenido-notificaciones"></div>
+    </section>
     <section class="vista" id="vista-perfil"></section>
   </main>
 
   <div class="mensaje mensaje--oculto mensaje--flotante" id="mensaje-estado">
     <p class="mensaje__texto"></p>
+  </div>
+
+  <!-- Modal para detalles de cita -->
+  <div class="modal modal--oculto" id="modal-detalle-cita">
+    <div class="modal__contenido">
+      <header class="modal__encabezado">
+        <h3 class="modal__titulo">Detalle de Cita</h3>
+        <button class="modal__boton-cerrar" id="btn-cerrar-detalle">&times;</button>
+      </header>
+      <div class="modal__cuerpo">
+        <div class="detalle-cita">
+          <p class="detalle-cita__item"><strong>Paciente:</strong> <span id="detalle-paciente"></span></p>
+          <p class="detalle-cita__item"><strong>Correo:</strong> <span id="detalle-correo"></span></p>
+          <p class="detalle-cita__item"><strong>Teléfono:</strong> <span id="detalle-telefono"></span></p>
+          <p class="detalle-cita__item"><strong>Fecha:</strong> <span id="detalle-fecha"></span></p>
+          <p class="detalle-cita__item"><strong>Hora:</strong> <span id="detalle-hora"></span></p>
+          <p class="detalle-cita__item"><strong>Estado:</strong> <span id="detalle-estado"></span></p>
+        </div>
+      </div>
+      <footer class="modal__acciones">
+        <button class="boton boton--peligro" id="btn-cancelar-cita-psicologo">Cancelar Cita</button>
+      </footer>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -63,6 +95,7 @@
   <script src="../../js/psicologo/repositorio/RepositorioConfiguracion.js"></script>
   <script src="../../js/psicologo/repositorio/RepositorioCitasPsicologo.js"></script>
   <script src="../../js/psicologo/repositorio/RepositorioPacientes.js"></script>
+  <script src="../../js/psicologo/repositorio/RepositorioNotificaciones.js"></script>
   <script src="../../js/psicologo/gestor/GestorConfiguracionUI.js"></script>
   <script src="../../js/psicologo/gestor/GestorHorarios.js"></script>
   <script src="../../js/psicologo/renderizador/RenderizadorCitas.js"></script>
@@ -71,6 +104,7 @@
   <script src="../../js/psicologo/gestor/GestorHistorial.js"></script>
   <script src="../../js/psicologo/gestor/GestorPerfil.js"></script>
   <script src="../../js/psicologo/gestor/GestorRestriccion.js"></script>
+  <script src="../../js/psicologo/gestor/GestorNotificaciones.js"></script>
   <script src="../../js/psicologo/ControladorEventosPsicologo.js"></script>
   <script src="../../js/psicologo/AplicacionPsicologo.js"></script>
 </body>

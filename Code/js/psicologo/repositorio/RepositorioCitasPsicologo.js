@@ -86,6 +86,31 @@ class RepositorioCitasPsicologo {
     } catch (_) {}
   }
 
+  static async crearNotificacionNuevoTurno(psicologoId, citaId) {
+    try {
+      if (!psicologoId || !citaId) {
+        return false;
+      }
+
+      const resultado = await clienteSupabase.from('notificaciones').insert({
+        destinatario_tipo: 'psicologo',
+        destinatario_id: psicologoId,
+        cita_id: citaId,
+        tipo: 'nuevo_turno',
+        canal: 'email',
+        enviado: false,
+      }).select();
+
+      if (resultado.error) {
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   static async obtenerHistorialPacientes(psicologoId) {
     const cached = this.#historialesCache.get(psicologoId);
     if (cached && this.#esCacheValido(cached.timestamp)) {
@@ -124,6 +149,10 @@ class RepositorioCitasPsicologo {
       });
     });
     return Object.values(porPaciente);
+  }
+
+  static invalidarCacheHistorial(psicologoId) {
+    this.#historialesCache.delete(psicologoId);
   }
 
   static #invalidarCacheCompleto(psicologoId) {

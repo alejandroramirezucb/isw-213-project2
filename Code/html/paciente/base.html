@@ -14,7 +14,7 @@
       <nav class="navegacion">
         <button class="navegacion__boton navegacion__boton--activo" data-vista="calendario"><span>Agendar</span></button>
         <button class="navegacion__boton" data-vista="mis-citas"><span>Mis Citas</span></button>
-        <button class="navegacion__boton" data-vista="notificaciones"><span>Notificaciones</span></button>
+        <button class="navegacion__boton" data-vista="notificaciones"><span>Notificaciones</span><span class="notificaciones__contador" id="contador-notificaciones" style="display: none;"></span></button>
         <button class="navegacion__boton" data-vista="perfil"><span>Perfil</span></button>
       </nav>
       <div class="encabezado__usuario">
@@ -29,6 +29,10 @@
     <section class="vista" id="vista-mis-citas"></section>
     <section class="vista" id="vista-notificaciones">
       <h1 class="vista-titulo">Notificaciones</h1>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div></div>
+        <button class="boton boton--blanco" id="btn-limpiar-notificaciones" style="display: none;">Limpiar</button>
+      </div>
       <div id="contenido-notificaciones"></div>
     </section>
     <section class="vista" id="vista-perfil"></section>
@@ -36,6 +40,24 @@
 
   <div class="mensaje mensaje--oculto mensaje--flotante" id="mensaje-estado">
     <p class="mensaje__texto"></p>
+  </div>
+
+  <!-- Modal para cancelación de cita -->
+  <div class="modal modal--oculto" id="modal-cancelacion">
+    <div class="modal__contenido">
+      <header class="modal__encabezado">
+        <h3 class="modal__titulo">Cancelar Cita</h3>
+        <button class="modal__boton-cerrar" id="btn-cerrar-modal-cancelacion">&times;</button>
+      </header>
+      <div class="modal__cuerpo">
+        <p class="modal__advertencia">¿Estás seguro de que deseas cancelar esta cita?</p>
+        <p class="modal__info">El horario quedará disponible para otros pacientes.</p>
+      </div>
+      <footer class="modal__acciones">
+        <button class="boton boton--secundario" id="btn-no-cancelar">No, mantener cita</button>
+        <button class="boton boton--peligro" id="btn-si-cancelar">Sí, cancelar</button>
+      </footer>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -66,6 +88,8 @@
   <script src="../../js/paciente/repositorio/RepositorioBloques.js"></script>
   <script src="../../js/paciente/repositorio/RepositorioCitas.js"></script>
   <script src="../../js/paciente/repositorio/RepositorioNotificaciones.js"></script>
+  <script src="../../js/paciente/repositorio/RepositorioListaEspera.js"></script>
+  <script src="../../js/psicologo/repositorio/RepositorioCitasPsicologo.js"></script>
   <script src="../../js/paciente/renderizador/RenderizadorCalendario.js"></script>
   <script src="../../js/paciente/renderizador/RenderizadorHorarios.js"></script>
   <script src="../../js/paciente/gestor/GestorProximaCita.js"></script>

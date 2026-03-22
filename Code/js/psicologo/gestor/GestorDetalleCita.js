@@ -1,6 +1,8 @@
 class GestorDetalleCita {
   static mostrar(citaId) {
     const citas = EstadoPsicologo.obtener('citasCargadas');
+    if (!citas) return;
+    
     const cita = citas.find((c) => c.id === citaId);
     if (!cita) return;
 
@@ -32,16 +34,6 @@ class GestorDetalleCita {
     }
     if (detalleEstado) {
       detalleEstado.textContent = cita.estado.charAt(0).toUpperCase() + cita.estado.slice(1);
-    }
-
-    const btnBloquear = document.getElementById('btn-bloquear-paciente');
-    if (btnBloquear) {
-      const bloqueado = cita.pacientes?.bloqueado;
-      btnBloquear.textContent = bloqueado
-        ? 'Desbloquear Paciente'
-        : 'Bloquear Paciente';
-      btnBloquear.dataset.pacienteId = cita.pacientes.id;
-      btnBloquear.dataset.bloqueado = bloqueado ? 'true' : 'false';
     }
 
     NavigacionFachada.abrirModal('modal-detalle-cita');

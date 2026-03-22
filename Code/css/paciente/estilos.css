@@ -332,11 +332,8 @@
   .horarios__lista {
     grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
   }
-}
-
-.lista-espera {
-  margin-top: 1rem;
-  text-align: center;
+}.lista-espera {
+  margin-top: 1.5rem;
 }
 
 .lista-espera--oculta {

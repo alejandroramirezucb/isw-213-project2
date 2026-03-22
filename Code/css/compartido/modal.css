@@ -93,15 +93,15 @@
 
 .modal__acciones {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 1rem 1.25rem;
   border-top: 1px solid var(--borde);
-  flex-wrap: wrap;
 }
 
 .modal__acciones .boton {
-  width: auto;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  padding: 0.65rem 1rem;
+  min-width: 110px;
 }

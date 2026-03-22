@@ -21,13 +21,16 @@ class RepositorioCitas {
       .select('id');
 
     if (resultado.error) {
-      console.error(
-        'Error al crear cita:',
-        resultado.error.message ||
-          resultado.error.details ||
-          JSON.stringify(resultado.error),
-      );
-      return null;
+      const errorMsg = resultado.error.message || resultado.error.details || JSON.stringify(resultado.error);
+      
+      // Detectar error de unique constraint en bloque_id
+      if (errorMsg.includes('unique') || errorMsg.includes('duplicate')) {
+        console.error('Error: El bloque ya está reservado por otro paciente');
+        throw new Error('Este bloque ya fue reservado por otro usuario');
+      }
+      
+      console.error('Error al crear cita:', errorMsg);
+      throw new Error('Error al crear cita: ' + errorMsg);
     }
 
     this.#citasCache = null;

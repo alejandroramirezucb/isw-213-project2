@@ -95,7 +95,7 @@ class GestorListaEspera {
         </div>
         <div class="modal__mensaje">
           <p>¿Quieres que te avisemos cuando se libere un espacio en esta fecha?</p>
-          <p class="modal__nota">Te enviaremos una notificación por email cuando se libere un horario.</p>
+          <p class="modal__nota">Recibirás una notificación del sistema cuando se libere un horario.</p>
         </div>
         <div class="modal__acciones">
           <button class="boton boton--principal" id="btn-confirmar-espera">

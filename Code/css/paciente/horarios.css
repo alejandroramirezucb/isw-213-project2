@@ -68,12 +68,39 @@
 }
 
 .lista-espera {
-  padding: 1rem;
-  margin-top: 1rem;
-  background: var(--info-fondo, #e3f2fd);
-  border: 1px solid var(--info-borde, #90caf9);
-  border-radius: var(--radio-sm);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  background: #ffffff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-md);
   text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lista-espera h3 {
+  margin: 0 0 0.75rem 0;
+  color: var(--primario);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.lista-espera p {
+  margin: 0 0 1rem 0;
+  color: var(--texto-sec);
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .lista-espera--oculta {
@@ -81,21 +108,31 @@
 }
 
 .lista-espera__boton {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  margin-top: 0.5rem;
-  background: var(--primario);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: #6b7280;
   color: white;
   border: none;
   border-radius: var(--radio-sm);
   cursor: pointer;
   font-weight: 600;
+  font-size: 0.95rem;
   transition: var(--transicion);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 0.75rem;
 }
 
 .lista-espera__boton:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
+  background: #4b5563;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.lista-espera__boton:active {
+  transform: translateY(0);
 }
 
 .citas-del-dia {

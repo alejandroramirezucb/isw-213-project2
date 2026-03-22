@@ -17,6 +17,9 @@ class ControladorEventosPsicologo {
         if (vista === 'historial') {
           GestorHistorial.cargar();
         }
+        if (vista === 'notificaciones') {
+          GestorNotificaciones.cargar();
+        }
       },
     );
   }
@@ -67,25 +70,10 @@ class ControladorEventosPsicologo {
         click: () =>
           NavigacionFachada.cerrarModal('modal-detalle-cita'),
       },
-      '#btn-cerrar-detalle-2': {
-        click: () =>
-          NavigacionFachada.cerrarModal('modal-detalle-cita'),
-      },
       '#btn-cancelar-cita-psicologo': {
         click: () => GestorDetalleCita.cancelar(),
       },
-      '#btn-bloquear-paciente': {
-        click: (e) => this.#manejarBloqueo(e),
-      },
     });
-  }
-
-  static #manejarBloqueo(e) {
-    const btn = e.currentTarget;
-    GestorRestriccion.bloquearDesdeCita(
-      btn.dataset.pacienteId,
-      btn.dataset.bloqueado === 'true',
-    );
   }
 
   static #configurarBusqueda() {

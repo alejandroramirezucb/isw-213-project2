@@ -83,3 +83,18 @@
 .navegacion__boton--activo .navegacion__icono--solido {
   display: block;
 }
+
+.notificaciones__contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  background: #ef4444;
+  color: white;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-left: 4px;
+}

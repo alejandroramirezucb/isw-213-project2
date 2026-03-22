@@ -23,7 +23,7 @@ class ControladorListaEspera extends ControladorBase {
         await this.obtenerCliente().post('/rest/v1/notificaciones', {
           destinatario_tipo: 'paciente',
           destinatario_id: espera.paciente_id,
-          tipo: 'libracion_horario',
+          tipo: 'lista_espera',
           canal: 'email',
           enviado: false,
         });

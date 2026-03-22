@@ -95,6 +95,11 @@ class GestorReservas {
       citaCreada,
     );
 
+    await RepositorioCitasPsicologo.crearNotificacionNuevoTurno(
+      bloque.psicologo_id,
+      citaCreada,
+    );
+
     this.#mostrarMensajeExito(datos.esReprogramacion);
     this.cerrarModal(true);
 

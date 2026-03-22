@@ -1,10 +1,10 @@
 class GestorNotificaciones {
-  static #pacienteId = null;
+  static #psicologoId = null;
   static #repositorio = RepositorioNotificaciones;
   static #intervaloActualizacion = null;
 
-  static inicializar(pacienteId) {
-    this.#pacienteId = pacienteId;
+  static inicializar(psicologoId) {
+    this.#psicologoId = psicologoId;
     this.#iniciarPolling();
   }
 
@@ -13,8 +13,8 @@ class GestorNotificaciones {
       const contenidoNotif = document.getElementById('contenido-notificaciones');
       if (!contenidoNotif) return;
 
-      const notificaciones = await this.#repositorio.obtenerTodas(this.#pacienteId);
-      const conteoNoLeidas = await this.#repositorio.obtenerConteoNoLeidas(this.#pacienteId);
+      const notificaciones = await this.#repositorio.obtenerTodas(this.#psicologoId);
+      const conteoNoLeidas = await this.#repositorio.obtenerConteoNoLeidas(this.#psicologoId);
 
       contenidoNotif.innerHTML = this.#renderizarVista(notificaciones, conteoNoLeidas);
       this.#vincularEventos();
@@ -33,7 +33,7 @@ class GestorNotificaciones {
   }
 
   static async #manejarLimpiarNotificaciones() {
-    const exito = await this.#repositorio.marcarTodasLeidasDelPaciente(this.#pacienteId);
+    const exito = await this.#repositorio.marcarTodasLeidas(this.#psicologoId);
     if (exito) {
       MensajesFachada.mostrar('Notificaciones marcadas como leídas', 'exito');
       await this.cargar();
@@ -97,14 +97,12 @@ class GestorNotificaciones {
 
   static #obtenerIcono(tipo) {
     switch (tipo) {
-      case 'confirmacion_reserva':
-        return '✓';
-      case 'recordatorio':
-        return '⏰';
+      case 'nuevo_turno':
+        return '👤';
       case 'cancelacion':
         return '✕';
-      case 'lista_espera':
-        return '⭐';
+      case 'recordatorio':
+        return '⏰';
       default:
         return 'ℹ️';
     }
@@ -112,14 +110,12 @@ class GestorNotificaciones {
 
   static #obtenerTitulo(tipo) {
     switch (tipo) {
-      case 'confirmacion_reserva':
-        return 'Cita Confirmada';
-      case 'recordatorio':
-        return 'Recordatorio de Cita';
+      case 'nuevo_turno':
+        return 'Nuevo Turno Agendado';
       case 'cancelacion':
         return 'Cita Cancelada';
-      case 'lista_espera':
-        return '¡Hay disponibilidad!';
+      case 'recordatorio':
+        return 'Recordatorio';
       default:
         return 'Notificación';
     }
@@ -127,34 +123,31 @@ class GestorNotificaciones {
 
   static #obtenerMensaje(tipo) {
     switch (tipo) {
-      case 'confirmacion_reserva':
-        return 'Tu cita ha sido confirmada. Tienes una sesión agendada.';
-      case 'recordatorio':
-        return 'Recordatorio: tienes una cita próximamente.';
+      case 'nuevo_turno':
+        return 'Un paciente ha agendado una nueva cita contigo.';
       case 'cancelacion':
-        return 'Tu cita ha sido cancelada.';
-      case 'lista_espera':
-        return '¡Excelente! Hay disponibilidad. Rápido, hay un turno libre para agendar.';
+        return 'Una cita ha sido cancelada.';
+      case 'recordatorio':
+        return 'Tienes una cita próxima.';
       default:
         return 'Tienes una nueva notificación.';
     }
   }
 
-  static #formatearFecha(fechaISO) {
-    const ahora = new Date();
-    const fecha = new Date(fechaISO);
-    const diff = Math.floor((ahora - fecha) / 1000);
+  static #formatearFecha(fecha) {
+    const hoy = new Date();
+    const fechaNotif = new Date(fecha);
+    const diffMs = hoy - fechaNotif;
+    const diffMinutos = Math.floor(diffMs / 60000);
+    const diffHoras = Math.floor(diffMs / 3600000);
+    const diffDias = Math.floor(diffMs / 86400000);
 
-    if (diff < 60) return 'Hace menos de un minuto';
-    if (diff < 3600) return `Hace ${Math.floor(diff / 60)} minutos`;
-    if (diff < 86400) return `Hace ${Math.floor(diff / 3600)} horas`;
+    if (diffMinutos < 1) return 'Ahora';
+    if (diffMinutos < 60) return `Hace ${diffMinutos}m`;
+    if (diffHoras < 24) return `Hace ${diffHoras}h`;
+    if (diffDias < 7) return `Hace ${diffDias}d`;
 
-    return fecha.toLocaleDateString('es-ES', {
-      day: 'numeric',
-      month: 'short',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    return fechaNotif.toLocaleDateString('es-ES');
   }
 
   static #iniciarPolling() {
@@ -164,26 +157,18 @@ class GestorNotificaciones {
       btnLimpiar.dataset.eventoRegistrado = 'true';
     }
 
-    if (this.#intervaloActualizacion) {
-      clearInterval(this.#intervaloActualizacion);
-    }
-
     this.#intervaloActualizacion = setInterval(async () => {
-      try {
-        const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#pacienteId);
-        this.#actualizarContador(conteo);
-        
-        const vistaNotif = document.getElementById('vista-notificaciones');
-        if (vistaNotif && vistaNotif.classList.contains('vista--activa')) {
-          await this.cargar();
-        }
-      } catch (error) {
-        console.error('Error en polling de notificaciones:', error);
+      const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#psicologoId);
+      this.#actualizarContador(conteo);
+      
+      const contenidoNotif = document.getElementById('contenido-notificaciones');
+      if (contenidoNotif) {
+        await this.cargar();
       }
     }, 30000);
 
     (async () => {
-      const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#pacienteId);
+      const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#psicologoId);
       this.#actualizarContador(conteo);
     })();
   }
@@ -191,6 +176,7 @@ class GestorNotificaciones {
   static detener() {
     if (this.#intervaloActualizacion) {
       clearInterval(this.#intervaloActualizacion);
+      this.#intervaloActualizacion = null;
     }
   }
 }

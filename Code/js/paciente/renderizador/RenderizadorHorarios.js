@@ -100,7 +100,7 @@ class RenderizadorHorarios {
     const usuario = EstadoPaciente.obtener('usuario');
 
     if (usuario?.pacientes?.bloqueado) {
-      mostrarMensaje(
+      MensajesFachada.mostrar(
         'No es posible agendar en este momento, comuníquese directamente con administración.',
         'error',
       );
@@ -111,7 +111,7 @@ class RenderizadorHorarios {
 
     const exito = await RepositorioBloques.bloquearTemporal(bloqueId);
     if (!exito) {
-      mostrarMensaje('Este horario ya no está disponible', 'error');
+      MensajesFachada.mostrar('Este horario ya no está disponible', 'error');
       await this.cargar(EstadoPaciente.obtener('fechaSeleccionada'));
       return;
     }
@@ -165,13 +165,13 @@ class RenderizadorHorarios {
     this.#btnEspera.addEventListener('click', async () => {
       const usuario = EstadoPaciente.obtener('usuario');
       if (!usuario) {
-        mostrarMensaje('Debes iniciar sesión para unirte a la lista de espera', 'error');
+        MensajesFachada.mostrar('Debes iniciar sesión para unirte a la lista de espera', 'error');
         return;
       }
 
       const psicologoId = EstadoPaciente.obtener('psicologoId');
       if (!psicologoId) {
-        mostrarMensaje('Error: No se pudo identificar el psicólogo', 'error');
+        MensajesFachada.mostrar('Error: No se pudo identificar el psicólogo', 'error');
         return;
       }
 

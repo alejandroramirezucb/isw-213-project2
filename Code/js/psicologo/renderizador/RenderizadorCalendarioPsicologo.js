@@ -126,6 +126,8 @@ class RenderizadorCalendarioPsicologo {
     const fecha = elemento.dataset.fecha;
     const citasDelDia = this.#citasDelMes[fecha] || [];
 
+    EstadoPsicologo.establecer('citasCargadas', citasDelDia);
+
     if (citasDelDia.length > 0) {
       RenderizadorCitas.renderizar(citasDelDia);
     }

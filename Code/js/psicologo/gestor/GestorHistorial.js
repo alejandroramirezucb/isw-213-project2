@@ -77,11 +77,18 @@ class GestorHistorial {
     });
 
     this.#lista.querySelectorAll('.btn-toggle-bloqueo').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        GestorRestriccion.toggleBloqueo(
-          btn.dataset.pacienteId,
-          btn.dataset.bloqueado === 'true',
-        );
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const pacienteId = btn.dataset.pacienteId;
+        const bloqueadoActual = btn.dataset.bloqueado === 'true';
+        
+        btn.disabled = true;
+        btn.textContent = bloqueadoActual ? 'Desbloqueando...' : 'Bloqueando...';
+        
+        await GestorRestriccion.toggleBloqueo(pacienteId, bloqueadoActual);
+        
+        const busqueda = document.getElementById('busqueda-paciente')?.value || '';
+        await this.cargar(busqueda);
       });
     });
   }
