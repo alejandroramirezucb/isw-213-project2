@@ -11,15 +11,15 @@ class Servidor {
   #config;
   #controladorRegistro;
   #controladorRecordatorios;
+  #intervaloRecordatorios;
 
-  constructor() {
-    this.#config = new Configuracion();
+  constructor(config = null) {
+    this.#config = config || new Configuracion();
 
     if (!this.#config.serviceRoleKey) {
-      console.error(
+      throw new Error(
         'ERROR: SUPABASE_SERVICE_ROLE_KEY no está configurado en .env',
       );
-      process.exit(1);
     }
 
     const cliente = new ClienteSupabaseAdmin(
@@ -34,25 +34,29 @@ class Servidor {
     http
       .createServer((req, res) => this.#manejarPeticion(req, res))
       .listen(puerto, () => {
-        console.log(`Servidor corriendo en http://localhost:${puerto}`);
-        setInterval(
-          () => {
-            this.#controladorRecordatorios
-              .ejecutar()
-              .then((r) =>
-                console.log(`[Recordatorios] enviados: ${r.enviados}`),
-              );
-          },
-          60 * 60 * 1000,
-        );
+        this.#iniciarRecordatorios();
       });
+  }
+
+  detener() {
+    if (this.#intervaloRecordatorios) {
+      clearInterval(this.#intervaloRecordatorios);
+    }
+  }
+
+  #iniciarRecordatorios() {
+    this.#intervaloRecordatorios = setInterval(async () => {
+      try {
+        await this.#controladorRecordatorios.ejecutar();
+      } catch {
+
+      }
+    }, 60 * 60 * 1000);
   }
 
   #manejarPeticion(req, res) {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
-
-    console.log(`[${new Date().toISOString()}] ${req.method} ${pathname}`);
 
     if (pathname === '/' || pathname === '') {
       res.writeHead(302, { Location: '/html/index.html' });
@@ -82,11 +86,9 @@ class Servidor {
 
     fs.readFile(filePath, (err, content) => {
       if (err) {
-        console.log(`  → 404 Error: ${err.code} (${filePath})`);
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end(`404 Not found: ${pathname}`);
       } else {
-        console.log(`  → 200 OK (${content.length} bytes)`);
         const headers = { 'Content-Type': contentType };
         if (ext === '.js' || ext === '.html') {
           headers['Cache-Control'] = 'no-store';

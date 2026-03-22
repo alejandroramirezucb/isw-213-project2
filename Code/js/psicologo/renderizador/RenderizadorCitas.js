@@ -30,6 +30,11 @@ class RenderizadorCitas {
   }
 
   static actualizarTitulo(periodo, fechas) {
+    if (!this.#tituloPeriodo || !this.#fechaActual) {
+      console.warn('Elementos titulo/fecha no encontrados. Fragment podría no estar cargado.');
+      return;
+    }
+
     if (periodo === 'semana') {
       this.#tituloPeriodo.textContent = 'Citas de la Semana';
       this.#fechaActual.textContent = `${FormateadorFecha.aTextoCorto(new Date(fechas.inicio + 'T00:00:00'))} - ${FormateadorFecha.aTextoCorto(new Date(fechas.fin + 'T00:00:00'))}`;
@@ -40,6 +45,11 @@ class RenderizadorCitas {
   }
 
   static actualizarResumen(citas, esHoy) {
+    if (!this.#totalCitas || !this.#siguienteCita) {
+      console.warn('Elementos resumen no encontrados. Fragment podría no estar cargado.');
+      return;
+    }
+
     this.#totalCitas.textContent = citas.length;
 
     if (esHoy && citas.length > 0) {
@@ -61,6 +71,11 @@ class RenderizadorCitas {
   }
 
   static renderizar(citas) {
+    if (!this.#lista || !this.#sinCitas) {
+      console.warn('Elementos lista/sinCitas no encontrados. Fragment podría no estar cargado.');
+      return;
+    }
+
     if (citas.length === 0) {
       this.#lista.innerHTML = '';
       this.#sinCitas.classList.remove('mensaje-vacio--oculto');

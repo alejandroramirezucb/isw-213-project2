@@ -6,8 +6,8 @@ class GestorHorarios {
       const psicologoId = EstadoPsicologo.obtener('psicologoId');
       const configuraciones =
         GestorConfiguracionUI.obtenerConfiguracionesFormulario();
-      const fechaDesde = document.getElementById('fecha-desde').value;
-      const fechaHasta = document.getElementById('fecha-hasta').value;
+      const fechaDesde = document.getElementById('fecha-desde')?.value;
+      const fechaHasta = document.getElementById('fecha-hasta')?.value;
 
       if (!configuraciones || configuraciones.length === 0) {
         MensajesFachada.mostrar(

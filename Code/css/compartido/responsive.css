@@ -1,0 +1,39 @@
+@media (max-width: 768px) {
+  .encabezado__contenido {
+    flex-wrap: wrap;
+  }
+
+  .navegacion {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .formulario__fila {
+    flex-direction: column;
+  }
+
+  .modal__acciones {
+    flex-direction: column;
+  }
+
+  .modal__acciones .boton--primario {
+    width: 100%;
+  }
+
+  .modal__acciones .boton--secundario {
+    width: auto;
+    align-self: flex-end;
+  }
+
+  .modal__acciones .boton--peligro {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenido-principal {
+    padding: 1rem;
+  }
+}

@@ -6,20 +6,33 @@ class GestorDetalleCita {
 
     EstadoPsicologo.establecer('citaSeleccionada', citaId);
 
-    document.getElementById('detalle-paciente').textContent =
-      `${cita.pacientes.nombre} ${cita.pacientes.apellido}`;
-    document.getElementById('detalle-correo').textContent =
-      cita.pacientes.correo;
-    document.getElementById('detalle-telefono').textContent =
-      cita.pacientes.telefono || 'No registrado';
-    document.getElementById('detalle-fecha').textContent =
-      FormateadorFecha.aTexto(
+    const detallePaciente = document.getElementById('detalle-paciente');
+    const detalleCorreo = document.getElementById('detalle-correo');
+    const detalleTelefono = document.getElementById('detalle-telefono');
+    const detalleFecha = document.getElementById('detalle-fecha');
+    const detalleHora = document.getElementById('detalle-hora');
+    const detalleEstado = document.getElementById('detalle-estado');
+
+    if (detallePaciente) {
+      detallePaciente.textContent = `${cita.pacientes.nombre} ${cita.pacientes.apellido}`;
+    }
+    if (detalleCorreo) {
+      detalleCorreo.textContent = cita.pacientes.correo;
+    }
+    if (detalleTelefono) {
+      detalleTelefono.textContent = cita.pacientes.telefono || 'No registrado';
+    }
+    if (detalleFecha) {
+      detalleFecha.textContent = FormateadorFecha.aTexto(
         new Date(cita.bloques_horario.fecha + 'T00:00:00'),
       );
-    document.getElementById('detalle-hora').textContent =
-      `${FormateadorHora.formatear(cita.bloques_horario.hora_inicio)} - ${FormateadorHora.formatear(cita.bloques_horario.hora_fin)}`;
-    document.getElementById('detalle-estado').textContent =
-      cita.estado.charAt(0).toUpperCase() + cita.estado.slice(1);
+    }
+    if (detalleHora) {
+      detalleHora.textContent = `${FormateadorHora.formatear(cita.bloques_horario.hora_inicio)} - ${FormateadorHora.formatear(cita.bloques_horario.hora_fin)}`;
+    }
+    if (detalleEstado) {
+      detalleEstado.textContent = cita.estado.charAt(0).toUpperCase() + cita.estado.slice(1);
+    }
 
     const btnBloquear = document.getElementById('btn-bloquear-paciente');
     if (btnBloquear) {

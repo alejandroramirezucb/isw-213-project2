@@ -1,0 +1,27 @@
+.panel-citas {
+  background: var(--superficie);
+  border-radius: var(--radio);
+  padding: 1.15rem;
+  box-shadow: var(--sombra);
+}
+
+.panel-citas__encabezado {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-citas__fecha {
+  color: var(--texto-sec);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.panel-citas__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

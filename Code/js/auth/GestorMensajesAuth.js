@@ -1,33 +1,41 @@
-class GestorMensajesAuth {
-  static #contenedor = null;
+class GestorMensajesAuth extends GestorMensajesBase {
   static #temporizador = null;
-  static #DURACION = 4000;
-  static #SELECTOR_CONTENEDOR = '#mensaje-estado';
-  static #SELECTOR_TEXTO = '.mensaje__texto';
+  static #contenedor = null;
 
-  static inicializar() {
-    this.#contenedor = document.querySelector(this.#SELECTOR_CONTENEDOR);
+  static obtenerTemporizador() {
+    return this.#temporizador;
   }
 
-  static mostrar(texto, tipo = 'info') {
-    if (!this.#contenedor) this.inicializar();
-    if (!this.#contenedor) return;
+  static asignarTemporizador(valor) {
+    this.#temporizador = valor;
+  }
 
-    const textoElemento = this.#contenedor.querySelector(this.#SELECTOR_TEXTO);
-    if (this.#temporizador) clearTimeout(this.#temporizador);
+  static obtenerContenedor() {
+    return this.#contenedor;
+  }
 
-    this.#contenedor.classList.remove(
-      'mensaje--oculto',
-      'mensaje--exito',
-      'mensaje--error',
-      'mensaje--info',
+  static asignarContenedor(valor) {
+    this.#contenedor = valor;
+  }
+
+  static obtenerTextoElemento() {
+    if (this.#contenedor) {
+      return this.#contenedor.querySelector(
+        Configuracion.SELECTORES_MENSAJES.TEXTO_MENSAJES,
+      );
+    }
+    return null;
+  }
+
+  static asignarTextoElemento(valor) {}
+
+  static obtenerDuracion() {
+    return Configuracion.DURACIONES.MENSAJE_AUTENTICACION;
+  }
+
+  static inicializar() {
+    this.#contenedor = document.querySelector(
+      Configuracion.SELECTORES_MENSAJES.CONTENEDOR_MENSAJES,
     );
-
-    this.#contenedor.classList.add(`mensaje--${tipo}`);
-    textoElemento.textContent = texto;
-
-    this.#temporizador = setTimeout(() => {
-      this.#contenedor.classList.add('mensaje--oculto');
-    }, this.#DURACION);
   }
 }

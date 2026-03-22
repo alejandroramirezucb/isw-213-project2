@@ -18,9 +18,7 @@ class Configuracion {
     let rawEnv = '';
     try {
       rawEnv = fs.readFileSync('.env', 'utf8');
-      console.log('  → .env encontrado, usando variables del archivo');
-    } catch (err) {
-      console.log('  → .env no encontrado, usando process.env (Render)');
+    } catch {
       rawEnv = '';
     }
 

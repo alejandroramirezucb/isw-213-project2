@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Psicoraiden - Panel del Psicólogo</title>
+  <link rel="icon" href="../../assets/psicoraiden-logo.png">
+  <link rel="stylesheet" href="../../css/psicologo/estilos.css">
+</head>
+<body class="pagina pagina--panel">
+  <header class="encabezado">
+    <div class="encabezado__contenido">
+      <h1 class="encabezado__logo">Psicoraiden</h1>
+      <nav class="navegacion">
+        <button class="navegacion__boton navegacion__boton--activo" data-vista="panel"><span>Panel</span></button>
+        <button class="navegacion__boton" data-vista="configuracion"><span>Horarios</span></button>
+        <button class="navegacion__boton" data-vista="historial"><span>Historial</span></button>
+        <button class="navegacion__boton" data-vista="perfil"><span>Perfil</span></button>
+      </nav>
+      <div class="encabezado__usuario">
+        <span class="encabezado__nombre" id="nombre-usuario">Psicólogo</span>
+        <button class="boton boton--secundario boton--pequeno" id="btn-cerrar-sesion">Salir</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenido-principal">
+    <section class="vista vista--activa" id="vista-panel"></section>
+    <section class="vista" id="vista-configuracion"></section>
+    <section class="vista" id="vista-historial"></section>
+    <section class="vista" id="vista-perfil"></section>
+  </main>
+
+  <div class="mensaje mensaje--oculto mensaje--flotante" id="mensaje-estado">
+    <p class="mensaje__texto"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+  <script src="/js/env.js"></script>
+  <script src="../../js/config/Configuracion.js"></script>
+  <script src="../../js/config/ClienteSupabase.js"></script>
+  <script src="../../js/core/ComponenteBase.js"></script>
+  <script src="../../js/core/ComponenteModal.js"></script>
+  <script src="../../js/core/ComponenteFormulario.js"></script>
+  <script src="../../js/core/MejoradorEventos.js"></script>
+  <script src="../../js/core/ValidadorFormulario.js"></script>
+  <script src="../../js/core/FormateadorFecha.js"></script>
+  <script src="../../js/core/FormateadorHora.js"></script>
+  <script src="../../js/core/GestorMensajesBase.js"></script>
+  <script src="../../js/core/GestorMensajes.js"></script>
+  <script src="../../js/core/GestorVistas.js"></script>
+  <script src="../../js/core/GestorModales.js"></script>
+  <script src="../../js/core/GestorFragmentos.js"></script>
+  <script src="../../js/core/ServicioAutenticacionPagina.js"></script>
+  <script src="../../js/core/FormateadorFachada.js"></script>
+  <script src="../../js/core/MensajesFachada.js"></script>
+  <script src="../../js/core/NavigacionFachada.js"></script>
+  <script src="../../js/core/AutenticacionFachada.js"></script>
+  <script src="../../js/core/CalendarioUtil.js"></script>
+  <script src="../../js/psicologo/estado/EstadoPsicologo.js"></script>
+  <script src="../../js/psicologo/repositorio/RepositorioConfiguracion.js"></script>
+  <script src="../../js/psicologo/repositorio/RepositorioCitasPsicologo.js"></script>
+  <script src="../../js/psicologo/repositorio/RepositorioPacientes.js"></script>
+  <script src="../../js/psicologo/gestor/GestorConfiguracionUI.js"></script>
+  <script src="../../js/psicologo/gestor/GestorHorarios.js"></script>
+  <script src="../../js/psicologo/renderizador/RenderizadorCitas.js"></script>
+  <script src="../../js/psicologo/renderizador/RenderizadorCalendarioPsicologo.js"></script>
+  <script src="../../js/psicologo/gestor/GestorDetalleCita.js"></script>
+  <script src="../../js/psicologo/gestor/GestorHistorial.js"></script>
+  <script src="../../js/psicologo/gestor/GestorPerfil.js"></script>
+  <script src="../../js/psicologo/gestor/GestorRestriccion.js"></script>
+  <script src="../../js/psicologo/ControladorEventosPsicologo.js"></script>
+  <script src="../../js/psicologo/AplicacionPsicologo.js"></script>
+</body>
+</html>

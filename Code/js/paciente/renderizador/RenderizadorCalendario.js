@@ -39,6 +39,11 @@ class RenderizadorCalendario {
     const anio = fechaActual.getFullYear();
     const mes = fechaActual.getMonth();
 
+    if (!this.#tituloMes || !this.#contenedor) {
+      console.warn('Elementos del calendario no encontrados. Fragment podría no estar cargado.');
+      return;
+    }
+
     this.#tituloMes.textContent = `${this.#NOMBRES_MESES[mes]} ${anio}`;
 
     const primerDia = new Date(anio, mes, 1);
@@ -108,6 +113,8 @@ class RenderizadorCalendario {
     if (this.#fechaSelectElement) {
       this.#fechaSelectElement.textContent =
         FormateadorFachada.formatearFechaCorta(new Date(fecha + 'T00:00:00'));
+    } else {
+      console.warn('Elemento de fecha seleccionada no encontrado.');
     }
 
     await RenderizadorHorarios.cargar(fecha);

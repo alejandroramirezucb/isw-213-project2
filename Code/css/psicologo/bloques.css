@@ -1,0 +1,32 @@
+.bloques {
+  background: var(--fondo);
+  border-radius: var(--radio);
+  padding: 1.15rem;
+  margin-bottom: 1.25rem;
+}
+
+.bloques__titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.bloques__descripcion {
+  font-size: 0.85rem;
+  color: var(--texto-sec);
+  margin-bottom: 1rem;
+}
+
+.bloques__rango {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.bloques__rango .formulario__grupo {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.formulario-horarios {
+  max-width: 560px;
+}

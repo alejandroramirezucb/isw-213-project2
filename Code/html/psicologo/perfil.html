@@ -1,0 +1,52 @@
+<header class="vista__encabezado">
+  <h2 class="vista__titulo">Mi Perfil</h2>
+  <p class="vista__descripcion">Información personal y contacto</p>
+</header>
+
+<div class="perfil">
+  <div class="perfil__seccion">
+    <h3 class="perfil__titulo">Información Personal</h3>
+    <div class="perfil__grupo">
+      <label class="perfil__etiqueta">Nombre</label>
+      <p class="perfil__valor" id="perfil-nombre">—</p>
+    </div>
+    <div class="perfil__grupo">
+      <label class="perfil__etiqueta">Apellido</label>
+      <p class="perfil__valor" id="perfil-apellido">—</p>
+    </div>
+    <div class="perfil__grupo">
+      <label class="perfil__etiqueta">Correo Electrónico</label>
+      <p class="perfil__valor" id="perfil-correo">—</p>
+    </div>
+  </div>
+
+  <div class="perfil__seccion">
+    <h3 class="perfil__titulo">Configuración de Cuenta</h3>
+    <div class="perfil__botones">
+      <button class="boton boton--secundario boton--pequeno" id="btn-cambiar-contrasena">Cambiar Contraseña</button>
+      <button class="boton boton--peligro boton--pequeno" id="btn-cerrar-sesion-perfil">Cerrar Sesión</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal--oculto" id="modal-cambiar-contrasena">
+  <div class="modal__contenido modal__contenido--ancho">
+    <header class="modal__encabezado">
+      <h3 class="modal__titulo">Cambiar Contraseña</h3>
+      <button class="modal__boton-cerrar" id="btn-cerrar-modal-contrasena">&times;</button>
+    </header>
+    <form class="formulario modal__cuerpo" id="formulario-cambiar-contrasena">
+      <div class="formulario__grupo">
+        <label class="formulario__etiqueta" for="nueva-contrasena">Nueva Contraseña</label>
+        <input type="password" class="formulario__campo" id="nueva-contrasena" placeholder="Ingresa tu nueva contraseña" required>
+      </div>
+      <div class="formulario__grupo">
+        <label class="formulario__etiqueta" for="confirmar-contrasena">Confirmar Contraseña</label>
+        <input type="password" class="formulario__campo" id="confirmar-contrasena" placeholder="Repite la contraseña" required>
+      </div>
+    </form>
+    <footer class="modal__acciones">
+      <button class="boton boton--primario" id="btn-guardar-contrasena">Guardar</button>
+    </footer>
+  </div>
+</div>

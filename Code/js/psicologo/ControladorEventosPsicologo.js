@@ -1,75 +1,102 @@
 class ControladorEventosPsicologo {
   static inicializar() {
-    document.querySelectorAll('.navegacion__boton').forEach((boton) => {
-      boton.addEventListener('click', () => {
-        NavigacionFachada.cambiarVista(boton.dataset.vista);
-        if (boton.dataset.vista === 'historial') {
+    this.#configurarNavegacion();
+    this.#configurarPeriodos();
+    this.#configurarSesion();
+    this.#configurarHorarios();
+    this.#configurarDetalleCita();
+    this.#configurarBusqueda();
+  }
+
+  static #configurarNavegacion() {
+    MejoradorEventos.mapearEventosPorData(
+      '.navegacion__boton',
+      'vista',
+      (vista) => {
+        NavigacionFachada.cambiarVista(vista);
+        if (vista === 'historial') {
           GestorHistorial.cargar();
         }
-      });
-    });
+      },
+    );
+  }
 
-    document.querySelectorAll('.periodo__boton').forEach((boton) => {
-      boton.addEventListener('click', () => {
+  static #configurarPeriodos() {
+    MejoradorEventos.mapearEventosPorData(
+      '.periodo__boton',
+      'periodo',
+      (periodo, e, elemento) => {
         document
           .querySelectorAll('.periodo__boton')
           .forEach((b) => b.classList.remove('periodo__boton--activo'));
-        boton.classList.add('periodo__boton--activo');
-        RenderizadorCitas.cargarPeriodo(boton.dataset.periodo);
-      });
+        elemento.classList.add('periodo__boton--activo');
+        RenderizadorCitas.cargarPeriodo(periodo);
+      },
+    );
+  }
+
+  static #configurarSesion() {
+    MejoradorEventos.mapearEventos({
+      '#btn-cerrar-sesion': {
+        click: () => AutenticacionFachada.cerrarSesion(),
+      },
+    });
+  }
+
+  static #configurarHorarios() {
+    MejoradorEventos.mapearEventos({
+      '#formulario-horarios': {
+        submit: (e) => GestorHorarios.guardar(e),
+      },
     });
 
-    document
-      .getElementById('btn-cerrar-sesion')
-      ?.addEventListener('click', () => AutenticacionFachada.cerrarSesion());
+    MejoradorEventos.mapearEventosMultiples({
+      '.configuracion__checkbox': {
+        change: (e) =>
+          GestorConfiguracionUI.toggleHorariosDia.call(
+            GestorConfiguracionUI,
+            e,
+          ),
+      },
+    });
+  }
 
-    document
-      .getElementById('formulario-horarios')
-      ?.addEventListener('submit', (e) => GestorHorarios.guardar(e));
+  static #configurarDetalleCita() {
+    MejoradorEventos.mapearEventos({
+      '#btn-cerrar-detalle': {
+        click: () =>
+          NavigacionFachada.cerrarModal('modal-detalle-cita'),
+      },
+      '#btn-cerrar-detalle-2': {
+        click: () =>
+          NavigacionFachada.cerrarModal('modal-detalle-cita'),
+      },
+      '#btn-cancelar-cita-psicologo': {
+        click: () => GestorDetalleCita.cancelar(),
+      },
+      '#btn-bloquear-paciente': {
+        click: (e) => this.#manejarBloqueo(e),
+      },
+    });
+  }
 
-    document
-      .querySelectorAll('.configuracion__checkbox')
-      .forEach((checkbox) => {
-        checkbox.addEventListener(
-          'change',
-          GestorConfiguracionUI.toggleHorariosDia,
-        );
-      });
+  static #manejarBloqueo(e) {
+    const btn = e.currentTarget;
+    GestorRestriccion.bloquearDesdeCita(
+      btn.dataset.pacienteId,
+      btn.dataset.bloqueado === 'true',
+    );
+  }
 
-    document
-      .getElementById('btn-cerrar-detalle')
-      ?.addEventListener('click', () =>
-        NavigacionFachada.cerrarModal('modal-detalle-cita'),
-      );
-    document
-      .getElementById('btn-cerrar-detalle-2')
-      ?.addEventListener('click', () =>
-        NavigacionFachada.cerrarModal('modal-detalle-cita'),
-      );
-    document
-      .getElementById('btn-cancelar-cita-psicologo')
-      ?.addEventListener('click', () => GestorDetalleCita.cancelar());
-
-    document
-      .getElementById('btn-bloquear-paciente')
-      ?.addEventListener('click', (e) => {
-        const btn = e.currentTarget;
-        GestorRestriccion.bloquearDesdeCita(
-          btn.dataset.pacienteId,
-          btn.dataset.bloqueado === 'true',
-        );
-      });
-
-    document
-      .getElementById('busqueda-paciente')
-      ?.addEventListener('input', (e) => {
-        GestorHistorial.cargar(e.target.value);
-      });
-
-    document
-      .getElementById('btn-cerrar-historial-paciente')
-      ?.addEventListener('click', () =>
-        NavigacionFachada.cerrarModal('modal-historial-paciente'),
-      );
+  static #configurarBusqueda() {
+    MejoradorEventos.mapearEventos({
+      '#busqueda-paciente': {
+        input: (e) => GestorHistorial.cargar(e.target.value),
+      },
+      '#btn-cerrar-historial-paciente': {
+        click: () =>
+          NavigacionFachada.cerrarModal('modal-historial-paciente'),
+      },
+    });
   }
 }

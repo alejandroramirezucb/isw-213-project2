@@ -1,0 +1,79 @@
+.formulario__grupo {
+  margin-bottom: 1rem;
+}
+
+.formulario__grupo--mitad {
+  flex: 1;
+}
+
+.formulario__fila {
+  display: flex;
+  gap: 1rem;
+}
+
+.formulario__etiqueta {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--texto);
+}
+
+.formulario__campo {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  font-size: 0.95rem;
+  font-family: var(--fuente);
+  transition: var(--transicion);
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.formulario__campo:focus {
+  outline: none;
+  border-color: var(--primario);
+  box-shadow: 0 0 0 3px var(--primario-light);
+}
+
+.formulario__opciones {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.formulario__opcion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.formulario__opcion input[type='radio'] {
+  accent-color: var(--primario);
+}
+
+.formulario__opcion-texto {
+  font-size: 0.93rem;
+}
+
+.formulario__acciones {
+  margin-top: 1.5rem;
+}
+
+.formulario__enlace {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: var(--texto-sec);
+}
+
+.enlace {
+  color: var(--primario);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.enlace:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,70 @@
+.perfil {
+  display: grid;
+  gap: 2rem;
+}
+
+.perfil__seccion {
+  background: var(--superficie);
+  padding: 1.5rem;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.perfil__titulo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--texto);
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--borde);
+}
+
+.perfil__grupo {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.perfil__grupo:last-child {
+  margin-bottom: 0;
+}
+
+.perfil__etiqueta {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--texto-sec);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.perfil__valor {
+  font-size: 1rem;
+  color: var(--texto);
+  padding: 0.5rem 0;
+}
+
+.perfil__botones {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.perfil__botones .boton {
+  margin-top: 0;
+}
+
+.boton--peligro {
+  background: var(--peligro);
+  color: #fff;
+}
+
+.boton--peligro:hover {
+  background: #cc2400;
+  color: #fff;
+}
+
+.modal__contenido--ancho {
+  max-width: 500px;
+}

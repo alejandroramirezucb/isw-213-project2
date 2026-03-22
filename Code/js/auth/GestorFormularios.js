@@ -1,32 +1,41 @@
 class GestorFormularios {
   static #seccionLogin = null;
   static #seccionRegistro = null;
-  static #SELECTOR_LOGIN = '#seccion-login';
-  static #SELECTOR_REGISTRO = '#seccion-registro';
-  static #CLASE_OCULTO = 'auth--oculto';
 
   static inicializar() {
-    this.#seccionLogin = document.querySelector(this.#SELECTOR_LOGIN);
-    this.#seccionRegistro = document.querySelector(this.#SELECTOR_REGISTRO);
+    this.#seccionLogin = document.querySelector(
+      Configuracion.SELECTORES_FORMULARIOS.SECCION_LOGIN,
+    );
+    this.#seccionRegistro = document.querySelector(
+      Configuracion.SELECTORES_FORMULARIOS.SECCION_REGISTRO,
+    );
   }
 
   static mostrarRegistro() {
     if (!this.#seccionLogin) this.inicializar();
     if (this.#seccionLogin) {
-      this.#seccionLogin.classList.add(this.#CLASE_OCULTO);
+      this.#seccionLogin.classList.add(
+        Configuracion.CLASES_CSS.OCULTO_AUTENTICACION,
+      );
     }
     if (this.#seccionRegistro) {
-      this.#seccionRegistro.classList.remove(this.#CLASE_OCULTO);
+      this.#seccionRegistro.classList.remove(
+        Configuracion.CLASES_CSS.OCULTO_AUTENTICACION,
+      );
     }
   }
 
   static mostrarLogin() {
     if (!this.#seccionLogin) this.inicializar();
     if (this.#seccionLogin) {
-      this.#seccionLogin.classList.remove(this.#CLASE_OCULTO);
+      this.#seccionLogin.classList.remove(
+        Configuracion.CLASES_CSS.OCULTO_AUTENTICACION,
+      );
     }
     if (this.#seccionRegistro) {
-      this.#seccionRegistro.classList.add(this.#CLASE_OCULTO);
+      this.#seccionRegistro.classList.add(
+        Configuracion.CLASES_CSS.OCULTO_AUTENTICACION,
+      );
     }
   }
 }

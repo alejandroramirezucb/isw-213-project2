@@ -1,0 +1,79 @@
+.historial-paciente {
+  background: var(--superficie);
+  border-radius: var(--radio);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--borde);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.historial-paciente--bloqueado {
+  border-color: var(--peligro);
+  background: var(--peligro-fondo, #fff5f5);
+}
+
+.historial-paciente__info {
+  flex: 1;
+}
+
+.historial-paciente__nombre {
+  font-weight: 600;
+  color: var(--texto);
+  font-size: 0.95rem;
+}
+
+.historial-paciente__estado {
+  font-size: 0.78rem;
+  color: var(--peligro);
+  font-weight: 500;
+  margin-top: 0.1rem;
+}
+
+.historial-paciente__resumen {
+  font-size: 0.82rem;
+  color: var(--texto-sec);
+  margin-top: 0.25rem;
+}
+
+.historial-paciente__completadas {
+  color: var(--exito, #16a34a);
+  font-weight: 500;
+}
+
+.historial-paciente__canceladas {
+  color: var(--peligro);
+  font-weight: 500;
+}
+
+.historial-paciente__acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.historial-item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--borde);
+  font-size: 0.88rem;
+  color: var(--texto);
+}
+
+.historial-item:last-child {
+  border-bottom: none;
+}
+
+.historial-item__fecha {
+  font-weight: 600;
+}
+
+.historial-item__estado--completada {
+  color: var(--exito, #16a34a);
+}
+
+.historial-item__estado--cancelada {
+  color: var(--peligro);
+}

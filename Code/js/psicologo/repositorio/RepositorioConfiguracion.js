@@ -76,7 +76,6 @@ class RepositorioConfiguracion {
       console.log('Bloques generados:', bloques.length);
 
       if (bloques.length > 0) {
-        // Obtener bloques existentes para evitar duplicados
         console.log('Verificando bloques existentes...');
         const existentes = await clienteSupabase
           .from('bloques_horario')
@@ -89,7 +88,6 @@ class RepositorioConfiguracion {
           (existentes.data || []).map((b) => `${b.fecha}-${b.hora_inicio}`),
         );
 
-        // Filtrar solo bloques nuevos
         const bloquesNuevos = bloques.filter(
           (b) => !existentesSet.has(`${b.fecha}-${b.hora_inicio}`),
         );

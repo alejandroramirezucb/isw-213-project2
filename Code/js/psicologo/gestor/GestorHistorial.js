@@ -89,8 +89,10 @@ class GestorHistorial {
   static #mostrarDetalle(item) {
     NavigacionFachada.abrirModal('modal-historial-paciente');
 
-    document.getElementById('historial-nombre-paciente').textContent =
-      `${item.paciente.nombre} ${item.paciente.apellido}`;
+    const nombrePaciente = document.getElementById('historial-nombre-paciente');
+    if (nombrePaciente) {
+      nombrePaciente.textContent = `${item.paciente.nombre} ${item.paciente.apellido}`;
+    }
 
     let html = '';
     item.citas.forEach((cita) => {

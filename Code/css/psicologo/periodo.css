@@ -1,0 +1,32 @@
+.periodo {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.25rem;
+  background: var(--fondo);
+  padding: 3px;
+  border-radius: var(--radio-sm);
+  width: fit-content;
+}
+
+.periodo__boton {
+  padding: 0.4rem 0.85rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transicion);
+  color: var(--texto-sec);
+  font-family: var(--fuente);
+}
+
+.periodo__boton:hover {
+  color: var(--texto);
+}
+
+.periodo__boton--activo {
+  background: var(--superficie);
+  color: var(--texto);
+  box-shadow: var(--sombra);
+}

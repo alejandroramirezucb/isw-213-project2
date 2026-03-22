@@ -1,36 +1,33 @@
-class GestorMensajes {
+class GestorMensajes extends GestorMensajesBase {
   static #temporizador = null;
-  static #duracionDefecto = 3000;
   static #contenedor = null;
   static #textoElemento = null;
 
-  static #inicializar() {
-    if (!this.#contenedor) {
-      this.#contenedor = document.querySelector('#mensaje-estado');
-      if (this.#contenedor) {
-        this.#textoElemento = this.#contenedor.querySelector('.mensaje__texto');
-      }
-    }
+  static obtenerTemporizador() {
+    return this.#temporizador;
   }
 
-  static mostrar(texto, tipo = 'info', duracion = null) {
-    this.#inicializar();
-    if (!this.#contenedor || !this.#textoElemento) return;
+  static asignarTemporizador(valor) {
+    this.#temporizador = valor;
+  }
 
-    if (this.#temporizador) clearTimeout(this.#temporizador);
+  static obtenerContenedor() {
+    return this.#contenedor;
+  }
 
-    this.#contenedor.classList.remove(
-      'mensaje--exito',
-      'mensaje--error',
-      'mensaje--info',
-      'mensaje--oculto',
-    );
-    this.#contenedor.classList.add(`mensaje--${tipo}`);
-    this.#textoElemento.textContent = texto;
+  static asignarContenedor(valor) {
+    this.#contenedor = valor;
+  }
 
-    const tiempoMuestra = duracion ?? this.#duracionDefecto;
-    this.#temporizador = setTimeout(() => {
-      this.#contenedor.classList.add('mensaje--oculto');
-    }, tiempoMuestra);
+  static obtenerTextoElemento() {
+    return this.#textoElemento;
+  }
+
+  static asignarTextoElemento(valor) {
+    this.#textoElemento = valor;
+  }
+
+  static obtenerDuracion() {
+    return Configuracion.DURACIONES.MENSAJE_DASHBOARD;
   }
 }

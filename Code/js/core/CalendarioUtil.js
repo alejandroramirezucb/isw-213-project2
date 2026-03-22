@@ -20,8 +20,8 @@ class CalendarioUtil {
 
   static renderizarMes(fechaActual, citasDelMes = {}, opciones = {}) {
     const {
-      selectorContenedor = '#calendario-dias',
-      selectorTitulo = '#calendario-mes',
+      selectorContenedor = Configuracion.SELECTORES_CALENDARIO.CONTENEDOR,
+      selectorTitulo = Configuracion.SELECTORES_CALENDARIO.TITULO,
       claseDia = 'calendario__dia',
       claseVacio = 'calendario__dia--vacio',
       claseHoy = 'calendario__dia--hoy',

@@ -1,0 +1,179 @@
+.vista {
+  display: none;
+}
+
+.vista--activa {
+  display: block;
+}
+
+.vista__encabezado {
+  margin-bottom: 1.5rem;
+}
+
+.vista__titulo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--texto);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.15rem;
+}
+
+.vista__descripcion {
+  color: var(--texto-sec);
+  font-size: 0.88rem;
+}
+
+.mensaje-vacio {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  color: var(--texto-ter);
+  background: var(--superficie);
+  border-radius: var(--radio);
+  font-size: 0.93rem;
+}
+
+.mensaje-vacio--oculto {
+  display: none;
+}
+
+.lista-citas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cita-item {
+  background: var(--fondo);
+  border-radius: var(--radio-sm);
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--borde);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
+.cita-item:hover {
+  background: var(--superficie);
+  border-color: var(--primario);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cita-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cita-item__fecha {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--texto);
+}
+
+.cita-item__hora {
+  color: var(--primario);
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.cita-item__paciente {
+  font-size: 0.85rem;
+  color: var(--texto-sec);
+}
+
+.cita-item__acciones {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.cita-item__estado {
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radio-pill);
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cita-item__estado--confirmada {
+  background: var(--exito-fondo);
+  color: var(--exito-texto);
+}
+
+.cita-item__estado--cancelada {
+  background: var(--peligro-fondo);
+  color: var(--peligro-texto);
+}
+
+.cita-item__estado--completada {
+  background: var(--info-fondo);
+  color: var(--info-texto);
+}
+
+.filtros {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  width: fit-content;
+  border-bottom: 1px solid var(--borde);
+}
+
+.filtros__boton {
+  padding: 0.35rem 0.75rem;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  font-size: 0.83rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transicion);
+  color: var(--texto-sec);
+  font-family: var(--fuente);
+}
+
+.filtros__boton:hover {
+  color: var(--texto);
+}
+
+.filtros__boton--activo {
+  background: transparent;
+  color: var(--primario);
+  border-bottom-color: var(--primario);
+  box-shadow: none;
+}
+
+.resumen-reserva {
+  background: var(--fondo);
+  padding: 1rem;
+  border-radius: var(--radio-sm);
+}
+
+.resumen-reserva__item {
+  margin-bottom: 0.5rem;
+  font-size: 0.93rem;
+}
+
+.resumen-reserva__item:last-child {
+  margin-bottom: 0;
+}
+
+.detalle-cita {
+  display: flex;
+  flex-direction: column;
+}
+
+.detalle-cita__item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--borde);
+  font-size: 0.93rem;
+}
+
+.detalle-cita__item:last-child {
+  border-bottom: none;
+}

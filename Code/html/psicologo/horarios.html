@@ -1,0 +1,209 @@
+<header class="vista__encabezado">
+  <h2 class="vista__titulo">Configuración de Horarios</h2>
+  <p class="vista__descripcion">Define tus días y horarios de atención</p>
+</header>
+
+<form class="formulario-horarios" id="formulario-horarios">
+  <div class="configuracion" id="dias-semana">
+    <article class="configuracion__dia" data-dia="1">
+      <label class="configuracion__toggle">
+        <input type="checkbox" class="configuracion__checkbox" data-dia="1">
+        <span class="configuracion__nombre">Lunes</span>
+      </label>
+      <div class="configuracion__horarios configuracion__horarios--oculto">
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Inicio</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="inicio" value="08:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Fin</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="fin" value="17:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Duración</label>
+          <select class="configuracion__duracion">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="90">90 min</option>
+          </select>
+        </div>
+      </div>
+    </article>
+
+    <article class="configuracion__dia" data-dia="2">
+      <label class="configuracion__toggle">
+        <input type="checkbox" class="configuracion__checkbox" data-dia="2">
+        <span class="configuracion__nombre">Martes</span>
+      </label>
+      <div class="configuracion__horarios configuracion__horarios--oculto">
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Inicio</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="inicio" value="08:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Fin</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="fin" value="17:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Duración</label>
+          <select class="configuracion__duracion">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="90">90 min</option>
+          </select>
+        </div>
+      </div>
+    </article>
+
+    <article class="configuracion__dia" data-dia="3">
+      <label class="configuracion__toggle">
+        <input type="checkbox" class="configuracion__checkbox" data-dia="3">
+        <span class="configuracion__nombre">Miércoles</span>
+      </label>
+      <div class="configuracion__horarios configuracion__horarios--oculto">
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Inicio</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="inicio" value="08:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Fin</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="fin" value="17:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Duración</label>
+          <select class="configuracion__duracion">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="90">90 min</option>
+          </select>
+        </div>
+      </div>
+    </article>
+
+    <article class="configuracion__dia" data-dia="4">
+      <label class="configuracion__toggle">
+        <input type="checkbox" class="configuracion__checkbox" data-dia="4">
+        <span class="configuracion__nombre">Jueves</span>
+      </label>
+      <div class="configuracion__horarios configuracion__horarios--oculto">
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Inicio</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="inicio" value="08:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Fin</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="fin" value="17:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Duración</label>
+          <select class="configuracion__duracion">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="90">90 min</option>
+          </select>
+        </div>
+      </div>
+    </article>
+
+    <article class="configuracion__dia" data-dia="5">
+      <label class="configuracion__toggle">
+        <input type="checkbox" class="configuracion__checkbox" data-dia="5">
+        <span class="configuracion__nombre">Viernes</span>
+      </label>
+      <div class="configuracion__horarios configuracion__horarios--oculto">
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Inicio</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="inicio" value="08:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Fin</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="fin" value="17:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Duración</label>
+          <select class="configuracion__duracion">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="90">90 min</option>
+          </select>
+        </div>
+      </div>
+    </article>
+
+    <article class="configuracion__dia" data-dia="6">
+      <label class="configuracion__toggle">
+        <input type="checkbox" class="configuracion__checkbox" data-dia="6">
+        <span class="configuracion__nombre">Sábado</span>
+      </label>
+      <div class="configuracion__horarios configuracion__horarios--oculto">
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Inicio</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="inicio" value="09:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Fin</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="fin" value="13:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Duración</label>
+          <select class="configuracion__duracion">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="90">90 min</option>
+          </select>
+        </div>
+      </div>
+    </article>
+
+    <article class="configuracion__dia" data-dia="0">
+      <label class="configuracion__toggle">
+        <input type="checkbox" class="configuracion__checkbox" data-dia="0">
+        <span class="configuracion__nombre">Domingo</span>
+      </label>
+      <div class="configuracion__horarios configuracion__horarios--oculto">
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Inicio</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="inicio" value="09:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Fin</label>
+          <input type="time" class="configuracion__tiempo" data-tipo="fin" value="12:00">
+        </div>
+        <div class="configuracion__rango">
+          <label class="configuracion__etiqueta">Duración</label>
+          <select class="configuracion__duracion">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="90">90 min</option>
+          </select>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <section class="bloques">
+    <h3 class="bloques__titulo">Generar Bloques de Horario</h3>
+    <p class="bloques__descripcion">Genera los bloques de citas disponibles para las próximas semanas.</p>
+    <div class="bloques__rango">
+      <div class="formulario__grupo">
+        <label class="formulario__etiqueta">Desde</label>
+        <input type="date" class="formulario__campo" id="fecha-desde">
+      </div>
+      <div class="formulario__grupo">
+        <label class="formulario__etiqueta">Hasta</label>
+        <input type="date" class="formulario__campo" id="fecha-hasta">
+      </div>
+    </div>
+  </section>
+
+  <div class="formulario__acciones">
+    <button type="submit" class="boton boton--primario">Guardar Configuración y Generar Bloques</button>
+  </div>
+</form>

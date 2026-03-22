@@ -1,0 +1,43 @@
+.mensaje {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radio-sm);
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.mensaje--oculto {
+  display: none;
+}
+
+.mensaje--flotante {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  left: auto;
+  transform: none;
+  z-index: 9999;
+  min-width: 280px;
+  max-width: 90vw;
+  box-shadow: var(--sombra-lg);
+  border-radius: var(--radio);
+}
+
+.mensaje--exito {
+  background: var(--exito-fondo);
+  color: var(--exito-texto);
+}
+
+.mensaje--error {
+  background: var(--peligro-fondo);
+  color: var(--peligro-texto);
+}
+
+.mensaje--info {
+  background: var(--info-fondo);
+  color: var(--info-texto);
+}
+
+.mensaje__texto {
+  margin: 0;
+  text-align: center;
+}

@@ -28,14 +28,10 @@
   --sombra-md: 0 2px 12px rgba(0, 0, 0, 0.08);
   --sombra-lg: 0 8px 28px rgba(0, 0, 0, 0.12);
   --transicion: 0.2s ease;
-  --fuente:
-    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui,
-    sans-serif;
+  --fuente: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -54,15 +50,9 @@ body {
   min-height: 100vh;
 }
 
-.pagina--dashboard {
+.pagina--panel {
   display: flex;
   flex-direction: column;
-}
-
-.contenedor-auth {
-  width: 100%;
-  max-width: 420px;
-  padding: 1rem;
 }
 
 .contenido-principal {

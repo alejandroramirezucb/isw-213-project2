@@ -16,16 +16,18 @@ class GestorVistas {
     if (this.#vistaActualId === vistaId) return;
     this.#cachear();
 
-    this.#vistasCache.forEach((v) => v.classList.remove('vista--activa'));
+    this.#vistasCache.forEach((v) =>
+      v.classList.remove(Configuracion.CLASES_CSS.ACTIVO_VISTA),
+    );
 
     const vista = document.getElementById(`vista-${vistaId}`);
     if (vista) {
-      vista.classList.add('vista--activa');
+      vista.classList.add(Configuracion.CLASES_CSS.ACTIVO_VISTA);
     }
 
     this.#botonesCache.forEach((boton) => {
       boton.classList.toggle(
-        'navegacion__boton--activo',
+        Configuracion.CLASES_CSS.ACTIVO_BOTON_NAVEGACION,
         boton.dataset.vista === vistaId,
       );
     });

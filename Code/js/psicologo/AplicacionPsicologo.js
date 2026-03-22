@@ -5,7 +5,7 @@ class AplicacionPsicologo {
 
     const usuario = await ServicioAutenticacionPagina.obtenerUsuario();
     if (!usuario || usuario.rol !== 'psicologo') {
-      window.location.href = 'index.html';
+      window.location.href = '/';
       return;
     }
 
@@ -15,6 +15,16 @@ class AplicacionPsicologo {
     const nombreElemento = document.getElementById('nombre-usuario');
     if (nombreElemento && usuario.psicologos) {
       nombreElemento.textContent = `Dr. ${usuario.psicologos.nombre} ${usuario.psicologos.apellido}`;
+    }
+
+    const fragmentoPanel = await GestorFragmentos.cargarFragmentoPsicologo('panel');
+    const fragmentoConfiguracion = await GestorFragmentos.cargarFragmentoPsicologo('configuracion');
+    const fragmentoHistorial = await GestorFragmentos.cargarFragmentoPsicologo('historial');
+    const fragmentoPerfil = await GestorFragmentos.cargarFragmentoPsicologo('perfil');
+
+    if (!fragmentoPanel || !fragmentoConfiguracion || !fragmentoHistorial || !fragmentoPerfil) {
+      console.error('No se pudieron cargar algunos fragmentos');
+      return;
     }
 
     GestorHistorial.inicializar();

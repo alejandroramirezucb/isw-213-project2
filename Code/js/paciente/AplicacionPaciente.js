@@ -5,7 +5,7 @@ class AplicacionPaciente {
 
     const usuario = await AutenticacionFachada.obtenerUsuario();
     if (!usuario || usuario.rol !== 'paciente') {
-      window.location.href = 'index.html';
+      window.location.href = '/';
       return;
     }
 
@@ -23,6 +23,15 @@ class AplicacionPaciente {
         'error',
         10000,
       );
+    }
+
+    const fragmentoCalendario = await GestorFragmentos.cargarFragmentoPaciente('calendario');
+    const fragmentoCitas = await GestorFragmentos.cargarFragmentoPaciente('mis-citas');
+    const fragmentoPerfil = await GestorFragmentos.cargarFragmentoPaciente('perfil');
+
+    if (!fragmentoCalendario || !fragmentoCitas || !fragmentoPerfil) {
+      console.error('No se pudieron cargar algunos fragmentos');
+      return;
     }
 
     RenderizadorCalendario.inicializar();

@@ -1,33 +1,26 @@
-.calendario {
-  background: var(--superficie);
-  border-radius: var(--radio);
-  padding: 1.25rem;
-  box-shadow: var(--sombra);
-  margin-bottom: 1.25rem;
-}
+@import '../index.css';
+@import '../compartido/comun.css';
+@import './calendario.css';
+@import './periodo.css';
+@import './resumen.css';
+@import './panel-citas.css';
+@import './configuracion.css';
+@import './bloques.css';
+@import './historial.css';
+@import './perfil.css';
 
-.calendario__encabezado {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
+@media (max-width: 768px) {
+  .bloques__rango {
+    flex-direction: column;
+  }
 
-.calendario__mes {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--texto);
-}
+  .configuracion__horarios {
+    flex-direction: column;
+  }
 
-.calendario__nav {
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  color: var(--primario);
-  cursor: pointer;
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radio-sm);
-  transition: var(--transicion);
+  .resumen {
+    flex-direction: column;
+  }
 }
 
 .calendario__nav:hover {

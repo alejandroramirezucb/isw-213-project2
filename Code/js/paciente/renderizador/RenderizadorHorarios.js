@@ -31,6 +31,11 @@ class RenderizadorHorarios {
   }
 
   static async cargar(fecha) {
+    if (!this.#seccion || !this.#lista || !this.#vacio) {
+      console.warn('Elementos de horarios no encontrados. Fragment podría no estar cargado.');
+      return;
+    }
+
     this.#seccion.classList.remove(this.#CLASE_OCULTO);
     this.#lista.innerHTML = '<p class="cargando">Cargando horarios...</p>';
 
@@ -96,19 +101,32 @@ class RenderizadorHorarios {
     boton.classList.add(this.#CLASE_BOTON_SELECT);
 
     const fechaSel = EstadoPaciente.obtener('fechaSeleccionada');
-    this.#resumenFecha.textContent = FormateadorFachada.formatearFecha(
-      new Date(fechaSel + 'T00:00:00'),
-    );
-    this.#resumenHora.textContent = boton.textContent;
+    if (this.#resumenFecha) {
+      this.#resumenFecha.textContent = FormateadorFachada.formatearFecha(
+        new Date(fechaSel + 'T00:00:00'),
+      );
+    } else {
+      console.warn('Elemento resumenFecha no encontrado.');
+    }
+
+    if (this.#resumenHora) {
+      this.#resumenHora.textContent = boton.textContent;
+    } else {
+      console.warn('Elemento resumenHora no encontrado.');
+    }
 
     const esReprogramacion = EstadoPaciente.obtener('modoReprogramacion');
-    if (esReprogramacion) {
-      this.#tituloModal.textContent = 'Confirmar Reprogramación';
-      this.#textoConf.textContent =
-        '¿Deseas reprogramar tu cita a este nuevo horario?';
+    if (this.#tituloModal && this.#textoConf) {
+      if (esReprogramacion) {
+        this.#tituloModal.textContent = 'Confirmar Reprogramación';
+        this.#textoConf.textContent =
+          '¿Deseas reprogramar tu cita a este nuevo horario?';
+      } else {
+        this.#tituloModal.textContent = 'Confirmar Reserva';
+        this.#textoConf.textContent = '¿Deseas confirmar esta cita?';
+      }
     } else {
-      this.#tituloModal.textContent = 'Confirmar Reserva';
-      this.#textoConf.textContent = '¿Deseas confirmar esta cita?';
+      console.warn('Elementos de modal no encontrados.');
     }
 
     NavigacionFachada.abrirModal('modal-reserva');

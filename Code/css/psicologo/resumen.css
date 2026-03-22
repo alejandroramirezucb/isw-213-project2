@@ -1,0 +1,28 @@
+.resumen {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.resumen__tarjeta {
+  flex: 1;
+  background: var(--superficie);
+  padding: 1rem;
+  border-radius: var(--radio);
+  text-align: center;
+  box-shadow: var(--sombra);
+}
+
+.resumen__numero {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primario);
+  letter-spacing: -0.02em;
+}
+
+.resumen__texto {
+  font-size: 0.8rem;
+  color: var(--texto-sec);
+  margin-top: 0.1rem;
+}

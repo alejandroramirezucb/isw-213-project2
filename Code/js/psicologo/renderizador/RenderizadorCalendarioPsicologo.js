@@ -69,6 +69,11 @@ class RenderizadorCalendarioPsicologo {
   }
 
   static #renderizar() {
+    if (!this.#tituloMes || !this.#contenedor) {
+      console.warn('Elementos del calendario no encontrados. Fragment podría no estar cargado.');
+      return;
+    }
+
     const anio = this.#fechaActual.getFullYear();
     const mes = this.#fechaActual.getMonth();
 

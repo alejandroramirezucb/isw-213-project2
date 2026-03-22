@@ -1,0 +1,66 @@
+<header class="vista__encabezado">
+  <h2 class="vista__titulo">Panel de Citas</h2>
+  <p class="vista__descripcion">Gestiona tus citas del día y semana</p>
+</header>
+
+<div class="periodo">
+  <button class="periodo__boton periodo__boton--activo" data-periodo="hoy">Hoy</button>
+  <button class="periodo__boton" data-periodo="semana">Esta Semana</button>
+</div>
+
+<article class="resumen" id="resumen-dia">
+  <div class="resumen__tarjeta">
+    <span class="resumen__numero" id="total-citas-dia">0</span>
+    <span class="resumen__texto">Citas hoy</span>
+  </div>
+  <div class="resumen__tarjeta">
+    <span class="resumen__numero" id="siguiente-cita-hora">--:--</span>
+    <span class="resumen__texto">Siguiente</span>
+  </div>
+</article>
+
+<section class="panel-citas" id="panel-citas">
+  <h3 class="panel-citas__encabezado">
+    <span id="titulo-periodo">Citas de Hoy</span>
+    <span class="panel-citas__fecha" id="fecha-actual"></span>
+  </h3>
+
+  <div class="calendario" id="calendario-psicologo">
+    <header class="calendario__encabezado">
+      <button class="calendario__nav" id="btn-mes-anterior">&#8249;</button>
+      <h3 class="calendario__mes" id="calendario-mes"></h3>
+      <button class="calendario__nav" id="btn-mes-siguiente">&#8250;</button>
+    </header>
+    <div class="calendario__dias-semana">
+      <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+    </div>
+    <div class="calendario__dias" id="calendario-dias"></div>
+  </div>
+
+  <div class="panel-citas__lista" id="lista-citas-panel"></div>
+  <p class="mensaje-vacio mensaje-vacio--oculto" id="sin-citas-panel">No hay citas programadas para este período.</p>
+</section>
+
+<div class="modal modal--oculto" id="modal-detalle-cita">
+  <div class="modal__contenido">
+    <header class="modal__encabezado">
+      <h3 class="modal__titulo">Detalle de Cita</h3>
+      <button class="modal__boton-cerrar" id="btn-cerrar-detalle">&times;</button>
+    </header>
+    <div class="modal__cuerpo">
+      <div class="detalle-cita">
+        <p class="detalle-cita__item"><strong>Paciente:</strong> <span id="detalle-paciente"></span></p>
+        <p class="detalle-cita__item"><strong>Correo:</strong> <span id="detalle-correo"></span></p>
+        <p class="detalle-cita__item"><strong>Teléfono:</strong> <span id="detalle-telefono"></span></p>
+        <p class="detalle-cita__item"><strong>Fecha:</strong> <span id="detalle-fecha"></span></p>
+        <p class="detalle-cita__item"><strong>Hora:</strong> <span id="detalle-hora"></span></p>
+        <p class="detalle-cita__item"><strong>Estado:</strong> <span id="detalle-estado"></span></p>
+      </div>
+    </div>
+    <footer class="modal__acciones">
+      <button class="boton boton--peligro" id="btn-cancelar-cita-psicologo">Cancelar Cita</button>
+      <button class="boton boton--secundario" id="btn-bloquear-paciente">Bloquear Paciente</button>
+      <button class="boton boton--secundario" id="btn-cerrar-detalle-2">Cerrar</button>
+    </footer>
+  </div>
+</div>

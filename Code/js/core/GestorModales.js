@@ -14,14 +14,41 @@ class GestorModales {
   static abrir(modalId) {
     const modal = this.#obtenerModal(modalId);
     if (modal) {
-      modal.classList.remove('modal--oculto');
+      modal.classList.remove(Configuracion.CLASES_CSS.OCULTO_MODAL);
+      modal.setAttribute('aria-hidden', 'false');
+      modal.removeAttribute('inert');
     }
   }
 
   static cerrar(modalId) {
     const modal = this.#obtenerModal(modalId);
     if (modal) {
-      modal.classList.add('modal--oculto');
+      const elementoConFoco = modal.querySelector(':focus');
+      if (elementoConFoco) {
+        elementoConFoco.blur();
+      }
+      
+      modal.classList.add(Configuracion.CLASES_CSS.OCULTO_MODAL);
+      modal.setAttribute('aria-hidden', 'true');
+      modal.setAttribute('inert', '');
     }
+  }
+
+  static toggle(modalId) {
+    const modal = this.#obtenerModal(modalId);
+    if (modal?.classList.contains(Configuracion.CLASES_CSS.OCULTO_MODAL)) {
+      this.abrir(modalId);
+    } else {
+      this.cerrar(modalId);
+    }
+  }
+
+  static estaAbierto(modalId) {
+    const modal = this.#obtenerModal(modalId);
+    return modal && !modal.classList.contains(Configuracion.CLASES_CSS.OCULTO_MODAL);
+  }
+
+  static limpiarCache() {
+    this.#modalesCache.clear();
   }
 }

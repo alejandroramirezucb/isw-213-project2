@@ -1,99 +1,64 @@
 class GestorPerfil {
-  static #modalContrasena = null;
-  static #formularioContrasena = null;
-
   static inicializar() {
-    this.#modalContrasena = document.getElementById('modal-cambiar-contrasena');
-    this.#formularioContrasena = document.getElementById(
-      'formulario-cambiar-contrasena',
-    );
-
-    this.#cargarPerfil();
-    this.#agregarEventos();
+    this.crearComponenteModal();
+    this.cargarPerfil();
+    this.configurarEventos();
   }
 
-  static #cargarPerfil() {
+  static crearComponenteModal() {
+    this.modal = new ComponenteModal('modal-cambiar-contrasena');
+    this.modal.inicializar();
+    this.modal.agregarBotonesAbrir(['#btn-cambiar-contrasena']);
+    this.modal.agregarBotonesCerrar([
+      '#btn-cerrar-modal-contrasena',
+    ]);
+    this.modal.agregarFormulario('#formulario-cambiar-contrasena');
+  }
+
+  static cargarPerfil() {
     const usuario = EstadoPaciente.obtener('usuario');
-    if (!usuario || !usuario.pacientes) return;
+    if (!usuario?.pacientes) return;
 
     const { pacientes } = usuario;
-    document.getElementById('perfil-nombre').textContent =
-      pacientes.nombre || '—';
-    document.getElementById('perfil-apellido').textContent =
-      pacientes.apellido || '—';
+    const perfil = (id) => document.getElementById(id);
+
+    const elementoNombre = perfil('perfil-nombre');
+    const elementoApellido = perfil('perfil-apellido');
 
     const correo = usuario.email || usuario.user?.email || '—';
-    const correoElement = document.getElementById('perfil-correo');
-    if (correoElement) {
-      correoElement.textContent = correo;
-    }
+    const elementoCorreo = perfil('perfil-correo');
+
+    if (elementoNombre) elementoNombre.textContent = pacientes.nombre || '—';
+    if (elementoApellido) elementoApellido.textContent = pacientes.apellido || '—';
+    if (elementoCorreo) elementoCorreo.textContent = correo;
   }
 
-  static #agregarEventos() {
-    document
-      .getElementById('btn-cambiar-contrasena')
-      ?.addEventListener('click', () => {
-        this.#abrirModalContrasena();
-      });
+  static configurarEventos() {
+    const guardarBtn = document.getElementById('btn-guardar-contrasena');
+    const cerrarBtn = document.getElementById('btn-cerrar-sesion-perfil');
 
-    document
-      .getElementById('btn-cerrar-modal-contrasena')
-      ?.addEventListener('click', () => {
-        this.#cerrarModalContrasena();
-      });
-
-    document
-      .getElementById('btn-cancelar-contrasena')
-      ?.addEventListener('click', () => {
-        this.#cerrarModalContrasena();
-      });
-
-    document
-      .getElementById('btn-guardar-contrasena')
-      ?.addEventListener('click', () => {
-        this.#guardarContrasena();
-      });
-
-    document
-      .getElementById('btn-cerrar-sesion-perfil')
-      ?.addEventListener('click', () => {
-        this.#cerrarSesion();
-      });
-
-    this.#formularioContrasena?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.#guardarContrasena();
-    });
+    guardarBtn?.addEventListener('click', () => this.guardarPassword());
+    cerrarBtn?.addEventListener('click', () => this.cerrarSesion());
   }
 
-  static #abrirModalContrasena() {
-    this.#formularioContrasena.reset();
-    this.#modalContrasena?.classList.remove('modal--oculto');
-    document.getElementById('nueva-contrasena')?.focus();
-  }
-
-  static #cerrarModalContrasena() {
-    this.#modalContrasena?.classList.add('modal--oculto');
-    this.#formularioContrasena.reset();
-  }
-
-  static async #guardarContrasena() {
+  static async guardarPassword() {
     const nueva = document.getElementById('nueva-contrasena')?.value;
     const confirmar = document.getElementById('confirmar-contrasena')?.value;
 
-    if (!nueva || !confirmar) {
+    if (!ValidadorFormulario.noEstaVacio(nueva) ||
+        !ValidadorFormulario.noEstaVacio(confirmar)) {
       MensajesFachada.mostrar('Por favor completa todos los campos', 'error');
       return;
     }
 
-    if (nueva !== confirmar) {
-      MensajesFachada.mostrar('Las contraseñas no coinciden', 'error');
+    if (!ValidadorFormulario.sonIguales(nueva, confirmar)) {
+      MensajesFachada.mostrar('Las passwords no coinciden', 'error');
       return;
     }
 
-    if (nueva.length < 6) {
+    if (!ValidadorFormulario.esPasswordValida(nueva)) {
       MensajesFachada.mostrar(
-        'La contraseña debe tener al menos 6 caracteres',
+        'La password debe tener al menos 6 caracteres',
         'error',
       );
       return;
@@ -104,30 +69,25 @@ class GestorPerfil {
         password: nueva,
       });
 
-      if (error) {
-        MensajesFachada.mostrar(
-          'Error al cambiar contraseña: ' + error.message,
-          'error',
-        );
-        return;
-      }
+      if (error) throw error;
 
-      MensajesFachada.mostrar('Contraseña actualizada correctamente', 'exito');
-      this.#cerrarModalContrasena();
+      MensajesFachada.mostrar('Password actualizado correctamente', 'exito');
+      this.modal?.cerrar();
     } catch (error) {
-      MensajesFachada.mostrar('Error al cambiar contraseña', 'error');
+      MensajesFachada.mostrar('Error al cambiar password', 'error');
     }
   }
 
-  static async #cerrarSesion() {
+  static async cerrarSesion() {
     const confirmacion = confirm('¿Deseas cerrar sesión?');
     if (!confirmacion) return;
 
     try {
       await AutenticacionFachada.cerrarSesion();
-      window.location.href = 'index.html';
     } catch (error) {
       MensajesFachada.mostrar('Error al cerrar sesión', 'error');
     }
   }
 }
+
+GestorPerfil.modal = null;

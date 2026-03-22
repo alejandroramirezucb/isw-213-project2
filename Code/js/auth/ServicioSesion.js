@@ -1,9 +1,9 @@
 class ServicioSesion {
-  static #URL_PSICOLOGO = 'psicologo.html';
-  static #URL_PACIENTE = 'paciente.html';
-
   static redirigirPorRol(rol) {
-    const url = rol === 'psicologo' ? this.#URL_PSICOLOGO : this.#URL_PACIENTE;
+    const url =
+      rol === 'psicologo'
+        ? Configuracion.RUTAS.PSICOLOGO
+        : Configuracion.RUTAS.PACIENTE;
     window.location.href = url;
   }
 

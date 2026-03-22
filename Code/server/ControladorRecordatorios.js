@@ -1,8 +1,8 @@
-class ControladorRecordatorios {
-  #cliente;
+const ControladorBase = require('./ControladorBase');
 
+class ControladorRecordatorios extends ControladorBase {
   constructor(cliente) {
-    this.#cliente = cliente;
+    super(cliente);
   }
 
   async ejecutar() {
@@ -12,7 +12,7 @@ class ControladorRecordatorios {
     const fechaDesde = ahora.toISOString().slice(0, 10);
     const fechaHasta = en24h.toISOString().slice(0, 10);
 
-    const citasResult = await this.#cliente.get(
+    const citasResult = await this.obtenerCliente().get(
       `/rest/v1/citas?estado=eq.reservada&fecha=gte.${fechaDesde}&fecha=lte.${fechaHasta}&select=id,paciente_id,fecha,hora_inicio,created_at`,
     );
 
@@ -26,7 +26,7 @@ class ControladorRecordatorios {
       const margenMs = ahora.getTime() - creadaEn.getTime();
       if (margenMs < 24 * 60 * 60 * 1000) continue;
 
-      const yaExisteResult = await this.#cliente.get(
+      const yaExisteResult = await this.obtenerCliente().get(
         `/rest/v1/notificaciones?cita_id=eq.${cita.id}&tipo=eq.recordatorio&select=id`,
       );
 
@@ -37,7 +37,7 @@ class ControladorRecordatorios {
         continue;
       }
 
-      await this.#cliente.post('/rest/v1/notificaciones', {
+      await this.obtenerCliente().post('/rest/v1/notificaciones', {
         paciente_id: cita.paciente_id,
         cita_id: cita.id,
         tipo: 'recordatorio',
@@ -53,13 +53,11 @@ class ControladorRecordatorios {
   async manejar(req, res) {
     try {
       const resultado = await this.ejecutar();
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ ok: true, ...resultado }));
-    } catch (err) {
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(
-        JSON.stringify({ error: 'Error interno al generar recordatorios' }),
-      );
+      this.responder(res, 200, { ok: true, ...resultado });
+    } catch {
+      this.responder(res, 500, {
+        error: 'Error interno al generar recordatorios',
+      });
     }
   }
 }

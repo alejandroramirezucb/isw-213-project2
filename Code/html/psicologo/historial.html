@@ -1,0 +1,26 @@
+<header class="vista__encabezado">
+  <h2 class="vista__titulo">Historial de Pacientes</h2>
+  <p class="vista__descripcion">Registro de citas por paciente</p>
+</header>
+
+<div class="formulario__grupo">
+  <input type="text" class="formulario__campo" id="busqueda-paciente" placeholder="Buscar paciente por nombre...">
+</div>
+
+<div class="lista-citas" id="lista-historial"></div>
+<p class="mensaje-vacio mensaje-vacio--oculto" id="sin-historial">No se encontraron pacientes.</p>
+
+<div class="modal modal--oculto" id="modal-historial-paciente">
+  <div class="modal__contenido">
+    <header class="modal__encabezado">
+      <h3 class="modal__titulo" id="historial-nombre-paciente"></h3>
+      <button class="modal__boton-cerrar" id="btn-cerrar-historial-paciente">&times;</button>
+    </header>
+    <div class="modal__cuerpo">
+      <div class="lista-citas" id="lista-historial-paciente"></div>
+    </div>
+    <footer class="modal__acciones">
+      <button class="boton boton--secundario" id="btn-descargar-historial">Descargar Historial</button>
+    </footer>
+  </div>
+</div>

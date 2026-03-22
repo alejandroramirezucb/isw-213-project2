@@ -1,0 +1,67 @@
+.horarios {
+  background: var(--superficie);
+  border-radius: var(--radio);
+  padding: 1.25rem;
+  box-shadow: var(--sombra);
+  margin-bottom: 1.25rem;
+}
+
+.horarios--oculto {
+  display: none;
+}
+
+.horarios__titulo {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--texto);
+  margin-bottom: 1rem;
+}
+
+.horarios__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 0.5rem;
+}
+
+.horarios__boton {
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--borde);
+  background: var(--superficie);
+  border-radius: var(--radio-sm);
+  font-size: 0.88rem;
+  font-family: var(--fuente);
+  cursor: pointer;
+  transition: var(--transicion);
+  text-align: center;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.horarios__boton:hover {
+  border-color: var(--primario);
+  color: var(--primario);
+}
+
+.horarios__boton--seleccionado {
+  background: var(--primario);
+  color: #fff;
+  border-color: var(--primario);
+}
+
+.horarios__boton--bloqueado {
+  background: var(--fondo);
+  color: var(--texto-ter);
+  cursor: not-allowed;
+  border-color: transparent;
+}
+
+.horarios__vacio {
+  color: var(--texto-sec);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+.horarios__vacio--oculto {
+  display: none;
+}

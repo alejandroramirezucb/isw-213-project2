@@ -1,10 +1,8 @@
 class ServicioAutenticacionPagina {
-  static #URL_INDEX = 'index.html';
-
   static async verificar() {
     const resultado = await clienteSupabase.auth.getSession();
     if (!resultado.data.session) {
-      window.location.href = this.#URL_INDEX;
+      window.location.href = '/';
       return null;
     }
     return resultado.data.session;
@@ -28,6 +26,6 @@ class ServicioAutenticacionPagina {
 
   static async cerrarSesion() {
     await clienteSupabase.auth.signOut();
-    window.location.href = this.#URL_INDEX;
+    window.location.href = '/';
   }
 }
