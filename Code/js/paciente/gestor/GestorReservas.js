@@ -13,7 +13,9 @@ class GestorReservas {
       console.error('Error en confirmación de reserva:', error);
       await RepositorioBloques.liberarTemporal(datos.bloqueId);
       
-      if (error.message?.includes('duplicate')) {
+      if (error.message?.includes('El horario no está disponible')) {
+        MensajesFachada.mostrar('Este horario fue tomado por otro usuario. Intenta con otro horario.', 'error');
+      } else if (error.message?.includes('duplicate')) {
         MensajesFachada.mostrar('Este horario fue tomado por otro usuario. Intenta con otro horario.', 'error');
       } else {
         MensajesFachada.mostrar('Error al reservar la cita', 'error');
@@ -54,7 +56,14 @@ class GestorReservas {
       await RepositorioCitas.cancelar(datos.citaAnterior);
     }
 
-    const bloque = await RepositorioBloques.obtenerProfesional(datos.bloqueId);
+    let bloque;
+    try {
+      bloque = await RepositorioBloques.obtenerProfesional(datos.bloqueId);
+    } catch (error) {
+      await RepositorioBloques.liberarTemporal(datos.bloqueId);
+      throw new Error('El horario no está disponible');
+    }
+
     if (!bloque?.psicologo_id) {
       throw new Error('Bloque no válido o profesional no encontrado');
     }

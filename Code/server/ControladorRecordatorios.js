@@ -58,7 +58,7 @@ class ControladorRecordatorios extends ControladorBase {
         destinatario_id: cita.paciente_id,
         cita_id: cita.id,
         tipo: 'recordatorio',
-        canal: 'sistema',
+        canal: 'email',
         enviado: false,
       });
       enviados++;

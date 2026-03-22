@@ -80,7 +80,7 @@ class RepositorioCitasPsicologo {
         destinatario_id: pacienteId,
         cita_id: citaId,
         tipo: 'cancelacion',
-        canal: 'sistema',
+        canal: 'email',
         enviado: false,
       });
     } catch (_) {}

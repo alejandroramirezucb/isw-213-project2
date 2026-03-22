@@ -59,31 +59,22 @@ class Servidor {
   }
 
   #iniciarRecordatorios() {
-    // Ejecutar recordatorios cada 1 hora (60 * 60 * 1000 ms)
     this.#intervaloRecordatorios = setInterval(async () => {
       try {
         await this.#controladorRecordatorios.ejecutar();
-      } catch {
-        // Silenciar errores de recordatorios
-      }
+      } catch {}
     }, 60 * 60 * 1000);
 
-    // Ejecutar envío de notificaciones cada 5 minutos (5 * 60 * 1000 ms)
     this.#intervaloNotificaciones = setInterval(async () => {
       try {
         await this.#controladorNotificaciones.ejecutar();
-      } catch {
-        // Silenciar errores de notificaciones
-      }
+      } catch {}
     }, 5 * 60 * 1000);
 
-    // Ejecutar procesamiento de lista de espera cada 5 minutos (5 * 60 * 1000 ms)
     this.#intervaloListaEspera = setInterval(async () => {
       try {
         await this.#controladorListaEspera.ejecutar();
-      } catch {
-        // Silenciar errores de lista de espera
-      }
+      } catch {}
     }, 5 * 60 * 1000);
   }
 

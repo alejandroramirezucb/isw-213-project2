@@ -55,9 +55,6 @@ class ControladorEventosPaciente {
       '#btn-cerrar-modal': {
         click: () => GestorReservas.cerrarModal(),
       },
-      '#btn-cancelar-reserva': {
-        click: () => GestorReservas.cerrarModal(),
-      },
       '#btn-confirmar-reserva': {
         click: () => GestorReservas.confirmar(),
       },

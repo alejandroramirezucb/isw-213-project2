@@ -15,6 +15,7 @@
   font-weight: 600;
   color: var(--texto);
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .horarios__lista {
@@ -95,5 +96,73 @@
 .lista-espera__boton:hover {
   opacity: 0.9;
   transform: scale(1.02);
+}
+
+.citas-del-dia {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: white;
+  border-radius: var(--radio-sm);
+}
+
+.citas-del-dia--oculto {
+  display: none;
+}
+
+.citas-del-dia__titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--texto);
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.citas-del-dia__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cita-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: var(--superficie);
+  border-left: 3px solid var(--primario);
+  border-radius: var(--radio-sm);
+  transition: var(--transicion);
+}
+
+.cita-item:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.cita-item__contenido {
+  flex: 1;
+}
+
+.cita-item__hora {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--texto);
+  margin: 0;
+}
+
+.cita-item__psicologo {
+  font-size: 0.85rem;
+  color: var(--texto-sec);
+  margin: 0.25rem 0 0;
+}
+
+.cita-item__estado {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primario);
+  text-transform: capitalize;
+  padding: 0.25rem 0.75rem;
+  background: var(--primario-light);
+  border-radius: var(--radio-sm);
+  white-space: nowrap;
 }
 

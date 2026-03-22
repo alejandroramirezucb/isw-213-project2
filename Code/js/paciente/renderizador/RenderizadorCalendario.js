@@ -21,6 +21,7 @@ class RenderizadorCalendario {
   static #CLASE_PASADO = 'calendario__dia--pasado';
   static #CLASE_SIN_DISP = 'calendario__dia--sin-disponibilidad';
   static #CLASE_SELECCIONADO = 'calendario__dia--seleccionado';
+  static #CLASE_CON_CITA = 'calendario__dia--con-cita';
 
   static #contenedor = null;
   static #tituloMes = null;
@@ -56,6 +57,21 @@ class RenderizadorCalendario {
       mes,
     );
 
+    const pacienteId = EstadoPaciente.obtener('pacienteId');
+    const citasPaciente = await RepositorioCitas.obtenerPorFiltro(
+      pacienteId,
+      'proximas'
+    );
+
+    const fechasConCitas = {};
+    citasPaciente.forEach((cita) => {
+      if (cita.bloques_horario?.fecha) {
+        fechasConCitas[cita.bloques_horario.fecha] = true;
+      }
+    });
+
+    EstadoPaciente.establecer('citasPorFecha', this.#agruparCitasPorFecha(citasPaciente));
+
     let html = '';
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
@@ -71,6 +87,7 @@ class RenderizadorCalendario {
 
       let clases = 'calendario__dia';
       const esPasado = fechaDia < hoy;
+      const tieneCita = fechasConCitas[fechaISO];
 
       if (fechaDia.getTime() === hoy.getTime()) {
         clases += ` ${this.#CLASE_HOY}`;
@@ -80,6 +97,9 @@ class RenderizadorCalendario {
       }
       if (!disponibilidad[fechaISO] && !esPasado) {
         clases += ` ${this.#CLASE_SIN_DISP}`;
+      }
+      if (tieneCita) {
+        clases += ` ${this.#CLASE_CON_CITA}`;
       }
 
       const deshabilitado = esPasado ? ' disabled' : '';
@@ -118,5 +138,19 @@ class RenderizadorCalendario {
     }
 
     await RenderizadorHorarios.cargar(fecha);
+  }
+
+  static #agruparCitasPorFecha(citas) {
+    const citasPorFecha = {};
+    citas.forEach((cita) => {
+      if (cita.bloques_horario?.fecha) {
+        const fecha = cita.bloques_horario.fecha;
+        if (!citasPorFecha[fecha]) {
+          citasPorFecha[fecha] = [];
+        }
+        citasPorFecha[fecha].push(cita);
+      }
+    });
+    return citasPorFecha;
   }
 }

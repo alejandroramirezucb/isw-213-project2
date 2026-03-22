@@ -8,12 +8,15 @@ class RenderizadorHorarios {
   static #SELECTOR_RESUMEN_HORA = '#resumen-hora';
   static #SELECTOR_TITULO_MODAL = '#titulo-modal-reserva';
   static #SELECTOR_TEXTO_CONF = '#texto-confirmacion-reserva';
+  static #SELECTOR_CITAS_DEL_DIA = '#citas-del-dia';
+  static #SELECTOR_LISTA_CITAS_DEL_DIA = '#lista-citas-del-dia';
 
   static #CLASE_OCULTO = 'horarios--oculto';
   static #CLASE_BOTON_BLOQUEADO = 'horarios__boton--bloqueado';
   static #CLASE_BOTON_SELECT = 'horarios__boton--seleccionado';
   static #CLASE_VACIO_OCULTO = 'horarios__vacio--oculto';
   static #CLASE_ESPERA_OCULTA = 'lista-espera--oculta';
+  static #CLASE_CITAS_OCULTAS = 'citas-del-dia--oculto';
 
   static #seccion = null;
   static #lista = null;
@@ -24,6 +27,8 @@ class RenderizadorHorarios {
   static #resumenHora = null;
   static #tituloModal = null;
   static #textoConf = null;
+  static #citasDelDia = null;
+  static #listaCitasDelDia = null;
 
   static inicializar() {
     this.#seccion = document.querySelector(this.#SELECTOR_SECCION);
@@ -35,6 +40,8 @@ class RenderizadorHorarios {
     this.#resumenHora = document.querySelector(this.#SELECTOR_RESUMEN_HORA);
     this.#tituloModal = document.querySelector(this.#SELECTOR_TITULO_MODAL);
     this.#textoConf = document.querySelector(this.#SELECTOR_TEXTO_CONF);
+    this.#citasDelDia = document.querySelector(this.#SELECTOR_CITAS_DEL_DIA);
+    this.#listaCitasDelDia = document.querySelector(this.#SELECTOR_LISTA_CITAS_DEL_DIA);
   }
 
   static async cargar(fecha) {
@@ -46,12 +53,13 @@ class RenderizadorHorarios {
     this.#seccion.classList.remove(this.#CLASE_OCULTO);
     this.#lista.innerHTML = '<p class="cargando">Cargando horarios...</p>';
 
+    this.#mostrarCitasDelDia(fecha);
+
     const bloques = await RepositorioBloques.obtenerPorFecha(fecha);
 
     if (bloques.length === 0) {
       this.#lista.innerHTML = '';
       this.#vacio.classList.remove(this.#CLASE_VACIO_OCULTO);
-      // Mostrar botón de lista de espera cuando no hay horarios disponibles
       if (this.#contenedorEspera) {
         this.#contenedorEspera.classList.remove(this.#CLASE_ESPERA_OCULTA);
         this.#agregarEventoListaEspera(fecha);
@@ -60,7 +68,6 @@ class RenderizadorHorarios {
     }
 
     this.#vacio.classList.add(this.#CLASE_VACIO_OCULTO);
-    // Ocultar botón de lista de espera cuando sí hay horarios
     if (this.#contenedorEspera) {
       this.#contenedorEspera.classList.add(this.#CLASE_ESPERA_OCULTA);
     }
@@ -173,5 +180,40 @@ class RenderizadorHorarios {
       
       await gestor.mostrarModalListaEspera(fecha, fechaFormato);
     });
+  }
+
+  static #mostrarCitasDelDia(fecha) {
+    if (!this.#citasDelDia || !this.#listaCitasDelDia) return;
+
+    const citasPorFecha = EstadoPaciente.obtener('citasPorFecha');
+    const citasDelDia = citasPorFecha?.[fecha] || [];
+
+    if (citasDelDia.length === 0) {
+      this.#citasDelDia.classList.add(this.#CLASE_CITAS_OCULTAS);
+      return;
+    }
+
+    this.#citasDelDia.classList.remove(this.#CLASE_CITAS_OCULTAS);
+
+    let html = '';
+    citasDelDia.forEach((cita) => {
+      const bloque = cita.bloques_horario;
+      if (!bloque) return;
+
+      const hora = FormateadorFachada.formatearHora(bloque.hora_inicio);
+      const psicologoNombre = cita.psicologo?.usuario?.nombre || 'Psicólogo';
+
+      html += `
+        <div class="cita-item">
+          <div class="cita-item__contenido">
+            <p class="cita-item__hora">${hora}</p>
+            <p class="cita-item__psicologo">Con ${psicologoNombre}</p>
+          </div>
+          <span class="cita-item__estado">${cita.estado}</span>
+        </div>
+      `;
+    });
+
+    this.#listaCitasDelDia.innerHTML = html;
   }
 }

@@ -58,16 +58,22 @@ class RepositorioBloques {
     const resultado = await clienteSupabase
       .from(this.#TABLA)
       .update({ estado: 'reservado', bloqueado_hasta: null })
-      .eq('id', bloqueId);
+      .eq('id', bloqueId)
+      .eq('estado', 'bloqueado_temporal');
     return !resultado.error;
   }
 
   static async obtenerProfesional(bloqueId) {
     const resultado = await clienteSupabase
       .from(this.#TABLA)
-      .select('psicologo_id')
+      .select('psicologo_id, estado')
       .eq('id', bloqueId)
       .single();
+    
+    if (resultado.data?.estado !== 'bloqueado_temporal') {
+      throw new Error('El bloque no está disponible o ya fue ocupado');
+    }
+    
     return resultado.data;
   }
 }

@@ -33,6 +33,10 @@
 </div>
 
 <section class="horarios horarios--oculto" id="seccion-horarios">
+  <div class="citas-del-dia citas-del-dia--oculto" id="citas-del-dia">
+    <h4 class="citas-del-dia__titulo">Tus citas programadas</h4>
+    <div class="citas-del-dia__lista" id="lista-citas-del-dia"></div>
+  </div>
   <h3 class="horarios__titulo">Horarios disponibles para <span id="fecha-seleccionada"></span></h3>
   <div class="horarios__lista" id="lista-horarios"></div>
   <p class="horarios__vacio horarios__vacio--oculto" id="sin-horarios">No hay horarios disponibles para este día.</p>
@@ -55,7 +59,6 @@
       <p class="modal__confirmacion" id="texto-confirmacion-reserva">¿Deseas confirmar esta cita?</p>
     </div>
     <footer class="modal__acciones">
-      <button class="boton boton--secundario" id="btn-cancelar-reserva">Cancelar</button>
       <button class="boton boton--primario" id="btn-confirmar-reserva">Confirmar Reserva</button>
     </footer>
   </div>

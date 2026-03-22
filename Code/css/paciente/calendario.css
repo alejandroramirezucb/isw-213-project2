@@ -120,6 +120,16 @@
   cursor: not-allowed;
 }
 
-.calendario__dia--con-citas {
-  box-shadow: inset 0 0 0 2px var(--primario);
+.calendario__dia--con-cita {
+  box-shadow: inset 0 0 0 2px #FFB81C;
+  background: transparent;
+  font-weight: 600;
+  color: #FFB81C;
+  border-radius: 50%;
+}
+
+.calendario__dia--seleccionado.calendario__dia--con-cita {
+  box-shadow: none;
+  background: var(--primario);
+  color: #fff;
 }

@@ -24,7 +24,7 @@ class ControladorListaEspera extends ControladorBase {
           destinatario_tipo: 'paciente',
           destinatario_id: espera.paciente_id,
           tipo: 'libracion_horario',
-          canal: 'sistema',
+          canal: 'email',
           enviado: false,
         });
 

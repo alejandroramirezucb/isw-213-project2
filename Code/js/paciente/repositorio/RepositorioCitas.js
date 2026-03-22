@@ -132,7 +132,7 @@ class RepositorioCitas {
         destinatario_id: pacienteId,
         cita_id: citaId,
         tipo: tipo,
-        canal: 'sistema',
+        canal: 'email',
         enviado: false,
       };
 
