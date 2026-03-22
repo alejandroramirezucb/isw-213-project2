@@ -2,12 +2,266 @@
 
 ## Tabla de Contenidos
 
-1. [Análisis del Problema](#análisis-del-problema)
+1. [Instalación](#instalación)
+2. [Documentación Técnica](#documentación-técnica)
+3. [Documentación Funcional](#documentación-funcional)
+   - [Entidades Principales](#entidades-principales)
+   - [Flujos Principales](#flujos-principales)
+   - [Estados y Transiciones](#estados-y-transiciones)
+   - [Sistema de Notificaciones](#sistema-de-notificaciones)
+4. [Análisis del Problema](#análisis-del-problema)
    - [Descripción del Problema](#descripción-del-problema)
    - [Usuario / Cliente](#usuario--cliente)
    - [Dolor o Necesidad](#dolor-o-necesidad)
    - [Alcance del Sistema](#alcance-del-sistema)
-2. [Requerimientos Funcionales](#requerimientos-funcionales)
+5. [Requerimientos Funcionales](#requerimientos-funcionales)
+
+---
+
+## Instalación
+
+### Requisitos Previos
+
+- **Node.js** versión 14 o superior
+- **npm** 
+- Una cuenta en **Supabase**
+
+### Pasos de Instalación
+
+#### 1. Acceder al Directorio
+
+```bash
+cd Code
+```
+
+#### 2. Instalar Dependencias
+
+```bash
+npm install
+```
+
+#### 3. Configurar Variables de Entorno
+
+Crea un archivo `.env` en la carpeta `Code/` con las variables de entorno.
+
+#### 4. Iniciar el Servidor
+
+```bash
+npm start
+```
+
+El servidor estara en `http://localhost:3000`
+
+---
+
+## Documentación Técnica
+
+### Stack Tecnológico
+
+| Capa | Tecnología |
+|------|-----------|
+| **Frontend** | HTML5, CSS3, JavaScript ES6+ |
+| **Backend** | Node.js, Express |
+| **Base de Datos** | PostgreSQL (Supabase) |
+| **Autenticación** | Supabase Auth |
+
+### Arquitectura de Carpetas
+
+```
+Code/
+├── html/
+│   ├── index.html
+│   ├── paciente/
+│   │   ├── base.html
+│   │   ├── calendario.html
+│   │   ├── citas.html
+│   │   └── perfil.html
+│   └── psicologo/
+│       ├── base.html
+│       ├── historial.html
+│       ├── horarios.html
+│       ├── panel.html
+│       └── perfil.html
+├── css/
+│   ├── index.css
+│   ├── entrada.css
+│   ├── compartido/
+│   │   ├── botones.css
+│   │   ├── comun.css
+│   │   ├── encabezado.css
+│   │   ├── formularios.css
+│   │   ├── listas.css
+│   │   ├── mensajes.css
+│   │   ├── modal.css
+│   │   ├── notificaciones.css
+│   │   └── responsive.css
+│   ├── paciente/
+│   │   ├── calendario.css
+│   │   ├── estilos.css
+│   │   ├── horarios.css
+│   │   ├── perfil.css
+│   │   └── tarjeta-cita.css
+│   └── psicologo/
+│       ├── bloques.css
+│       ├── calendario.css
+│       ├── configuracion.css
+│       ├── estilos.css
+│       ├── historial.css
+│       ├── panel-citas.css
+│       ├── perfil.css
+│       ├── periodo.css
+│       └── resumen.css
+├── js/
+│   ├── auth/
+│   │   ├── ControladorEventosAuth.js
+│   │   ├── GestorFormularios.js
+│   │   ├── GestorMensajesAuth.js
+│   │   ├── ServicioAutenticacion.js
+│   │   ├── ServicioSesion.js
+│   │   └── inicio.js
+│   ├── config/
+│   │   ├── ClienteSupabase.js
+│   │   └── Configuracion.js
+│   ├── core/
+│   │   ├── (Componentes base, gestores UI, utilidades, etc.)
+│   ├── paciente/
+│   │   ├── AplicacionPaciente.js
+│   │   ├── ControladorEventosPaciente.js
+│   │   ├── estado/
+│   │   │   └── EstadoPaciente.js
+│   │   ├── gestor/
+│   │   │   ├── GestorReservas.js
+│   │   │   ├── GestorCancelacion.js
+│   │   │   ├── GestorReprogramacion.js
+│   │   │   ├── GestorMisCitas.js
+│   │   │   ├── GestorProximaCita.js
+│   │   │   ├── GestorListaEspera.js
+│   │   │   ├── GestorNotificaciones.js
+│   │   │   └── GestorPerfil.js
+│   │   ├── renderizador/
+│   │   │   ├── RenderizadorCalendario.js
+│   │   │   └── RenderizadorHorarios.js
+│   │   └── repositorio/
+│   │       ├── RepositorioBloques.js
+│   │       ├── RepositorioCitas.js
+│   │       ├── RepositorioListaEspera.js
+│   │       └── RepositorioNotificaciones.js
+│   └── psicologo/
+│       ├── AplicacionPsicologo.js
+│       ├── ControladorEventosPsicologo.js
+│       ├── estado/
+│       │   └── EstadoPsicologo.js
+│       ├── gestor/
+│       │   ├── GestorHorarios.js
+│       │   ├── GestorConfiguracionUI.js
+│       │   ├── GestorDetalleCita.js
+│       │   ├── GestorHistorial.js
+│       │   ├── GestorPerfil.js
+│       │   └── GestorRestriccion.js
+│       ├── renderizador/
+│       │   ├── RenderizadorCitas.js
+│       │   └── RenderizadorCalendarioPsicologo.js
+│       └── repositorio/
+│           ├── RepositorioConfiguracion.js
+│           ├── RepositorioCitasPsicologo.js
+│           └── RepositorioPacientes.js
+├── server/
+│   ├── Servidor.js
+│   ├── ClienteSupabaseAdmin.js
+│   ├── Configuracion.js
+│   ├── ControladorBase.js
+│   ├── ControladorRecordatorios.js
+│   ├── ControladorNotificaciones.js
+│   ├── ControladorListaEspera.js
+│   └── ControladorRegistro.js
+└── index.js
+```
+
+---
+
+## Documentación Funcional
+
+### Usuarios
+
+#### Psicólogos
+Pueden:
+- Configurar su horario de atención semanal (días y horarios)
+- Ver todas las citas agendadas con sus pacientes
+- Cancelar citas 
+- Ver el historial de citas con cada paciente
+- Bloquear a pacientes
+
+#### Pacientes
+Pueden:
+- Visualizar el calendario de disponibilidad
+- Reservar horarios disponibles
+- Cancelar o reprogramar citas propias
+- Entrar en lista de espera si no hay disponibilidad
+- Recibir recordatorios y notificaciones
+
+#### Citas
+Incluyen:
+- Paciente y psicólogo involucrados
+- Bloque horario asignado
+- Estado: confirmada, cancelada o completada
+
+#### Notificaciones
+Tipos:
+- **Confirmación de Reserva**: Se genera al paciente al agendar
+- **Recordatorio**: 24 horas antes de la cita (si fue agendada con tiempo)
+- **Cancelación**: Cuando psicólogo o paciente cancela
+- **Nuevo Turno**: Al psicólogo cuando un paciente agenda
+- **Lista de Espera**: A pacientes en espera cuando se libera un turno
+
+### Flujos Principales
+
+#### Configuración de Horario (Psicólogo)
+1. Psicólogo accede a "Configuración de Horarios"
+2. Selecciona los días de la semana en que atiende
+3. Define hora de inicio y fin para cada día
+4. Define duración de cada bloque (ej: 60 minutos)
+5. Sistema genera automáticamente los bloques para las próximas semanas
+6. Los bloques aparecen en el calendario para pacientes
+
+#### Agendar Cita (Paciente)
+1. Paciente accede al calendario de disponibilidad
+2. Selecciona un día 
+3. Visualiza horarios libres para ese día
+4. Selecciona un horario
+5. Confirma la reserva 
+7. Sistema crea la cita y genera notificación de confirmación
+8. Psicólogo recibe notificación de "Nuevo turno agendado"
+
+#### Cancelación de Cita
+**Paciente:**
+1. Paciente entra a "Mis Citas"
+2. Selecciona una cita confirmada
+3. Hace clic en "Cancelar"
+4. Confirma la acción
+5. Cita cambia a estado "Cancelada"
+6. Psicólogo recibe notificación de cancelación
+
+**Psicólogo:**
+1. Psicólogo entra a "Panel de Citas"
+2. Selecciona una cita de su lista
+3. Hace clic en "Cancelar Turno"
+4. Paciente recibe notificación de cancelación del sistema
+
+#### Reprogramación de Cita (Paciente)
+1. Paciente selecciona una cita para modificar
+2. Sistema bloquea reprogramación si faltan menos de 24 horas
+3. Selecciona nueva fecha y horario disponible
+4. Confirma cambio
+5. Bloque antiguo vuelve a disponible
+6. Nueva cita se crea y se genera notificación de confirmación
+
+#### Lista de Espera
+1. Paciente selecciona día sin disponibilidad
+2. Sistema le ofrece opción "Avisarme si se libera"
+3. Paciente entra a lista de espera para ese día y psicólogo
+4. Si alguien cancela en ese día:
+   - Sistema notifica a todos en lista de espera
+   - Pacientes pueden intentar reservar nuevamente
 
 ---
 
@@ -142,8 +396,8 @@
 - **Tipo de prioridad:** Media
 - **Historia:** Como paciente, quiero recibir una notificación al momento de agendar para tener un comprobante y los detalles exactos de mi turno.
 - **Criterios de aceptación:**
-  - Dado que la reserva se guarda exitosamente en la base de datos, cuando el proceso termine, entonces el sistema debe enviar un email al paciente con el día, hora y opciones para gestionar la cita (cancelar/reprogramar).
-  - Dado que se genera una nueva reserva, cuando se envíe la notificación al paciente, entonces el administrador también debe recibir una notificación de "Nuevo turno agendado".
+  - Dado que la reserva se guarda exitosamente en la base de datos, cuando el proceso termine, entonces el sistema debe crear una notificación con el día, hora y opciones para gestionar la cita (cancelar/reprogramar).
+  - Dado que se genera una nueva reserva, cuando se cree la notificación al paciente, entonces el administrador también debe recibir una notificación de "Nuevo turno agendado".
 - **Estimación:** 3 h
 
 ### HU-10 Vista de "Próxima Cita" del Paciente
@@ -160,10 +414,10 @@
 
 - **Orden de prioridad:** 11/15
 - **Tipo de prioridad:** Media
-- **Historia:** Como psicólogo, quiero que el sistema envíe una notificación a mis pacientes 24 horas antes de su turno para reducir las inasistencias por olvido.
+- **Historia:** Como psicólogo, quiero que el sistema genere notificaciones a mis pacientes 24 horas antes de su turno para reducir las inasistencias por olvido.
 - **Criterios de aceptación:**
-  - Dado que faltan 24 horas exactas para un turno, cuando el sistema ejecute su revisión diaria, entonces debe enviar una notificación con el recordatorio a la cuenta del paciente.
-  - Dado que un paciente agendó con menos de 24 horas de anticipación, cuando reserve, entonces el sistema no enviará un recordatorio adicional (solo el de confirmación de reserva).
+  - Dado que faltan 24 horas exactas para un turno, cuando el sistema ejecute su revisión diaria, entonces debe crear una notificación de recordatorio en la cuenta del paciente.
+  - Dado que un paciente agendó con menos de 24 horas de anticipación, cuando Reserve, entonces el sistema no creará un recordatorio adicional (solo el de confirmación de reserva).
 - **Estimación:** 4 h
 
 ### HU-12 Configuración de Horario de Oficina y Calendario
