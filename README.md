@@ -3,20 +3,35 @@
 ## Tabla de Contenidos
 
 1. [Instalación](#instalación)
-2. [Documentación Técnica](#documentación-técnica)
-3. [Documentación Funcional](#documentación-funcional)
+2. [Deployment](#deploy)
+3. [Documentación Técnica](#documentación-técnica)
+4. [Documentación Funcional](#documentación-funcional)
+   - [Propósito del Sistema](#propósito-del-sistema)
+   - [Problemática que Resuelve](#problemática-que-resuelve)
+   - [Usuarios Involucrados](#usuarios-involucrados)
+   - [Funcionalidades Contempladas](#funcionalidades-contempladas)
+   - [Límites del Proyecto](#límites-del-proyecto)
+   - [Alcance de la Solución Entregada](#alcance-de-la-solución-entregada)
    - [Entidades Principales](#entidades-principales)
-   - [Flujos Principales](#flujos-principales)
    - [Estados y Transiciones](#estados-y-transiciones)
    - [Sistema de Notificaciones](#sistema-de-notificaciones)
-4. [Análisis del Problema](#análisis-del-problema)
+5. [Diseño de Arquitectura](#diseño-de-arquitectura)
+   - [Componentes Principales del Sistema](#componentes-principales-del-sistema)
+   - [Relación entre Frontend, Backend y Base de Datos](#relación-entre-frontend-backend-y-base-de-datos)
+   - [Flujo General de Interacción](#flujo-general-de-interacción)
+   - [Tecnologías Utilizadas](#tecnologías-utilizadas)
+6. [Análisis del Problema](#análisis-del-problema)
    - [Descripción del Problema](#descripción-del-problema)
    - [Usuario / Cliente](#usuario--cliente)
    - [Dolor o Necesidad](#dolor-o-necesidad)
    - [Alcance del Sistema](#alcance-del-sistema)
-5. [Requerimientos Funcionales](#requerimientos-funcionales)
+7. [Requerimientos Funcionales](#requerimientos-funcionales)
 
 ---
+
+## Deployment
+
+Link: https://psicoraiden.onrender.com
 
 ## Instalación
 
@@ -43,6 +58,14 @@ npm install
 #### 3. Configurar Variables de Entorno
 
 Crea un archivo `.env` en la carpeta `Code/` con las variables de entorno.
+
+```
+SUPABASE_URL
+SUPABASE_ANON_KEY
+DATABASE_URL
+SUPABASE_SERVICE_ROLE_KEY
+PORT=3000
+```
 
 #### 4. Iniciar el Servidor
 
@@ -181,23 +204,104 @@ Code/
 
 ## Documentación Funcional
 
-### Usuarios
+### Propósito del Sistema
+
+Psicoraiden es una web de gestión de citas para consultorios psicológicos que facilita el control de disponibilidad horaria, reduce conflictos en la reserva de turnos, genera recordatorios automáticos y mantiene un registro del estado de las citas.
+
+---
+
+### Problemática que Resuelve
+
+Actualmente, la gestión de citas en consultorios psicológicos se realiza mediante agendas manuales o aplicaciones de mensajería, que provoca:
+
+- **Cruces de horarios:** Dos pacientes pueden agendar el mismo horario.
+- **Falta de automatización en los recordatorios:** Los recordatorios se hacen de forma manual, causando que los pacientes se ausenten.
+- **Desorganización:** Las citas no tienen un registro centralizado.
+- **Sobrecarga del psicólogo:** El psicologo pierde tiempo coordinando horarios por chat en lugar de atender pacientes.
+
+---
+
+### Usuarios Involucrados
 
 #### Psicólogos
-Pueden:
+Profesionales de salud mental que utilizan la plataforma para:
 - Configurar su horario de atención semanal (días y horarios)
 - Ver todas las citas agendadas con sus pacientes
-- Cancelar citas 
-- Ver el historial de citas con cada paciente
-- Bloquear a pacientes
+- Cancelar citas y bloquear a pacientes con bajo asistencia
+- Consultar el historial de citas de cada paciente
 
 #### Pacientes
-Pueden:
+Personas que buscan atención psicológica y utilizan la plataforma para:
 - Visualizar el calendario de disponibilidad
 - Reservar horarios disponibles
 - Cancelar o reprogramar citas propias
 - Entrar en lista de espera si no hay disponibilidad
-- Recibir recordatorios y notificaciones
+- Recibir recordatorios y notificaciones de sus citas
+
+---
+
+### Funcionalidades
+
+1. **Configuración de Horarios (Psicólogo)**
+   - Definir días laborables y bloques horarios semanales
+   - Establecer duración de cada sesión
+   - Generar bloques de horarios para próximas semanas
+
+2. **Visualización del calendario (Paciente)**
+   - Calendario interactivo con horarios libres
+   - Indicador visual si el paciente ya hizo una reserva para ese dia
+
+3. **Agendamiento de Citas**
+   - Reserva de horarios disponibles por el paciente
+   - Prevención de reservas duplicadas
+   - Confirmación inmediata de la cita
+
+4. **Gestión de Citas**
+   - Cancelación de citas (paciente y psicólogo)
+   - Reprogramación de citas con límite de 24 horas (paciente)
+   - Vista de próxima cita en el panel del paciente
+
+5. **Sistema de Notificaciones**
+   - Confirmación de reserva instantánea
+   - Recordatorios 24 horas antes de la cita (paciente)
+   - Notificaciones de cancelación
+   - Alertas de nuevos turnos agendados (psicologo)
+
+6. **Historial y Reportes**
+   - Registro de citas pasadas por paciente
+   - Descarga de historial en PDF
+
+7. **Lista de Espera**
+   - Registro de pacientes interesados en días llenos
+   - Notificación automática al liberarse un turno
+
+8. **Restricción de Pacientes**
+   - Bloqueo de pacientes por parte del psicologo
+
+---
+
+### Límites del Proyecto
+
+**El sistema NO incluye:**
+
+- **Diagnóstico o evaluación clínica:** Psicoraiden no realiza diagnósticos.
+- **Integración con metodos de pago:** No se procesa pagos ni genera facturas automáticas.
+
+---
+
+### Alcance de la Solución Entregada
+
+**La solución entregada incluye:**
+
+- Una plataforma web funcional de gestión de citas
+- Dos interfaces: una para pacientes y otra para psicólogos
+- Base de datos PostgreSQL en Supabase
+- Sistema automático de generación de bloques horarios
+- Prevención de doble cita en el mismo bloque mediante bloqueo en tiempo real
+- Recordatorios automáticos 24 horas antes de citas
+- Historial de citas con opción de descarga PDF
+- Lista de espera con notificaciones 
+- Permite bloquear pacientes y cancelar citas.
 
 #### Citas
 Incluyen:
@@ -212,6 +316,69 @@ Tipos:
 - **Cancelación**: Cuando psicólogo o paciente cancela
 - **Nuevo Turno**: Al psicólogo cuando un paciente agenda
 - **Lista de Espera**: A pacientes en espera cuando se libera un turno
+
+---
+
+## Diseño de Arquitectura
+
+### Componentes Principales del Sistema
+
+#### 1. **Frontend**
+- **Paciente:** Incluye calendario, historial de citas, vista de próxima cita, reserva y reprogramación de turnos
+- **Psicólogo:** Incluye una vista de las citas del día, configuración de horarios y historial de pacientes. 
+- **Componentes Compartidos:** Autenticación y notificaciones.
+
+#### 2. **Capa Backend**
+- **Servidor Node.js/Express:** Sirve archivos estáticos (HTML/CSS/JS) y expone APIs específicas
+- **APIs del Backend:**
+  - `POST /api/registrar` - Registro de nuevos usuarios en Supabase Auth
+  - `POST /api/recordatorios` - Generación de recordatorios automáticos (se ejecuta cada 60 minutos)
+  - `POST /api/notificaciones` - Procesamiento de notificaciones (se ejecuta cada 5 minutos)
+  - `POST /api/lista-espera` - Notificación de pacientes en lista de espera (se ejecuta cada 5 minutos)
+- **Nota:** La mayoría de las operaciones CRUD (crear, leer, actualizar, eliminar) se realizan directamente desde el Frontend hacia Supabase, no a través de este Backend
+
+#### 3. **Capa de Persistencia**
+- **Base de Datos PostgreSQL (Supabase):** Almacena usuarios, citas, bloques horarios, notificaciones, lista de espera
+- **Autenticación Supabase Auth:** Gestión segura de sesiones y credenciales
+
+#### 4. **Servicio de Notificaciones**
+- Generación de notificaciones en base de datos
+- Recordatorios automáticos
+
+---
+
+### Relación entre Frontend, Backend y Base de Datos
+
+**Diagrama**
+
+```
+                    PACIENTE/PSICÓLOGO
+                            ↓
+                  Frontend (HTML/CSS/JS)  ←→  Backend (Node.js/Express)
+                            ↓ (API REST)            ↓ (Tareas)
+                            ↓                        ↓
+                   Supabase (REST API)  ←→  Supabase (Admin API)
+                            ↓
+                 Base de Datos PostgreSQL (Supabase)
+```
+
+**Comunicación:**
+- **Frontend y Supabase (directo):** El Cliente conecta directamente a Supabase para operaciones de:
+  - Agendar, cancelar, reprogramar citas
+  - Obtener bloques horarios
+  - Gestionar configuración
+  - Obtener notificaciones
+  - Lista de espera
+  - Autenticación
+
+- **Frontend y Backend (HTTP):** Solo para registro de nuevos usuarios (POST /api/registrar)
+
+- **Backend** Procesa:
+  - Generación de recordatorios
+  - Procesamiento de notificaciones
+  - Notificación de lista de espera
+
+---
 
 ### Flujos Principales
 
