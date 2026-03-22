@@ -39,6 +39,8 @@ class AplicacionPaciente {
     GestorProximaCita.inicializar();
     GestorMisCitas.inicializar();
     GestorPerfil.inicializar();
+    GestorNotificaciones.inicializar(usuario.paciente_id);
+    
     ControladorEventosPaciente.inicializar();
 
     await RenderizadorCalendario.renderizar();

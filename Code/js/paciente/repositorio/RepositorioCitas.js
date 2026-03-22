@@ -126,38 +126,31 @@ class RepositorioCitas {
   }
 
   static async crearNotificacion(pacienteId, tipo, citaId) {
-    const payload = {
-      destinatario_tipo: 'paciente',
-      destinatario_id: pacienteId,
-      cita_id: citaId,
-      tipo: tipo,
-      canal: 'email',
-    };
+    try {
+      const payload = {
+        destinatario_tipo: 'paciente',
+        destinatario_id: pacienteId,
+        cita_id: citaId,
+        tipo: tipo,
+        canal: 'sistema',
+        enviado: false,
+      };
 
-    console.log('📧 Creando notificación con payload:', payload);
+      const resultado = await clienteSupabase
+        .from(this.#TABLA_NOTIF)
+        .insert(payload)
+        .select();
 
-    const resultado = await clienteSupabase
-      .from(this.#TABLA_NOTIF)
-      .insert(payload)
-      .select();
-
-    if (resultado.error) {
-      if (resultado.error.code === '23505') {
-        console.log('ℹ️ Notificación duplicada, ignorando');
-        return true;
+      if (resultado.error) {
+        if (resultado.error.code === '23505') {
+          return true;
+        }
       }
-      console.error(
-        '❌ Error al crear notificación:',
-        resultado.error.message,
-        'Detalles:',
-        resultado.error.details,
-        'Hint:',
-        resultado.error.hint,
-      );
-    } else {
-      console.log('✅ Notificación creada exitosamente');
-    }
 
-    return !resultado.error;
+      return !resultado.error;
+    } catch (error) {
+      console.error('Error creating notification:', error);
+      return false;
+    }
   }
 }

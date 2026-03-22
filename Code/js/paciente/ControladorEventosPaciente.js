@@ -18,6 +18,9 @@ class ControladorEventosPaciente {
         if (vista === 'mis-citas') {
           GestorMisCitas.cargar('proximas');
         }
+        if (vista === 'notificaciones') {
+          GestorNotificaciones.cargar();
+        }
       },
     );
   }

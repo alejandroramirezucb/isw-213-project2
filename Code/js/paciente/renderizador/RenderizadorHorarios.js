@@ -2,6 +2,8 @@ class RenderizadorHorarios {
   static #SELECTOR_SECCION = '#seccion-horarios';
   static #SELECTOR_LISTA = '#lista-horarios';
   static #SELECTOR_VACIO = '#sin-horarios';
+  static #SELECTOR_CONTENEDOR_ESPERA = '#contenedor-lista-espera';
+  static #SELECTOR_BTN_ESPERA = '#btn-lista-espera';
   static #SELECTOR_RESUMEN_FECHA = '#resumen-fecha';
   static #SELECTOR_RESUMEN_HORA = '#resumen-hora';
   static #SELECTOR_TITULO_MODAL = '#titulo-modal-reserva';
@@ -11,10 +13,13 @@ class RenderizadorHorarios {
   static #CLASE_BOTON_BLOQUEADO = 'horarios__boton--bloqueado';
   static #CLASE_BOTON_SELECT = 'horarios__boton--seleccionado';
   static #CLASE_VACIO_OCULTO = 'horarios__vacio--oculto';
+  static #CLASE_ESPERA_OCULTA = 'lista-espera--oculta';
 
   static #seccion = null;
   static #lista = null;
   static #vacio = null;
+  static #contenedorEspera = null;
+  static #btnEspera = null;
   static #resumenFecha = null;
   static #resumenHora = null;
   static #tituloModal = null;
@@ -24,6 +29,8 @@ class RenderizadorHorarios {
     this.#seccion = document.querySelector(this.#SELECTOR_SECCION);
     this.#lista = document.querySelector(this.#SELECTOR_LISTA);
     this.#vacio = document.querySelector(this.#SELECTOR_VACIO);
+    this.#contenedorEspera = document.querySelector(this.#SELECTOR_CONTENEDOR_ESPERA);
+    this.#btnEspera = document.querySelector(this.#SELECTOR_BTN_ESPERA);
     this.#resumenFecha = document.querySelector(this.#SELECTOR_RESUMEN_FECHA);
     this.#resumenHora = document.querySelector(this.#SELECTOR_RESUMEN_HORA);
     this.#tituloModal = document.querySelector(this.#SELECTOR_TITULO_MODAL);
@@ -44,10 +51,19 @@ class RenderizadorHorarios {
     if (bloques.length === 0) {
       this.#lista.innerHTML = '';
       this.#vacio.classList.remove(this.#CLASE_VACIO_OCULTO);
+      // Mostrar botón de lista de espera cuando no hay horarios disponibles
+      if (this.#contenedorEspera) {
+        this.#contenedorEspera.classList.remove(this.#CLASE_ESPERA_OCULTA);
+        this.#agregarEventoListaEspera(fecha);
+      }
       return;
     }
 
     this.#vacio.classList.add(this.#CLASE_VACIO_OCULTO);
+    // Ocultar botón de lista de espera cuando sí hay horarios
+    if (this.#contenedorEspera) {
+      this.#contenedorEspera.classList.add(this.#CLASE_ESPERA_OCULTA);
+    }
 
     let html = '';
     bloques.forEach((bloque) => {
@@ -130,5 +146,32 @@ class RenderizadorHorarios {
     }
 
     NavigacionFachada.abrirModal('modal-reserva');
+  }
+
+  static #agregarEventoListaEspera(fecha) {
+    if (!this.#btnEspera) return;
+
+    const btnClon = this.#btnEspera.cloneNode(true);
+    this.#btnEspera.parentNode.replaceChild(btnClon, this.#btnEspera);
+    this.#btnEspera = btnClon;
+
+    this.#btnEspera.addEventListener('click', async () => {
+      const usuario = EstadoPaciente.obtener('usuario');
+      if (!usuario) {
+        mostrarMensaje('Debes iniciar sesión para unirte a la lista de espera', 'error');
+        return;
+      }
+
+      const psicologoId = EstadoPaciente.obtener('psicologoId');
+      if (!psicologoId) {
+        mostrarMensaje('Error: No se pudo identificar el psicólogo', 'error');
+        return;
+      }
+
+      const gestor = new GestorListaEspera(usuario.paciente_id, psicologoId);
+      const fechaFormato = FormateadorFachada.formatearFecha(new Date(fecha + 'T00:00:00'));
+      
+      await gestor.mostrarModalListaEspera(fecha, fechaFormato);
+    });
   }
 }

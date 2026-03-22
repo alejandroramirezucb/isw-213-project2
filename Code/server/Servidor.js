@@ -6,12 +6,18 @@ const Configuracion = require('./Configuracion');
 const ClienteSupabaseAdmin = require('./ClienteSupabaseAdmin');
 const ControladorRegistro = require('./ControladorRegistro');
 const ControladorRecordatorios = require('./ControladorRecordatorios');
+const ControladorNotificaciones = require('./ControladorNotificaciones');
+const ControladorListaEspera = require('./ControladorListaEspera');
 
 class Servidor {
   #config;
   #controladorRegistro;
   #controladorRecordatorios;
+  #controladorNotificaciones;
+  #controladorListaEspera;
   #intervaloRecordatorios;
+  #intervaloNotificaciones;
+  #intervaloListaEspera;
 
   constructor(config = null) {
     this.#config = config || new Configuracion();
@@ -28,6 +34,8 @@ class Servidor {
     );
     this.#controladorRegistro = new ControladorRegistro(cliente);
     this.#controladorRecordatorios = new ControladorRecordatorios(cliente);
+    this.#controladorNotificaciones = new ControladorNotificaciones(cliente);
+    this.#controladorListaEspera = new ControladorListaEspera(cliente);
   }
 
   iniciar(puerto = 3000) {
@@ -42,16 +50,41 @@ class Servidor {
     if (this.#intervaloRecordatorios) {
       clearInterval(this.#intervaloRecordatorios);
     }
+    if (this.#intervaloNotificaciones) {
+      clearInterval(this.#intervaloNotificaciones);
+    }
+    if (this.#intervaloListaEspera) {
+      clearInterval(this.#intervaloListaEspera);
+    }
   }
 
   #iniciarRecordatorios() {
+    // Ejecutar recordatorios cada 1 hora (60 * 60 * 1000 ms)
     this.#intervaloRecordatorios = setInterval(async () => {
       try {
         await this.#controladorRecordatorios.ejecutar();
       } catch {
-
+        // Silenciar errores de recordatorios
       }
     }, 60 * 60 * 1000);
+
+    // Ejecutar envío de notificaciones cada 5 minutos (5 * 60 * 1000 ms)
+    this.#intervaloNotificaciones = setInterval(async () => {
+      try {
+        await this.#controladorNotificaciones.ejecutar();
+      } catch {
+        // Silenciar errores de notificaciones
+      }
+    }, 5 * 60 * 1000);
+
+    // Ejecutar procesamiento de lista de espera cada 5 minutos (5 * 60 * 1000 ms)
+    this.#intervaloListaEspera = setInterval(async () => {
+      try {
+        await this.#controladorListaEspera.ejecutar();
+      } catch {
+        // Silenciar errores de lista de espera
+      }
+    }, 5 * 60 * 1000);
   }
 
   #manejarPeticion(req, res) {
@@ -74,6 +107,14 @@ class Servidor {
 
     if (pathname === '/api/recordatorios' && req.method === 'POST') {
       return this.#controladorRecordatorios.manejar(req, res);
+    }
+
+    if (pathname === '/api/notificaciones' && req.method === 'POST') {
+      return this.#controladorNotificaciones.manejar(req, res);
+    }
+
+    if (pathname === '/api/lista-espera' && req.method === 'POST') {
+      return this.#controladorListaEspera.manejar(req, res);
     }
 
     this.#servirArchivo(pathname, res);

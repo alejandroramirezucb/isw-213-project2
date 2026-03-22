@@ -14,6 +14,7 @@
       <nav class="navegacion">
         <button class="navegacion__boton navegacion__boton--activo" data-vista="calendario"><span>Agendar</span></button>
         <button class="navegacion__boton" data-vista="mis-citas"><span>Mis Citas</span></button>
+        <button class="navegacion__boton" data-vista="notificaciones"><span>Notificaciones</span></button>
         <button class="navegacion__boton" data-vista="perfil"><span>Perfil</span></button>
       </nav>
       <div class="encabezado__usuario">
@@ -26,6 +27,10 @@
   <main class="contenido-principal">
     <section class="vista vista--activa" id="vista-calendario"></section>
     <section class="vista" id="vista-mis-citas"></section>
+    <section class="vista" id="vista-notificaciones">
+      <h1 class="vista-titulo">Notificaciones</h1>
+      <div id="contenido-notificaciones"></div>
+    </section>
     <section class="vista" id="vista-perfil"></section>
   </main>
 
@@ -60,6 +65,7 @@
   <script src="../../js/paciente/estado/EstadoPaciente.js"></script>
   <script src="../../js/paciente/repositorio/RepositorioBloques.js"></script>
   <script src="../../js/paciente/repositorio/RepositorioCitas.js"></script>
+  <script src="../../js/paciente/repositorio/RepositorioNotificaciones.js"></script>
   <script src="../../js/paciente/renderizador/RenderizadorCalendario.js"></script>
   <script src="../../js/paciente/renderizador/RenderizadorHorarios.js"></script>
   <script src="../../js/paciente/gestor/GestorProximaCita.js"></script>
@@ -67,6 +73,7 @@
   <script src="../../js/paciente/gestor/GestorMisCitas.js"></script>
   <script src="../../js/paciente/gestor/GestorReprogramacion.js"></script>
   <script src="../../js/paciente/gestor/GestorCancelacion.js"></script>
+  <script src="../../js/paciente/gestor/GestorNotificaciones.js"></script>
   <script src="../../js/paciente/gestor/GestorPerfil.js"></script>
   <script src="../../js/paciente/ControladorEventosPaciente.js"></script>
   <script src="../../js/paciente/AplicacionPaciente.js"></script>
