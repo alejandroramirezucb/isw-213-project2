@@ -112,7 +112,7 @@ class Servidor {
   }
 
   #servirArchivo(pathname, res) {
-    const filePath = '.' + pathname;
+    const filePath = path.join(__dirname, '..', pathname);
     const ext = path.extname(filePath);
     const contentType = this.#config.obtenerMime(ext);
 
