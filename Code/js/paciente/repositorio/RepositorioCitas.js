@@ -22,10 +22,10 @@ class RepositorioCitas {
 
     if (resultado.error) {
       const errorMsg = resultado.error.message || resultado.error.details || JSON.stringify(resultado.error);
+      const statusCode = resultado.error.code || '';
       
-      // Detectar error de unique constraint en bloque_id
-      if (errorMsg.includes('unique') || errorMsg.includes('duplicate')) {
-        console.error('Error: El bloque ya está reservado por otro paciente');
+      if (statusCode.includes('409') || errorMsg.includes('unique') || errorMsg.includes('duplicate') || errorMsg.includes('violates')) {
+        console.warn('Error 409: Bloque ya reservado');
         throw new Error('Este bloque ya fue reservado por otro usuario');
       }
       
@@ -34,7 +34,19 @@ class RepositorioCitas {
     }
 
     this.#citasCache = null;
-    return resultado.data?.[0]?.id || null;
+    const citaId = resultado.data?.[0]?.id || null;
+    
+    if (citaId) {
+      try {
+        await RepositorioBloques.marcarReservado(bloqueId);
+      } catch (e) {
+        console.warn('No se pudo marcar bloque:', e.message);
+      }
+      
+      await this.crearNotificacionPsicologo(profesionalId, 'nueva_cita', citaId);
+    }
+
+    return citaId;
   }
 
   static async obtenerProxima(pacienteId) {
@@ -121,10 +133,21 @@ class RepositorioCitas {
   }
 
   static async cancelar(citaId) {
+    const { data: cita } = await clienteSupabase
+      .from(this.#TABLA_CITAS)
+      .select('paciente_id, psicologo_id')
+      .eq('id', citaId)
+      .single();
+
     const resultado = await clienteSupabase.rpc(this.#RPC_CANCELAR, {
       p_cita_id: citaId,
       p_cancelada_por: 'paciente',
     });
+
+    if (!resultado.error && cita) {
+      await this.crearNotificacionPsicologo(cita.psicologo_id, 'cancelada_por_paciente', citaId);
+    }
+
     return !resultado.error;
   }
 
@@ -141,19 +164,53 @@ class RepositorioCitas {
 
       const resultado = await clienteSupabase
         .from(this.#TABLA_NOTIF)
-        .insert(payload)
-        .select();
+        .insert(payload);
+
+      if (resultado.error) {
+        if (resultado.error.code === '23505' || resultado.error.status === 403 || resultado.error.status === 400 || resultado.error.code === '42501') {
+          console.warn(`No se pudo crear notificación paciente (${resultado.error.status || resultado.error.code}), continuando...`);
+          return true;
+        }
+      }
+
+      return true;
+    } catch (error) {
+      console.warn('Error creando notificación (no crítico):', error.message);
+      return true;
+    }
+  }
+
+  static async crearNotificacionPsicologo(psicologoId, tipo, citaId) {
+    try {
+      const payload = {
+        destinatario_tipo: 'psicologo',
+        destinatario_id: psicologoId,
+        cita_id: citaId,
+        tipo: tipo,
+        canal: 'email',
+        enviado: false,
+      };
+
+      const resultado = await clienteSupabase
+        .from(this.#TABLA_NOTIF)
+        .insert(payload);
 
       if (resultado.error) {
         if (resultado.error.code === '23505') {
           return true;
         }
+        if (resultado.error.status === 403 || resultado.error.status === 400 || resultado.error.code === '42501') {
+          console.warn(`No se pudo crear notificación psicólogo (${resultado.error.status || resultado.error.code}), continuando...`);
+          return true;
+        }
+        console.warn('Error al crear notificación psicólogo:', resultado.error);
+        return true;
       }
 
-      return !resultado.error;
+      return true;
     } catch (error) {
-      console.error('Error creating notification:', error);
-      return false;
+      console.warn('Error creando notificación (no crítico):', error.message);
+      return true;
     }
   }
 }

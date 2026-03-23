@@ -9,16 +9,30 @@ class GestorReservas {
 
     try {
       await this.#procesarReserva(datos);
+      // Éxito: cerrar modal
+      this.cerrarModal();
     } catch (error) {
       console.error('Error en confirmación de reserva:', error);
-      await RepositorioBloques.liberarTemporal(datos.bloqueId);
       
-      if (error.message?.includes('El horario no está disponible')) {
-        MensajesFachada.mostrar('Este horario fue tomado por otro usuario. Intenta con otro horario.', 'error');
+      // Mostrar mensaje de error al usuario
+      if (error.message === 'RACE_CONDITION') {
+        MensajesFachada.mostrar('Este horario fue tomado por otro usuario justo ahora. Intenta con otro horario.', 'error');
+      } else if (error.message?.includes('El horario no está disponible')) {
+        MensajesFachada.mostrar('Este horario no está disponible. Intenta con otro horario.', 'error');
       } else if (error.message?.includes('duplicate')) {
         MensajesFachada.mostrar('Este horario fue tomado por otro usuario. Intenta con otro horario.', 'error');
       } else {
         MensajesFachada.mostrar('Error al reservar la cita', 'error');
+      }
+      
+      // Recargar horarios para mostrar disponibilidad actualizada
+      try {
+        const fechaSeleccionada = EstadoPaciente.obtener('fechaSeleccionada');
+        if (fechaSeleccionada) {
+          await RenderizadorHorarios.cargar(fechaSeleccionada);
+        }
+      } catch (reloadError) {
+        console.warn('No se pudieron recargar los horarios:', reloadError);
       }
     }
   }
@@ -76,19 +90,18 @@ class GestorReservas {
         datos.bloqueId,
       );
     } catch (error) {
-      if (error.message?.includes('duplicate') || error.message?.includes('unique')) {
-        await RepositorioBloques.liberarTemporal(datos.bloqueId);
-        throw new Error('duplicate key value violates unique constraint');
+      await RepositorioBloques.liberarTemporal(datos.bloqueId);
+      
+      if (error.message?.includes('bloque ya fue reservado') || error.message?.includes('duplicate')) {
+        throw new Error('RACE_CONDITION');
       }
       throw error;
     }
     
     if (!citaCreada) throw new Error('Error al crear cita');
 
-    const bloqueActualizado =
-      await RepositorioBloques.marcarReservado(datos.bloqueId);
-    if (!bloqueActualizado) throw new Error('Error al actualizar bloque');
-
+    // Nota: RepositorioCitas.crear() ya marca el bloque como reservado
+    
     await RepositorioCitas.crearNotificacion(
       datos.pacienteId,
       'confirmacion_reserva',

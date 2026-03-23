@@ -100,4 +100,36 @@ class RepositorioNotificaciones {
       return 0;
     }
   }
+
+  static suscribirseNuevasNotificaciones(psicologoId, callback) {
+    try {
+      const channel = clienteSupabase
+        .channel(`notificaciones-psicologo-${psicologoId}`)
+        .on(
+          'postgres_changes',
+          {
+            event: 'INSERT',
+            schema: 'public',
+            table: this.#TABLA,
+          },
+          (payload) => {
+            if (payload.new && payload.new.destinatario_tipo === 'psicologo' && payload.new.destinatario_id === psicologoId) {
+              callback(payload.new);
+            }
+          }
+        )
+        .subscribe((status) => {
+          if (status === 'SUBSCRIBED') {
+            console.log(`Suscrito a notificaciones del psicólogo ${psicologoId}`);
+          }
+        });
+      
+      return () => {
+        channel.unsubscribe();
+      };
+    } catch (error) {
+      console.error('Error en suscripción de notificaciones:', error);
+      return () => {};
+    }
+  }
 }

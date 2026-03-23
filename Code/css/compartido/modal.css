@@ -101,7 +101,7 @@
 }
 
 .modal__acciones .boton {
-  flex: 0 0 auto;
+  flex: 1;
   padding: 0.65rem 1rem;
-  min-width: 110px;
+  border-radius: var(--radio);
 }

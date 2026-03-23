@@ -17,6 +17,12 @@ class GestorCancelacion {
         NavigacionFachada.cerrarModal(this.#MODAL_ID);
         await GestorProximaCita.cargar();
         await RenderizadorCalendario.renderizar();
+        
+        // Recargar horarios de la fecha seleccionada si está visible
+        const fechaSeleccionada = EstadoPaciente.obtener('fechaSeleccionada');
+        if (fechaSeleccionada) {
+          await RenderizadorHorarios.cargar(fechaSeleccionada);
+        }
       } else {
         MensajesFachada.mostrar('Error al cancelar la cita', 'error');
       }

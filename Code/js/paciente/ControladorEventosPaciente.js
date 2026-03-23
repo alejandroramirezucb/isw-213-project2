@@ -72,10 +72,6 @@ class ControladorEventosPaciente {
         click: () =>
           NavigacionFachada.cerrarModal('modal-cancelacion'),
       },
-      '#btn-no-cancelar': {
-        click: () =>
-          NavigacionFachada.cerrarModal('modal-cancelacion'),
-      },
       '#btn-si-cancelar': {
         click: () => GestorCancelacion.cancelar(),
       },

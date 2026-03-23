@@ -99,15 +99,19 @@ class RepositorioCitasPsicologo {
         tipo: 'nuevo_turno',
         canal: 'email',
         enviado: false,
-      }).select();
+      });
 
       if (resultado.error) {
-        return false;
+        if (resultado.error.code === '23505' || resultado.error.code === '42501' || resultado.error.status === 403 || resultado.error.status === 400) {
+          console.warn(`Notificación no pudo ser creada (${resultado.error.code || resultado.error.status}), continuando...`);
+          return true;
+        }
+        console.warn('Error creando notificación:', resultado.error.message);
       }
-
       return true;
     } catch (error) {
-      return false;
+      console.warn('Error creando notificación:', error.message);
+      return true;
     }
   }
 

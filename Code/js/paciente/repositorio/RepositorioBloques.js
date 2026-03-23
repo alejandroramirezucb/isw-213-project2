@@ -26,16 +26,63 @@ class RepositorioBloques {
   }
 
   static async obtenerPorFecha(fecha) {
+    // 1. Liberar bloques expirados
     await clienteSupabase.rpc(this.#RPC_LIBERAR);
 
-    const resultado = await clienteSupabase
+    // 2. Obtener todos los bloques de esa fecha
+    const { data: bloques, error: errorBloques } = await clienteSupabase
       .from(this.#TABLA)
       .select('*')
       .eq('fecha', fecha)
-      .in('estado', ['disponible', 'bloqueado_temporal'])
       .order('hora_inicio');
 
-    return resultado.data || [];
+    if (errorBloques || !bloques) {
+      console.error('Error obteniendo bloques:', errorBloques);
+      return [];
+    }
+
+    // 3. Obtener todas las citas CONFIRMADAS para esos bloques
+    const bloqueIds = bloques.map((b) => b.id);
+    const { data: citas, error: errorCitas } = await clienteSupabase
+      .from('citas')
+      .select('bloque_id, estado')
+      .in('bloque_id', bloqueIds)
+      .eq('estado', 'confirmada');
+
+    if (errorCitas) {
+      console.error('Error obteniendo citas:', errorCitas);
+    }
+
+    // 4. Crear un mapa de bloques reservados
+    const bloquesReservados = new Set(
+      (citas || []).map((cita) => cita.bloque_id)
+    );
+
+    // 5. Marcar bloques como reservado si tienen citas confirmadas
+    return bloques.map((bloque) => {
+      if (bloquesReservados.has(bloque.id) && bloque.estado !== 'bloqueado_temporal') {
+        return {
+          ...bloque,
+          estado: 'reservado',
+        };
+      }
+      return bloque;
+    });
+  }
+
+  static async obtenerTodosPorFecha(fecha) {
+    const { data: bloques, error } = await clienteSupabase
+      .from(this.#TABLA)
+      .select('id, psicologo_id, fecha, hora_inicio, hora_fin, estado')
+      .eq('fecha', fecha)
+      .order('hora_inicio');
+
+    if (error || !bloques || bloques.length === 0) {
+      console.warn('No hay bloques para la fecha:', fecha);
+      return [];
+    }
+
+    return bloques;
   }
 
   static async bloquearTemporal(bloqueId) {

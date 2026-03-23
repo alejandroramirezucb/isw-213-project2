@@ -150,7 +150,7 @@ class GestorNotificaciones {
     return fechaNotif.toLocaleDateString('es-ES');
   }
 
-  static #iniciarPolling() {
+    static #iniciarPolling() {
     const btnLimpiar = document.getElementById('btn-limpiar-notificaciones');
     if (btnLimpiar && !btnLimpiar.dataset.eventoRegistrado) {
       btnLimpiar.addEventListener('click', () => this.#manejarLimpiarNotificaciones());
@@ -158,25 +158,50 @@ class GestorNotificaciones {
     }
 
     this.#intervaloActualizacion = setInterval(async () => {
-      const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#psicologoId);
-      this.#actualizarContador(conteo);
-      
-      const contenidoNotif = document.getElementById('contenido-notificaciones');
-      if (contenidoNotif) {
-        await this.cargar();
+      try {
+        const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#psicologoId);
+        this.#actualizarContador(conteo);
+
+        const contenidoNotif = document.getElementById('contenido-notificaciones');
+        if (contenidoNotif) { await this.cargar(); }
+      } catch (error) {
+        console.warn('Error en polling de notificaciones:', error);
       }
     }, 30000);
 
+    // Suscripción en tiempo real (opcional, no rompe si falla)
+    if (this.#repositorio.suscribirseNuevasNotificaciones) {
+      try {
+        this.unsuscriber = this.#repositorio.suscribirseNuevasNotificaciones(this.#psicologoId, async () => {
+          try {
+            const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#psicologoId);
+            this.#actualizarContador(conteo);
+            const contenidoNotif = document.getElementById('contenido-notificaciones');
+            if (contenidoNotif) { await this.cargar(); }
+            MensajesFachada.mostrar('Nueva notificación recibida', 'exito');
+          } catch (cbError) {
+            console.warn('Error en callback de notificación:', cbError);
+          }
+        });
+      } catch (subError) {
+        console.warn('No se pudo suscribir a notificaciones en tiempo real:', subError);
+      }
+    }
+
     (async () => {
-      const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#psicologoId);
-      this.#actualizarContador(conteo);
+      try {
+        const conteo = await this.#repositorio.obtenerConteoNoLeidas(this.#psicologoId);
+        this.#actualizarContador(conteo);
+      } catch (error) {
+        console.warn('Error al obtener conteo inicial de notificaciones:', error);
+      }
     })();
   }
 
   static detener() {
-    if (this.#intervaloActualizacion) {
-      clearInterval(this.#intervaloActualizacion);
-      this.#intervaloActualizacion = null;
-    }
+    if (this.#intervaloActualizacion) { clearInterval(this.#intervaloActualizacion); this.#intervaloActualizacion = null; }
+    if (this.unsuscriber) { this.unsuscriber(); this.unsuscriber = null; }
   }
 }
+
+

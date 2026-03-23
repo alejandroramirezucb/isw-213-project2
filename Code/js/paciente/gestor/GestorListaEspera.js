@@ -24,8 +24,8 @@ class GestorListaEspera {
       return;
     }
 
-    const modal = this.#crearModalEspera(fecha, fechaFormato);
-    GestorModales.abrirModal(modal);
+    const modalId = this.#crearModalEspera(fecha, fechaFormato);
+    GestorModales.abrir(modalId);
   }
 
   async unirseAListaEspera(fecha) {
@@ -47,7 +47,6 @@ class GestorListaEspera {
         'exito',
       );
 
-      GestorModales.cerrarTodos();
       this.#dispararEvento('unido_a_espera', { fecha, posicion });
     } else {
       MensajesFachada.mostrar(
@@ -86,49 +85,65 @@ class GestorListaEspera {
   }
 
   #crearModalEspera(fecha, fechaFormato) {
-    const contenido = `
-      <div class="modal__contenido">
-        <h2>Unirse a Lista de Espera</h2>
-        <p>El horario que seleccionaste no está disponible en este momento.</p>
-        <div class="modal__info">
-          <p><strong>Fecha:</strong> ${fechaFormato}</p>
-        </div>
-        <div class="modal__mensaje">
-          <p>¿Quieres que te avisemos cuando se libere un espacio en esta fecha?</p>
-          <p class="modal__nota">Recibirás una notificación del sistema cuando se libere un horario.</p>
-        </div>
-        <div class="modal__acciones">
-          <button class="boton boton--principal" id="btn-confirmar-espera">
-            Sí, avisarme
-          </button>
-          <button class="boton boton--secundario" id="btn-cancelar-espera">
-            Cancelar
-          </button>
+    const modalId = `modal-espera-${fecha}`;
+    
+    const modalAnterior = document.getElementById(modalId);
+    if (modalAnterior) {
+      modalAnterior.remove();
+    }
+
+    const html = `
+      <div class="modal modal--oculto" id="${modalId}">
+        <div class="modal__contenido">
+          <header class="modal__encabezado">
+            <h3 class="modal__titulo">Unirse a Lista de Espera</h3>
+            <button class="modal__boton-cerrar" id="btn-cerrar-espera-${fecha}">&times;</button>
+          </header>
+          <div class="modal__cuerpo">
+            <p class="modal__info">Te notificaremos cuando se libere un horario en esta fecha.</p>
+            <div class="resumen-reserva" style="margin-top: 1rem;">
+              <p class="resumen-reserva__item"><strong>Fecha:</strong> <span>${fechaFormato}</span></p>
+            </div>
+          </div>
+          <footer class="modal__acciones">
+            <button class="boton boton--secundario" id="btn-cancelar-espera-${fecha}">Cancelar</button>
+            <button class="boton boton--primario" id="btn-confirmar-espera-${fecha}">Avisarme</button>
+          </footer>
         </div>
       </div>
     `;
 
-    const modal = {
-      id: `espera-${fecha}`,
-      contenido: contenido,
-      onAbrir: () => {
-        document.getElementById('btn-confirmar-espera').addEventListener(
-          'click',
-          async () => {
-            await this.unirseAListaEspera(fecha);
-          },
-        );
+    const contenedorTemporal = document.createElement('div');
+    contenedorTemporal.innerHTML = html;
+    const modal = contenedorTemporal.firstElementChild;
+    document.body.appendChild(modal);
 
-        document.getElementById('btn-cancelar-espera').addEventListener(
-          'click',
-          () => {
-            GestorModales.cerrarTodos();
-          },
-        );
+    document.getElementById(`btn-confirmar-espera-${fecha}`).addEventListener(
+      'click',
+      async () => {
+        await this.unirseAListaEspera(fecha);
+        GestorModales.cerrar(modalId);
+        modal.remove();
       },
-    };
+    );
 
-    return modal;
+    document.getElementById(`btn-cancelar-espera-${fecha}`).addEventListener(
+      'click',
+      () => {
+        GestorModales.cerrar(modalId);
+        modal.remove();
+      },
+    );
+
+    document.getElementById(`btn-cerrar-espera-${fecha}`).addEventListener(
+      'click',
+      () => {
+        GestorModales.cerrar(modalId);
+        modal.remove();
+      },
+    );
+
+    return modalId;
   }
 
   #dispararEvento(nombre, datos) {

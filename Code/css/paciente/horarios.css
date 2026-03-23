@@ -38,7 +38,7 @@
   color: var(--texto);
 }
 
-.horarios__boton:hover {
+.horarios__boton:hover:not(:disabled) {
   border-color: var(--primario);
   color: var(--primario);
 }
@@ -49,11 +49,20 @@
   border-color: var(--primario);
 }
 
-.horarios__boton--bloqueado {
-  background: var(--fondo);
-  color: var(--texto-ter);
+.horarios__boton--bloqueado,
+.horarios__boton:disabled {
+  background: #e0e0e0;
+  color: #9e9e9e;
   cursor: not-allowed;
-  border-color: transparent;
+  border-color: #bdbdbd;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.horarios__boton--bloqueado:hover,
+.horarios__boton:disabled:hover {
+  border-color: #bdbdbd;
+  color: #9e9e9e;
 }
 
 .horarios__vacio {

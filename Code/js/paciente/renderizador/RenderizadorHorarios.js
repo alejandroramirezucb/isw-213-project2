@@ -46,7 +46,6 @@ class RenderizadorHorarios {
 
   static async cargar(fecha) {
     if (!this.#seccion || !this.#lista || !this.#vacio) {
-      console.warn('Elementos de horarios no encontrados. Fragment podría no estar cargado.');
       return;
     }
 
@@ -56,6 +55,33 @@ class RenderizadorHorarios {
     this.#mostrarCitasDelDia(fecha);
 
     const bloques = await RepositorioBloques.obtenerPorFecha(fecha);
+
+    if (bloques.length > 0 && bloques[0].psicologo_id) {
+      EstadoPaciente.establecer('psicologoId', bloques[0].psicologo_id);
+    } else {
+      try {
+        const todosLosBloques = await RepositorioBloques.obtenerTodosPorFecha(fecha);
+        if (todosLosBloques && todosLosBloques.length > 0 && todosLosBloques[0].psicologo_id) {
+          EstadoPaciente.establecer('psicologoId', todosLosBloques[0].psicologo_id);
+        }
+      } catch (e) {
+        // Error silencioso
+      }
+
+      if (!EstadoPaciente.obtener('psicologoId')) {
+        try {
+          const { data: psicologos, error } = await clienteSupabase
+            .from('psicologos')
+            .select('id')
+            .limit(1);
+          if (!error && psicologos && psicologos.length > 0) {
+            EstadoPaciente.establecer('psicologoId', psicologos[0].id);
+          }
+        } catch (e) {
+          // Error silencioso
+        }
+      }
+    }
 
     if (bloques.length === 0) {
       this.#lista.innerHTML = '';
@@ -75,11 +101,11 @@ class RenderizadorHorarios {
     let html = '';
     bloques.forEach((bloque) => {
       const hora = FormateadorFachada.formatearHora(bloque.hora_inicio);
-      const estaBloqueado = bloque.estado === 'bloqueado_temporal';
+      const noDisponible = bloque.estado === 'bloqueado_temporal' || bloque.estado === 'reservado';
       const clases = `horarios__boton${
-        estaBloqueado ? ` ${this.#CLASE_BOTON_BLOQUEADO}` : ''
+        noDisponible ? ` ${this.#CLASE_BOTON_BLOQUEADO}` : ''
       }`;
-      const deshabilitado = estaBloqueado ? ' disabled' : '';
+      const deshabilitado = noDisponible ? ' disabled' : '';
 
       html += `<button class="${clases}" data-bloque-id="${bloque.id}"${deshabilitado}>${hora}</button>`;
     });
@@ -128,14 +154,10 @@ class RenderizadorHorarios {
       this.#resumenFecha.textContent = FormateadorFachada.formatearFecha(
         new Date(fechaSel + 'T00:00:00'),
       );
-    } else {
-      console.warn('Elemento resumenFecha no encontrado.');
     }
 
     if (this.#resumenHora) {
       this.#resumenHora.textContent = boton.textContent;
-    } else {
-      console.warn('Elemento resumenHora no encontrado.');
     }
 
     const esReprogramacion = EstadoPaciente.obtener('modoReprogramacion');
@@ -148,8 +170,6 @@ class RenderizadorHorarios {
         this.#tituloModal.textContent = 'Confirmar Reserva';
         this.#textoConf.textContent = '¿Deseas confirmar esta cita?';
       }
-    } else {
-      console.warn('Elementos de modal no encontrados.');
     }
 
     NavigacionFachada.abrirModal('modal-reserva');
@@ -169,15 +189,71 @@ class RenderizadorHorarios {
         return;
       }
 
-      const psicologoId = EstadoPaciente.obtener('psicologoId');
-      if (!psicologoId) {
-        MensajesFachada.mostrar('Error: No se pudo identificar el psicólogo', 'error');
+      const pacienteId = EstadoPaciente.obtener('pacienteId');
+      if (!pacienteId) {
+        MensajesFachada.mostrar('Error: No se encontró tu información de paciente', 'error');
         return;
       }
 
-      const gestor = new GestorListaEspera(usuario.paciente_id, psicologoId);
+      let psicologoId = EstadoPaciente.obtener('psicologoId');
+
+      if (!psicologoId && usuario?.psicologos) {
+        if (Array.isArray(usuario.psicologos) && usuario.psicologos.length > 0) {
+          psicologoId = usuario.psicologos[0].id;
+        } else if (typeof usuario.psicologos === 'object' && usuario.psicologos.id) {
+          psicologoId = usuario.psicologos.id;
+        }
+      }
+
+      if (!psicologoId) {
+        try {
+          const todosLosBloques = await RepositorioBloques.obtenerTodosPorFecha(fecha);
+          if (todosLosBloques?.length > 0) {
+            psicologoId = todosLosBloques[0].psicologo_id;
+          }
+        } catch (e) {
+          console.error('Error en RepositorioBloques:', e);
+        }
+      }
+
+      if (!psicologoId) {
+        try {
+          const { data, error } = await clienteSupabase
+            .from('psicologos')
+            .select('id', { count: 'exact' });
+          if (data?.length > 0) {
+            psicologoId = data[0].id;
+          }
+        } catch (e) {
+          console.error('Error en consulta psicologos:', e.message);
+        }
+      }
+
+      if (!psicologoId) {
+        try {
+          const { data, error } = await clienteSupabase
+            .from('pacientes')
+            .select('psicologo_id')
+            .eq('id', pacienteId)
+            .single();
+          if (!error && data?.psicologo_id) {
+            psicologoId = data.psicologo_id;
+          }
+        } catch (e) {
+          console.error('Error en consulta pacientes:', e.message);
+        }
+      }
+
+      if (!psicologoId) {
+        MensajesFachada.mostrar(
+          'No hay profesionales disponibles. Contacta a administración.',
+          'error'
+        );
+        return;
+      }
+
+      const gestor = new GestorListaEspera(pacienteId, psicologoId);
       const fechaFormato = FormateadorFachada.formatearFecha(new Date(fecha + 'T00:00:00'));
-      
       await gestor.mostrarModalListaEspera(fecha, fechaFormato);
     });
   }

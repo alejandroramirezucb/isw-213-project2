@@ -8,6 +8,7 @@ const ControladorRegistro = require('./ControladorRegistro');
 const ControladorRecordatorios = require('./ControladorRecordatorios');
 const ControladorNotificaciones = require('./ControladorNotificaciones');
 const ControladorListaEspera = require('./ControladorListaEspera');
+const ControladorMigracion = require('./ControladorMigracion');
 
 class Servidor {
   #config;
@@ -15,6 +16,7 @@ class Servidor {
   #controladorRecordatorios;
   #controladorNotificaciones;
   #controladorListaEspera;
+  #controladorMigracion;
   #intervaloRecordatorios;
   #intervaloNotificaciones;
   #intervaloListaEspera;
@@ -36,6 +38,7 @@ class Servidor {
     this.#controladorRecordatorios = new ControladorRecordatorios(cliente);
     this.#controladorNotificaciones = new ControladorNotificaciones(cliente);
     this.#controladorListaEspera = new ControladorListaEspera(cliente);
+    this.#controladorMigracion = new ControladorMigracion(cliente);
   }
 
   iniciar(puerto = 3000) {
@@ -94,6 +97,10 @@ class Servidor {
 
     if (pathname === '/api/registrar' && req.method === 'POST') {
       return this.#controladorRegistro.manejar(req, res);
+    }
+
+    if (pathname === '/api/migracion' && req.method === 'POST') {
+      return this.#controladorMigracion.manejar(req, res);
     }
 
     if (pathname === '/api/recordatorios' && req.method === 'POST') {

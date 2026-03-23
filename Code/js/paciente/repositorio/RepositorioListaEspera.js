@@ -17,11 +17,17 @@ class RepositorioListaEspera {
         console.log('ℹ️ Paciente ya está en la lista de espera para esta fecha');
         return true;
       }
-      console.error(
-        'Error al añadir a lista de espera:',
-        resultado.error.message,
-      );
+      if (resultado.error.status === 403 || resultado.error.code === '42501') {
+        console.warn('Sin permiso para añadir a lista de espera (RLS):', resultado.error.message);
+        return false;
+      }
+      console.error('Error al añadir a lista de espera:', resultado.error.message);
       return false;
+    }
+
+    if (!resultado.data || resultado.data.length === 0) {
+      console.warn('Inserción exitosa pero sin datos retornados');
+      return true;
     }
 
     return !!resultado.data?.[0]?.id;
@@ -30,7 +36,7 @@ class RepositorioListaEspera {
   static async obtenerPosicion(pacienteId, psicologoId, fecha) {
     const resultado = await clienteSupabase
       .from(this.#TABLA)
-      .select('id, creado_en')
+      .select('id, paciente_id, creado_en')
       .eq('psicologo_id', psicologoId)
       .eq('fecha', fecha)
       .eq('notificado', false)
@@ -49,7 +55,7 @@ class RepositorioListaEspera {
   static async obtenerClientesEnEsperaParaFecha(psicologoId, fecha) {
     const resultado = await clienteSupabase
       .from(this.#TABLA)
-      .select('id, paciente_id, creado_en, usuarios_auth(id, email, nombre, apellido)')
+      .select('id, paciente_id, creado_en, notificado')
       .eq('psicologo_id', psicologoId)
       .eq('fecha', fecha)
       .eq('notificado', false)

@@ -13,15 +13,20 @@ class GestorNotificaciones {
       const contenidoNotif = document.getElementById('contenido-notificaciones');
       if (!contenidoNotif) return;
 
-      const notificaciones = await this.#repositorio.obtenerTodas(this.#pacienteId);
-      const conteoNoLeidas = await this.#repositorio.obtenerConteoNoLeidas(this.#pacienteId);
+      try {
+        const notificaciones = await this.#repositorio.obtenerTodas(this.#pacienteId);
+        const conteoNoLeidas = await this.#repositorio.obtenerConteoNoLeidas(this.#pacienteId);
 
-      contenidoNotif.innerHTML = this.#renderizarVista(notificaciones, conteoNoLeidas);
-      this.#vincularEventos();
-      this.#actualizarBotonesCleanup(notificaciones.length > 0);
-      this.#actualizarContador(conteoNoLeidas);
+        contenidoNotif.innerHTML = this.#renderizarVista(notificaciones, conteoNoLeidas);
+        this.#vincularEventos();
+        this.#actualizarBotonesCleanup(notificaciones.length > 0);
+        this.#actualizarContador(conteoNoLeidas);
+      } catch (apiError) {
+        console.warn('Error al acceder a notificaciones:', apiError);
+        contenidoNotif.innerHTML = `<div class="notif-vacia">No se pudieron cargar las notificaciones (${apiError?.status || 'error'})</div>`;
+      }
     } catch (error) {
-      console.error('Error al cargar notificaciones:', error);
+      console.error('Error general al cargar notificaciones:', error);
     }
   }
 
