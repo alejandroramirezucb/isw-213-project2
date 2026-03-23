@@ -395,9 +395,9 @@ Tipos:
 2. Selecciona un día 
 3. Visualiza horarios libres para ese día
 4. Selecciona un horario
-5. Confirma la reserva 
-7. Sistema crea la cita y genera notificación de confirmación
-8. Psicólogo recibe notificación de "Nuevo turno agendado"
+5. Confirma la reserva
+6. Sistema crea la cita y genera notificación de confirmación
+7. Psicólogo recibe notificación de "Nuevo turno agendado"
 
 #### Cancelación de Cita
 **Paciente:**
@@ -406,7 +406,6 @@ Tipos:
 3. Hace clic en "Cancelar"
 4. Confirma la acción
 5. Cita cambia a estado "Cancelada"
-6. Psicólogo recibe notificación de cancelación
 
 **Psicólogo:**
 1. Psicólogo entra a "Panel de Citas"
@@ -501,10 +500,10 @@ Tipos:
 
 - **Orden de prioridad:** 3/15
 - **Tipo de prioridad:** Alta
-- **Historia:** Como paciente, quiero seleccionar un horario libre y confirmar mi reserva ingresando mis datos para asegurar mi espacio.
+- **Historia:** Como paciente, quiero seleccionar un horario libre y confirmar mi reserva para asegurar mi espacio.
 - **Criterios de aceptación:**
-  - Dado que el paciente selecciona un bloque, cuando ingrese su nombre y correo y presione "Reservar", entonces el sistema debe registrar la cita a su nombre.
-  - Dado que el paciente intenta reservar sin llenar sus datos de contacto, cuando presione "Reservar", entonces el sistema debe mostrar un error pidiendo los campos obligatorios.
+  - Dado que el paciente selecciona un bloque, cuando presione "Confirmar Reserva", entonces el sistema debe registrar la cita a su nombre de usuario.
+  - Dado que el paciente selecciona un horario libre en el calendario, cuando se abra la ventana de confirmación, entonces el sistema debe mostrar un resumen previo indicando la fecha y la hora exacta del bloque seleccionado.
 - **Estimación:** 4 h
 
 ### HU-04 Prevención de Reservas Duplicadas
@@ -563,7 +562,7 @@ Tipos:
 - **Tipo de prioridad:** Media
 - **Historia:** Como paciente, quiero recibir una notificación al momento de agendar para tener un comprobante y los detalles exactos de mi turno.
 - **Criterios de aceptación:**
-  - Dado que la reserva se guarda exitosamente en la base de datos, cuando el proceso termine, entonces el sistema debe crear una notificación con el día, hora y opciones para gestionar la cita (cancelar/reprogramar).
+  - Dado que la reserva se guarda exitosamente en la base de datos, cuando el proceso termine, entonces el sistema debe crear una notificación de confirmación con el detalle de la cita de que ha sido reservada con éxito.
   - Dado que se genera una nueva reserva, cuando se cree la notificación al paciente, entonces el administrador también debe recibir una notificación de "Nuevo turno agendado".
 - **Estimación:** 3 h
 
@@ -573,8 +572,8 @@ Tipos:
 - **Tipo de prioridad:** Media
 - **Historia:** Como paciente, quiero ver rápidamente los datos de mi próxima cita agendada al ingresar a la web para no olvidar mi horario.
 - **Criterios de aceptación:**
-  - Dado que el paciente entra a la web y se identifica, cuando tenga una cita futura, entonces la pantalla principal debe mostrar una tarjeta con el texto "Tu próxima cita es el \[Día\] a las \[Hora\]".
-  - Dado que el paciente no tiene citas futuras, cuando ingrese, entonces el sistema debe mostrarle directamente el botón para "Agendar nueva cita".
+  - Dado que el paciente entra a la web y se identifica, cuando tenga una cita futura, entonces la pantalla principal debe mostrar una tarjeta con los datos de su próxima cita.
+  - Dado que el paciente no tiene citas futuras, cuando ingrese, entonces el sistema le mostrará el calendario directamente para agendar una nueva cita.
 - **Estimación:** 2 h
 
 ### HU-11 Recordatorios Automatizados
@@ -591,10 +590,10 @@ Tipos:
 
 - **Orden de prioridad:** 12/15
 - **Tipo de prioridad:** Media
-- **Historia:** Como psicólogo, quiero parametrizar mi horario de oficina, pero que el calendario muestre el día completo para diferenciar mi tiempo regular de posibles excepciones.
+- **Historia:** Como psicólogo, quiero parametrizar mi horario de oficina para que se generen los bloques de atención de manera automática.
 - **Criterios de aceptación:**
-  - Dado que el psicólogo accede a "Configuración", cuando defina su jornada, entonces el sistema debe marcar esos bloques como "Laborables" por defecto.
-  - Dado que un paciente ve el calendario, cuando visualice el día, entonces debe ver el día completo, pero solo podrá seleccionar turnos dentro del rango que se configuró.
+  - Dado que el psicólogo accede a "Configuración", cuando defina su jornada y genere los horarios, entonces el sistema debe crear bloques de turnos seleccionables con la duración especificada.
+  - Dado que un paciente ve el calendario, cuando visualice el día, entonces solo podrá seleccionar turnos dentro de los bloques generados por el psicólogo.
 - **Estimación:** 4 h
 
 ### HU-13 Historial de Citas
@@ -623,6 +622,6 @@ Tipos:
 - **Tipo de prioridad:** Baja
 - **Historia:** Como psicólogo, quiero poder bloquear a pacientes que frecuentemente ocupan horarios en el calendario y no asisten.
 - **Criterios de aceptación:**
-  - Dado que el administrador añade a un paciente a la lista negra, cuando ese paciente intente realizar una nueva reserva, entonces el sistema debe mostrar un mensaje: "No es posible agendar en este momento, comuníquese directamente con administración."
+  - Dado que el administrador añade a un paciente a la lista negra, cuando ese paciente intente realizar una nueva reserva, entonces el sistema debe mostrar un mensaje: "No es posible agendar en este momento".
   - Dado que un paciente bloqueado intenta reservar, cuando presione el botón final de confirmación, entonces la reserva no debe guardarse en la base de datos.
 - **Estimación:** 2 h
