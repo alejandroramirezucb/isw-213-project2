@@ -2,7 +2,7 @@
 
 ## Video
 
-- [Ver video](https://raw.githubusercontent.com/<TU_USUARIO>/<TU_REPO>/main/Video/Video.mp4)
+- [Ver video](https://raw.githubusercontent.com/alejandroramirezucb/isw-213-project2/main/Video/Video.mp4)
 
 ## Tabla de Contenidos
 
