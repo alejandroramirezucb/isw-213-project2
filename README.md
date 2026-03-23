@@ -2,10 +2,7 @@
 
 ## Video
 
-<video width="100%" controls>
-  <source src="Video/Video.mp4" type="video/mp4">
-  Tu navegador no soporta el elemento de video.
-</video>
+- [Ver video](https://raw.githubusercontent.com/<TU_USUARIO>/<TU_REPO>/main/Video/Video.mp4)
 
 ## Tabla de Contenidos
 
