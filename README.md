@@ -1,5 +1,12 @@
 # Psicoraiden
 
+## Video
+
+<video width="100%" controls>
+  <source src="Video/Video.mp4" type="video/mp4">
+  Tu navegador no soporta el elemento de video.
+</video>
+
 ## Tabla de Contenidos
 
 1. [Instalación](#instalación)
