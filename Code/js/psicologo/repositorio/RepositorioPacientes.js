@@ -10,3 +10,7 @@ class RepositorioPacientes {
     return !resultado.error;
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = RepositorioPacientes;
+}

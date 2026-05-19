@@ -14,3 +14,7 @@ class EstadoPsicologo {
     this.#estado[clave] = valor;
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = EstadoPsicologo;
+}

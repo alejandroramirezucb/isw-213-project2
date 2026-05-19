@@ -173,3 +173,7 @@ class RepositorioCitasPsicologo {
     this.#historialesCache.clear();
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = RepositorioCitasPsicologo;
+}

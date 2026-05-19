@@ -205,3 +205,7 @@ class GestorNotificaciones {
 }
 
 
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = GestorNotificaciones;
+}

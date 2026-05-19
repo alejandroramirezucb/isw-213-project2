@@ -1,0 +1,479 @@
+
+> psicoraiden@1.0.0 test
+> jest --json
+
+PASS tests/unit/repositorio/RepositorioPacientes.test.js
+FAIL tests/unit/gestor/GestorNotificaciones.test.js
+  ● Test suite failed to run
+
+    ReferenceError: RepositorioNotificaciones is not defined
+
+      at Function.<static_initializer> (eval at Object.<anonymous> (tests/unit/gestor/GestorNotificaciones.test.js:9:1), <anonymous>:3:25)
+      at eval (eval at Object.<anonymous> (tests/unit/gestor/GestorNotificaciones.test.js:9:1), <anonymous>:1:1)
+      at Object.eval (tests/unit/gestor/GestorNotificaciones.test.js:9:1)
+
+PASS tests/unit/gestor/GestorHorarios.test.js
+PASS tests/unit/gestor/GestorRestriccion.test.js
+PASS tests/unit/estado/EstadoPsicologo.test.js
+FAIL tests/unit/repositorio/RepositorioConfiguracion.test.js
+  ● Console
+
+    console.log
+      Eliminando configuración anterior para psicólogo: psi-001
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:37:15)
+
+    console.log
+      Insertando nuevas configuraciones: [
+        {
+          psicologo_id: 'psi-001',
+          dia_semana: 1,
+          hora_inicio: '09:00',
+          hora_fin: '13:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        }
+      ]
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:53:15)
+
+    console.error
+      Error en guardarYGenerarBloques: TypeError: clienteSupabase.from(...).insert(...).select is not a function
+          at Function.guardarYGenerarBloques (eval at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\unit\repositorio\RepositorioConfiguracion.test.js:9:1), <anonymous>:57:10)
+          at processTicksAndRejections (node:internal/process/task_queues:105:5)
+          at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\unit\repositorio\RepositorioConfiguracion.test.js:33:25)
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:118:15)
+      at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:33:25)
+
+    console.log
+      Eliminando configuración anterior para psicólogo: psi-002
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:37:15)
+
+    console.log
+      Insertando nuevas configuraciones: [
+        {
+          psicologo_id: 'psi-002',
+          dia_semana: 3,
+          hora_inicio: '10:00',
+          hora_fin: '11:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        }
+      ]
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:53:15)
+
+    console.error
+      Error en guardarYGenerarBloques: TypeError: clienteSupabase.from(...).insert(...).select is not a function
+          at Function.guardarYGenerarBloques (eval at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\unit\repositorio\RepositorioConfiguracion.test.js:9:1), <anonymous>:57:10)
+          at processTicksAndRejections (node:internal/process/task_queues:105:5)
+          at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\unit\repositorio\RepositorioConfiguracion.test.js:48:25)
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:118:15)
+      at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:48:25)
+
+    console.log
+      Eliminando configuración anterior para psicólogo: psi-003
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:37:15)
+
+    console.log
+      Insertando nuevas configuraciones: [
+        {
+          psicologo_id: 'psi-003',
+          dia_semana: 1,
+          hora_inicio: '10:00',
+          hora_fin: '10:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        }
+      ]
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:53:15)
+
+    console.error
+      Error en guardarYGenerarBloques: TypeError: clienteSupabase.from(...).insert(...).select is not a function
+          at Function.guardarYGenerarBloques (eval at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\unit\repositorio\RepositorioConfiguracion.test.js:9:1), <anonymous>:57:10)
+          at processTicksAndRejections (node:internal/process/task_queues:105:5)
+          at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\unit\repositorio\RepositorioConfiguracion.test.js:63:25)
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:118:15)
+      at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:63:25)
+
+    console.log
+      Eliminando configuración anterior para psicólogo: psi-004
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:37:15)
+
+    console.log
+      Insertando nuevas configuraciones: [
+        {
+          psicologo_id: 'psi-004',
+          dia_semana: 1,
+          hora_inicio: '09:00',
+          hora_fin: '10:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        }
+      ]
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:53:15)
+
+    console.error
+      Error en guardarYGenerarBloques: TypeError: clienteSupabase.from(...).insert(...).select is not a function
+          at Function.guardarYGenerarBloques (eval at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\unit\repositorio\RepositorioConfiguracion.test.js:9:1), <anonymous>:57:10)
+          at processTicksAndRejections (node:internal/process/task_queues:105:5)
+          at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\unit\repositorio\RepositorioConfiguracion.test.js:78:25)
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:9:1), <anonymous>:118:15)
+      at Object.<anonymous> (tests/unit/repositorio/RepositorioConfiguracion.test.js:78:25)
+
+  ● RepositorioConfiguracion › guardarYGenerarBloques › VÁLIDO: Guarda configuración válida de bloques
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 32 |[39m
+     [90m 33 |[39m       [36mconst[39m resultado [33m=[39m [36mawait[39m [33mRepositorioConfiguracion[39m[33m.[39mguardarYGenerarBloques([32m'psi-001'[39m[33m,[39m config[33m,[39m [32m'2026-05-18'[39m[33m,[39m [32m'2026-05-24'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 34 |[39m       expect(resultado)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m    |[39m                         [31m[1m^[22m[39m
+     [90m 35 |[39m     })[33m;[39m
+     [90m 36 |[39m
+     [90m 37 |[39m     test([32m'LÍMITE: Guarda bloque mínimo válido'[39m[33m,[39m [36masync[39m () [33m=>[39m {[0m
+
+      at Object.toBe (tests/unit/repositorio/RepositorioConfiguracion.test.js:34:25)
+
+  ● RepositorioConfiguracion › guardarYGenerarBloques › LÍMITE: Guarda bloque mínimo válido
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 47 |[39m       [36mconst[39m config [33m=[39m [{ psicologo_id[33m:[39m [32m'psi-002'[39m[33m,[39m dia_semana[33m:[39m [35m3[39m[33m,[39m hora_inicio[33m:[39m [32m'10:00'[39m[33m,[39m hora_fin[33m:[39m [32m'11:00'[39m[33m,[39m duracion_bloque_minutos[33m:[39m [35m60[39m[33m,[39m activo[33m:[39m [36mtrue[39m }][33m;[39m
+     [90m 48 |[39m       [36mconst[39m resultado [33m=[39m [36mawait[39m [33mRepositorioConfiguracion[39m[33m.[39mguardarYGenerarBloques([32m'psi-002'[39m[33m,[39m config[33m,[39m [32m'2026-05-18'[39m[33m,[39m [32m'2026-05-24'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 49 |[39m       expect(resultado)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m    |[39m                         [31m[1m^[22m[39m
+     [90m 50 |[39m     })[33m;[39m
+     [90m 51 |[39m
+     [90m 52 |[39m     test([32m'INVÁLIDO: Rechaza bloque sin duración'[39m[33m,[39m [36masync[39m () [33m=>[39m {[0m
+
+      at Object.toBe (tests/unit/repositorio/RepositorioConfiguracion.test.js:49:25)
+
+  ● RepositorioConfiguracion › guardarYGenerarBloques › INVÁLIDO: Rechaza bloque sin duración
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 62 |[39m       [36mconst[39m config [33m=[39m [{ psicologo_id[33m:[39m [32m'psi-003'[39m[33m,[39m dia_semana[33m:[39m [35m1[39m[33m,[39m hora_inicio[33m:[39m [32m'10:00'[39m[33m,[39m hora_fin[33m:[39m [32m'10:00'[39m[33m,[39m duracion_bloque_minutos[33m:[39m [35m60[39m[33m,[39m activo[33m:[39m [36mtrue[39m }][33m;[39m
+     [90m 63 |[39m       [36mconst[39m resultado [33m=[39m [36mawait[39m [33mRepositorioConfiguracion[39m[33m.[39mguardarYGenerarBloques([32m'psi-003'[39m[33m,[39m config[33m,[39m [32m'2026-05-18'[39m[33m,[39m [32m'2026-05-24'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 64 |[39m       expect(resultado)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m    |[39m                         [31m[1m^[22m[39m
+     [90m 65 |[39m     })[33m;[39m
+     [90m 66 |[39m
+     [90m 67 |[39m     test([32m'INVÁLIDO: Falla si error en Supabase'[39m[33m,[39m [36masync[39m () [33m=>[39m {[0m
+
+      at Object.toBe (tests/unit/repositorio/RepositorioConfiguracion.test.js:64:25)
+
+FAIL tests/integration/HU_Integracion.test.js (32.805 s)
+  ● Console
+
+    console.log
+      Eliminando configuración anterior para psicólogo: psi-001
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:37:15)
+
+    console.log
+      Insertando nuevas configuraciones: [
+        {
+          psicologo_id: 'psi-001',
+          dia_semana: 1,
+          hora_inicio: '09:00',
+          hora_fin: '13:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        },
+        {
+          psicologo_id: 'psi-001',
+          dia_semana: 2,
+          hora_inicio: '09:00',
+          hora_fin: '13:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        },
+        {
+          psicologo_id: 'psi-001',
+          dia_semana: 3,
+          hora_inicio: '09:00',
+          hora_fin: '13:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        },
+        {
+          psicologo_id: 'psi-001',
+          dia_semana: 4,
+          hora_inicio: '09:00',
+          hora_fin: '13:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        },
+        {
+          psicologo_id: 'psi-001',
+          dia_semana: 5,
+          hora_inicio: '09:00',
+          hora_fin: '13:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        }
+      ]
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:53:15)
+
+    console.error
+      Error en guardarYGenerarBloques: TypeError: clienteSupabase.from(...).insert(...).select is not a function
+          at Function.guardarYGenerarBloques (eval at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\integration\HU_Integracion.test.js:9:1), <anonymous>:57:10)
+          at processTicksAndRejections (node:internal/process/task_queues:105:5)
+          at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\integration\HU_Integracion.test.js:37:25)
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:118:15)
+      at Object.<anonymous> (tests/integration/HU_Integracion.test.js:37:25)
+
+    console.log
+      Eliminando configuración anterior para psicólogo: psi-002
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:37:15)
+
+    console.log
+      Insertando nuevas configuraciones: [
+        {
+          psicologo_id: 'psi-002',
+          dia_semana: 3,
+          hora_inicio: '10:00',
+          hora_fin: '11:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        }
+      ]
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:53:15)
+
+    console.error
+      Error en guardarYGenerarBloques: TypeError: clienteSupabase.from(...).insert(...).select is not a function
+          at Function.guardarYGenerarBloques (eval at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\integration\HU_Integracion.test.js:9:1), <anonymous>:57:10)
+          at processTicksAndRejections (node:internal/process/task_queues:105:5)
+          at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\integration\HU_Integracion.test.js:52:25)
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:118:15)
+      at Object.<anonymous> (tests/integration/HU_Integracion.test.js:52:25)
+
+    console.log
+      Eliminando configuración anterior para psicólogo: psi-003
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:37:15)
+
+    console.log
+      Insertando nuevas configuraciones: [
+        {
+          psicologo_id: 'psi-003',
+          dia_semana: 1,
+          hora_inicio: '10:00',
+          hora_fin: '10:00',
+          duracion_bloque_minutos: 60,
+          activo: true
+        }
+      ]
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:53:15)
+
+    console.error
+      Error en guardarYGenerarBloques: TypeError: clienteSupabase.from(...).insert(...).select is not a function
+          at Function.guardarYGenerarBloques (eval at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\integration\HU_Integracion.test.js:9:1), <anonymous>:57:10)
+          at processTicksAndRejections (node:internal/process/task_queues:105:5)
+          at Object.<anonymous> (C:\Users\USUARIO\Documents\5_SEMESTRE\Taller de Diseño de Software I\isw-213-project2\Code\tests\integration\HU_Integracion.test.js:67:25)
+
+      at Function.guardarYGenerarBloques (eval at Object.<anonymous> (tests/integration/HU_Integracion.test.js:9:1), <anonymous>:118:15)
+      at Object.<anonymous> (tests/integration/HU_Integracion.test.js:67:25)
+
+  ● Historias de Usuario - Integración › HU-01: Configuración del Horario › VÁLIDO: Guardar plantilla válida de 20 bloques semanales
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 36 |[39m
+     [90m 37 |[39m       [36mconst[39m resultado [33m=[39m [36mawait[39m global[33m.[39m[33mRepositorioConfiguracion[39m[33m.[39mguardarYGenerarBloques(psicologoId[33m,[39m configuraciones[33m,[39m [32m'2026-05-18'[39m[33m,[39m [32m'2026-05-22'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 38 |[39m       expect(resultado)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m    |[39m                         [31m[1m^[22m[39m
+     [90m 39 |[39m     })[33m;[39m
+     [90m 40 |[39m
+     [90m 41 |[39m     test([32m'LÍMITE: Bloque mínimo válido (1 bloque)'[39m[33m,[39m [36masync[39m () [33m=>[39m {[0m
+
+      at Object.toBe (tests/integration/HU_Integracion.test.js:38:25)
+
+  ● Historias de Usuario - Integración › HU-01: Configuración del Horario › LÍMITE: Bloque mínimo válido (1 bloque)
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 51 |[39m       [36mconst[39m config [33m=[39m [{ psicologo_id[33m:[39m [32m'psi-002'[39m[33m,[39m dia_semana[33m:[39m [35m3[39m[33m,[39m hora_inicio[33m:[39m [32m'10:00'[39m[33m,[39m hora_fin[33m:[39m [32m'11:00'[39m[33m,[39m duracion_bloque_minutos[33m:[39m [35m60[39m[33m,[39m activo[33m:[39m [36mtrue[39m }][33m;[39m
+     [90m 52 |[39m       [36mconst[39m resultado [33m=[39m [36mawait[39m global[33m.[39m[33mRepositorioConfiguracion[39m[33m.[39mguardarYGenerarBloques([32m'psi-002'[39m[33m,[39m config[33m,[39m [32m'2026-05-18'[39m[33m,[39m [32m'2026-05-24'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 53 |[39m       expect(resultado)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m    |[39m                         [31m[1m^[22m[39m
+     [90m 54 |[39m     })[33m;[39m
+     [90m 55 |[39m
+     [90m 56 |[39m     test([32m'INVÁLIDO: Rechaza bloque con duración 0'[39m[33m,[39m [36masync[39m () [33m=>[39m {[0m
+
+      at Object.toBe (tests/integration/HU_Integracion.test.js:53:25)
+
+  ● Historias de Usuario - Integración › HU-01: Configuración del Horario › INVÁLIDO: Rechaza bloque con duración 0
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 66 |[39m       [36mconst[39m config [33m=[39m [{ psicologo_id[33m:[39m [32m'psi-003'[39m[33m,[39m dia_semana[33m:[39m [35m1[39m[33m,[39m hora_inicio[33m:[39m [32m'10:00'[39m[33m,[39m hora_fin[33m:[39m [32m'10:00'[39m[33m,[39m duracion_bloque_minutos[33m:[39m [35m60[39m[33m,[39m activo[33m:[39m [36mtrue[39m }][33m;[39m
+     [90m 67 |[39m       [36mconst[39m resultado [33m=[39m [36mawait[39m global[33m.[39m[33mRepositorioConfiguracion[39m[33m.[39mguardarYGenerarBloques([32m'psi-003'[39m[33m,[39m config[33m,[39m [32m'2026-05-18'[39m[33m,[39m [32m'2026-05-24'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 68 |[39m       expect(resultado)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m    |[39m                         [31m[1m^[22m[39m
+     [90m 69 |[39m     })[33m;[39m
+     [90m 70 |[39m   })[33m;[39m
+     [90m 71 |[39m[0m
+
+      at Object.toBe (tests/integration/HU_Integracion.test.js:68:25)
+
+  ● Historias de Usuario - Integración › HU-02: Visualización de Calendario › VÁLIDO: Retorna bloques disponibles excluyendo reservados
+
+    thrown: "Exceeded timeout of 10000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+    [0m [90m 71 |[39m
+     [90m 72 |[39m   describe([32m'HU-02: Visualización de Calendario'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 73 |[39m     test([32m'VÁLIDO: Retorna bloques disponibles excluyendo reservados'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m    |[39m     [31m[1m^[22m[39m
+     [90m 74 |[39m       global[33m.[39mclienteSupabase[33m.[39m[36mfrom[39m [33m=[39m jest[33m.[39mfn(() [33m=>[39m ({
+     [90m 75 |[39m         select[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m
+     [90m 76 |[39m         eq[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m[0m
+
+      at test (tests/integration/HU_Integracion.test.js:73:5)
+      at describe (tests/integration/HU_Integracion.test.js:72:3)
+      at Object.describe (tests/integration/HU_Integracion.test.js:12:1)
+
+  ● Historias de Usuario - Integración › HU-02: Visualización de Calendario › LÍMITE: Un bloque disponible se muestra
+
+    thrown: "Exceeded timeout of 10000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+    [0m [90m 89 |[39m     })[33m;[39m
+     [90m 90 |[39m
+    [31m[1m>[22m[39m[90m 91 |[39m     test([32m'LÍMITE: Un bloque disponible se muestra'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m    |[39m     [31m[1m^[22m[39m
+     [90m 92 |[39m       global[33m.[39mclienteSupabase[33m.[39m[36mfrom[39m [33m=[39m jest[33m.[39mfn(() [33m=>[39m ({
+     [90m 93 |[39m         select[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m
+     [90m 94 |[39m         eq[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m[0m
+
+      at test (tests/integration/HU_Integracion.test.js:91:5)
+      at describe (tests/integration/HU_Integracion.test.js:72:3)
+      at Object.describe (tests/integration/HU_Integracion.test.js:12:1)
+
+  ● Historias de Usuario - Integración › HU-02: Visualización de Calendario › INVÁLIDO: Filtra citas sin bloque_horario
+
+    thrown: "Exceeded timeout of 10000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+    [0m [90m 106 |[39m     })[33m;[39m
+     [90m 107 |[39m
+    [31m[1m>[22m[39m[90m 108 |[39m     test([32m'INVÁLIDO: Filtra citas sin bloque_horario'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m     |[39m     [31m[1m^[22m[39m
+     [90m 109 |[39m       global[33m.[39mclienteSupabase[33m.[39m[36mfrom[39m [33m=[39m jest[33m.[39mfn(() [33m=>[39m ({
+     [90m 110 |[39m         select[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m
+     [90m 111 |[39m         eq[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m[0m
+
+      at test (tests/integration/HU_Integracion.test.js:108:5)
+      at describe (tests/integration/HU_Integracion.test.js:72:3)
+      at Object.describe (tests/integration/HU_Integracion.test.js:12:1)
+
+FAIL tests/unit/repositorio/RepositorioCitasPsicologo.test.js (42.72 s)
+  ● RepositorioCitasPsicologo › obtenerPorPeriodo › VÁLIDO: Retorna bloques disponibles excluyendo reservados
+
+    thrown: "Exceeded timeout of 10000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+    [0m [90m 17 |[39m
+     [90m 18 |[39m   describe([32m'obtenerPorPeriodo'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 19 |[39m     test([32m'VÁLIDO: Retorna bloques disponibles excluyendo reservados'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m    |[39m     [31m[1m^[22m[39m
+     [90m 20 |[39m       global[33m.[39mclienteSupabase[33m.[39m[36mfrom[39m [33m=[39m jest[33m.[39mfn(() [33m=>[39m ({
+     [90m 21 |[39m         select[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m
+     [90m 22 |[39m         eq[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m[0m
+
+      at test (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:19:5)
+      at describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:18:3)
+      at Object.describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:11:1)
+
+  ● RepositorioCitasPsicologo › obtenerPorPeriodo › LÍMITE: Un bloque disponible se retorna sin errores
+
+    thrown: "Exceeded timeout of 10000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+    [0m [90m 35 |[39m     })[33m;[39m
+     [90m 36 |[39m
+    [31m[1m>[22m[39m[90m 37 |[39m     test([32m'LÍMITE: Un bloque disponible se retorna sin errores'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m    |[39m     [31m[1m^[22m[39m
+     [90m 38 |[39m       global[33m.[39mclienteSupabase[33m.[39m[36mfrom[39m [33m=[39m jest[33m.[39mfn(() [33m=>[39m ({
+     [90m 39 |[39m         select[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m
+     [90m 40 |[39m         eq[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m[0m
+
+      at test (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:37:5)
+      at describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:18:3)
+      at Object.describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:11:1)
+
+  ● RepositorioCitasPsicologo › obtenerPorPeriodo › INVÁLIDO: Filtra citas sin bloque_horario asociado
+
+    thrown: "Exceeded timeout of 10000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+    [0m [90m 52 |[39m     })[33m;[39m
+     [90m 53 |[39m
+    [31m[1m>[22m[39m[90m 54 |[39m     test([32m'INVÁLIDO: Filtra citas sin bloque_horario asociado'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m    |[39m     [31m[1m^[22m[39m
+     [90m 55 |[39m       global[33m.[39mclienteSupabase[33m.[39m[36mfrom[39m [33m=[39m jest[33m.[39mfn(() [33m=>[39m ({
+     [90m 56 |[39m         select[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m
+     [90m 57 |[39m         eq[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m[0m
+
+      at test (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:54:5)
+      at describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:18:3)
+      at Object.describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:11:1)
+
+  ● RepositorioCitasPsicologo › obtenerPorPeriodo › INVÁLIDO: Retorna array vacío si no hay citas
+
+    thrown: "Exceeded timeout of 10000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+    [0m [90m 69 |[39m     })[33m;[39m
+     [90m 70 |[39m
+    [31m[1m>[22m[39m[90m 71 |[39m     test([32m'INVÁLIDO: Retorna array vacío si no hay citas'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m    |[39m     [31m[1m^[22m[39m
+     [90m 72 |[39m       global[33m.[39mclienteSupabase[33m.[39m[36mfrom[39m [33m=[39m jest[33m.[39mfn(() [33m=>[39m ({
+     [90m 73 |[39m         select[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m
+     [90m 74 |[39m         eq[33m:[39m jest[33m.[39mfn()[33m.[39mmockReturnThis()[33m,[39m[0m
+
+      at test (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:71:5)
+      at describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:18:3)
+      at Object.describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:11:1)
+
+Test Suites: 4 failed, 4 passed, 8 total
+Tests:       13 failed, 39 passed, 52 total
+Snapshots:   0 total
+Time:        44.285 s
+Ran all test suites.
+{"numFailedTestSuites":4,"numFailedTests":13,"numPassedTestSuites":4,"numPassedTests":39,"numPendingTestSuites":0,"numPendingTests":0,"numRuntimeErrorTestSuites":1,"numTodoTests":0,"numTotalTestSuites":8,"numTotalTests":52,"openHandles":[],"snapshot":{"added":0,"didUpdate":false,"failure":false,"filesAdded":0,"filesRemoved":0,"filesRemovedList":[],"filesUnmatched":0,"filesUpdated":0,"matched":0,"total":0,"unchecked":0,"uncheckedKeysByFile":[],"unmatched":0,"updated":0},"startTime":1779199986098,"success":false,"testResults":[{"assertionResults":[{"ancestorTitles":["RepositorioPacientes","actualizarBloqueo"],"duration":35,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioPacientes actualizarBloqueo VÁLIDO: Bloquea paciente correctamente","invocations":1,"location":null,"numPassingAsserts":2,"retryReasons":[],"status":"passed","title":"VÁLIDO: Bloquea paciente correctamente"},{"ancestorTitles":["RepositorioPacientes","actualizarBloqueo"],"duration":3,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioPacientes actualizarBloqueo VÁLIDO: Desbloquea paciente correctamente","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Desbloquea paciente correctamente"},{"ancestorTitles":["RepositorioPacientes","actualizarBloqueo"],"duration":3,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioPacientes actualizarBloqueo LÍMITE: Bloquea paciente recién agregado","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"LÍMITE: Bloquea paciente recién agregado"},{"ancestorTitles":["RepositorioPacientes","actualizarBloqueo"],"duration":2,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioPacientes actualizarBloqueo INVÁLIDO: Retorna false si Supabase falla","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: Retorna false si Supabase falla"},{"ancestorTitles":["RepositorioPacientes","actualizarBloqueo"],"duration":3,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioPacientes actualizarBloqueo INVÁLIDO: No persiste si BD rechaza","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: No persiste si BD rechaza"}],"endTime":1779199990146,"message":"","name":"C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioPacientes.test.js","startTime":1779199987563,"status":"passed","summary":""},{"assertionResults":[],"coverage":{},"endTime":1779200030387,"message":"  ● Test suite failed to run\n\n    ReferenceError: RepositorioNotificaciones is not defined\n\n      at Function.<static_initializer> (eval at Object.<anonymous> (tests/unit/gestor/GestorNotificaciones.test.js:9:1), <anonymous>:3:25)\n      at eval (eval at Object.<anonymous> (tests/unit/gestor/GestorNotificaciones.test.js:9:1), <anonymous>:1:1)\n      at Object.eval (tests/unit/gestor/GestorNotificaciones.test.js:9:1)\n","name":"C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\gestor\\GestorNotificaciones.test.js","startTime":1779200030387,"status":"failed","summary":""},{"assertionResults":[{"ancestorTitles":["GestorHorarios"],"duration":41,"failureDetails":[],"failureMessages":[],"fullName":"GestorHorarios VÁLIDO: Procesa evento de guardar horario correctamente","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Procesa evento de guardar horario correctamente"},{"ancestorTitles":["GestorHorarios"],"duration":5,"failureDetails":[],"failureMessages":[],"fullName":"GestorHorarios LÍMITE: Valida fechas de inicio y fin","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"LÍMITE: Valida fechas de inicio y fin"},{"ancestorTitles":["GestorHorarios"],"duration":2,"failureDetails":[],"failureMessages":[],"fullName":"GestorHorarios INVÁLIDO: Requiere al menos un día con horarios","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: Requiere al menos un día con horarios"},{"ancestorTitles":["GestorHorarios"],"duration":2,"failureDetails":[],"failureMessages":[],"fullName":"GestorHorarios INVÁLIDO: Valida que fechas estén definidas","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: Valida que fechas estén definidas"}],"endTime":1779199990211,"message":"","name":"C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\gestor\\GestorHorarios.test.js","startTime":1779199987602,"status":"passed","summary":""},{"assertionResults":[{"ancestorTitles":["GestorRestriccion"],"duration":40,"failureDetails":[],"failureMessages":[],"fullName":"GestorRestriccion VÁLIDO: Bloquea paciente correctamente","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Bloquea paciente correctamente"},{"ancestorTitles":["GestorRestriccion"],"duration":3,"failureDetails":[],"failureMessages":[],"fullName":"GestorRestriccion VÁLIDO: Desbloquea paciente correctamente","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Desbloquea paciente correctamente"},{"ancestorTitles":["GestorRestriccion"],"duration":3,"failureDetails":[],"failureMessages":[],"fullName":"GestorRestriccion LÍMITE: Bloquea paciente recién agregado","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"LÍMITE: Bloquea paciente recién agregado"},{"ancestorTitles":["GestorRestriccion"],"duration":3,"failureDetails":[],"failureMessages":[],"fullName":"GestorRestriccion INVÁLIDO: No bloquea si falla actualización","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: No bloquea si falla actualización"},{"ancestorTitles":["GestorRestriccion"],"duration":3,"failureDetails":[],"failureMessages":[],"fullName":"GestorRestriccion INVÁLIDO: Valida bloqueo en backend","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: Valida bloqueo en backend"}],"endTime":1779199990200,"message":"","name":"C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\gestor\\GestorRestriccion.test.js","startTime":1779199987577,"status":"passed","summary":""},{"assertionResults":[{"ancestorTitles":["EstadoPsicologo","obtener"],"duration":28,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo obtener VÁLIDO: retorna valor establecido previamente","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: retorna valor establecido previamente"},{"ancestorTitles":["EstadoPsicologo","obtener"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo obtener LÍMITE: retorna undefined cuando clave no existe","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"LÍMITE: retorna undefined cuando clave no existe"},{"ancestorTitles":["EstadoPsicologo","obtener"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo obtener INVÁLIDO: no retorna valores de otros ciclos","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: no retorna valores de otros ciclos"},{"ancestorTitles":["EstadoPsicologo","establecer"],"duration":2,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo establecer VÁLIDO: almacena y recupera psicologoId","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: almacena y recupera psicologoId"},{"ancestorTitles":["EstadoPsicologo","establecer"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo establecer VÁLIDO: sobrescribe valor anterior","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: sobrescribe valor anterior"},{"ancestorTitles":["EstadoPsicologo","establecer"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo establecer LÍMITE: acepta null como valor válido","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"LÍMITE: acepta null como valor válido"},{"ancestorTitles":["EstadoPsicologo","establecer"],"duration":0,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo establecer INVÁLIDO: mantiene integridad con múltiples claves","invocations":1,"location":null,"numPassingAsserts":2,"retryReasons":[],"status":"passed","title":"INVÁLIDO: mantiene integridad con múltiples claves"},{"ancestorTitles":["EstadoPsicologo","citasCargadas"],"duration":0,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo citasCargadas VÁLIDO: inicializa como array vacío","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: inicializa como array vacío"},{"ancestorTitles":["EstadoPsicologo","citasCargadas"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"EstadoPsicologo citasCargadas VÁLIDO: puede almacenar array de citas","invocations":1,"location":null,"numPassingAsserts":2,"retryReasons":[],"status":"passed","title":"VÁLIDO: puede almacenar array de citas"}],"endTime":1779199990212,"message":"","name":"C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\estado\\EstadoPsicologo.test.js","startTime":1779199987594,"status":"passed","summary":""},{"assertionResults":[{"ancestorTitles":["RepositorioConfiguracion","guardarYGenerarBloques"],"duration":99,"failureDetails":[{"matcherResult":{"actual":false,"expected":true,"message":"expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false","name":"toBe","pass":false}}],"failureMessages":["Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n    at Object.toBe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioConfiguracion.test.js:34:25)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"],"fullName":"RepositorioConfiguracion guardarYGenerarBloques VÁLIDO: Guarda configuración válida de bloques","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"VÁLIDO: Guarda configuración válida de bloques"},{"ancestorTitles":["RepositorioConfiguracion","guardarYGenerarBloques"],"duration":6,"failureDetails":[{"matcherResult":{"actual":false,"expected":true,"message":"expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false","name":"toBe","pass":false}}],"failureMessages":["Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n    at Object.toBe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioConfiguracion.test.js:49:25)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"],"fullName":"RepositorioConfiguracion guardarYGenerarBloques LÍMITE: Guarda bloque mínimo válido","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"LÍMITE: Guarda bloque mínimo válido"},{"ancestorTitles":["RepositorioConfiguracion","guardarYGenerarBloques"],"duration":9,"failureDetails":[{"matcherResult":{"actual":false,"expected":true,"message":"expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false","name":"toBe","pass":false}}],"failureMessages":["Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n    at Object.toBe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioConfiguracion.test.js:64:25)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"],"fullName":"RepositorioConfiguracion guardarYGenerarBloques INVÁLIDO: Rechaza bloque sin duración","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"INVÁLIDO: Rechaza bloque sin duración"},{"ancestorTitles":["RepositorioConfiguracion","guardarYGenerarBloques"],"duration":9,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioConfiguracion guardarYGenerarBloques INVÁLIDO: Falla si error en Supabase","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: Falla si error en Supabase"},{"ancestorTitles":["RepositorioConfiguracion","obtener"],"duration":2,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioConfiguracion obtener VÁLIDO: Retorna configuraciones del psicólogo","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Retorna configuraciones del psicólogo"},{"ancestorTitles":["RepositorioConfiguracion","obtener"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioConfiguracion obtener LÍMITE: Retorna array vacío si no hay config","invocations":1,"location":null,"numPassingAsserts":2,"retryReasons":[],"status":"passed","title":"LÍMITE: Retorna array vacío si no hay config"},{"ancestorTitles":["RepositorioConfiguracion","obtener"],"duration":2,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioConfiguracion obtener INVÁLIDO: No mezcla config de otros psicólogos","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: No mezcla config de otros psicólogos"}],"endTime":1779199990292,"message":"  ● RepositorioConfiguracion › guardarYGenerarBloques › VÁLIDO: Guarda configuración válida de bloques\n\n    expect(received).toBe(expected) // Object.is equality\n\n    Expected: true\n    Received: false\n\n    \u001b[0m \u001b[90m 32 |\u001b[39m\n     \u001b[90m 33 |\u001b[39m       \u001b[36mconst\u001b[39m resultado \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[33mRepositorioConfiguracion\u001b[39m\u001b[33m.\u001b[39mguardarYGenerarBloques(\u001b[32m'psi-001'\u001b[39m\u001b[33m,\u001b[39m config\u001b[33m,\u001b[39m \u001b[32m'2026-05-18'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'2026-05-24'\u001b[39m)\u001b[33m;\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 34 |\u001b[39m       expect(resultado)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n     \u001b[90m    |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 35 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 36 |\u001b[39m\n     \u001b[90m 37 |\u001b[39m     test(\u001b[32m'LÍMITE: Guarda bloque mínimo válido'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\n      at Object.toBe (tests/unit/repositorio/RepositorioConfiguracion.test.js:34:25)\n\n  ● RepositorioConfiguracion › guardarYGenerarBloques › LÍMITE: Guarda bloque mínimo válido\n\n    expect(received).toBe(expected) // Object.is equality\n\n    Expected: true\n    Received: false\n\n    \u001b[0m \u001b[90m 47 |\u001b[39m       \u001b[36mconst\u001b[39m config \u001b[33m=\u001b[39m [{ psicologo_id\u001b[33m:\u001b[39m \u001b[32m'psi-002'\u001b[39m\u001b[33m,\u001b[39m dia_semana\u001b[33m:\u001b[39m \u001b[35m3\u001b[39m\u001b[33m,\u001b[39m hora_inicio\u001b[33m:\u001b[39m \u001b[32m'10:00'\u001b[39m\u001b[33m,\u001b[39m hora_fin\u001b[33m:\u001b[39m \u001b[32m'11:00'\u001b[39m\u001b[33m,\u001b[39m duracion_bloque_minutos\u001b[33m:\u001b[39m \u001b[35m60\u001b[39m\u001b[33m,\u001b[39m activo\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }]\u001b[33m;\u001b[39m\n     \u001b[90m 48 |\u001b[39m       \u001b[36mconst\u001b[39m resultado \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[33mRepositorioConfiguracion\u001b[39m\u001b[33m.\u001b[39mguardarYGenerarBloques(\u001b[32m'psi-002'\u001b[39m\u001b[33m,\u001b[39m config\u001b[33m,\u001b[39m \u001b[32m'2026-05-18'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'2026-05-24'\u001b[39m)\u001b[33m;\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 49 |\u001b[39m       expect(resultado)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n     \u001b[90m    |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 50 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 51 |\u001b[39m\n     \u001b[90m 52 |\u001b[39m     test(\u001b[32m'INVÁLIDO: Rechaza bloque sin duración'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\n      at Object.toBe (tests/unit/repositorio/RepositorioConfiguracion.test.js:49:25)\n\n  ● RepositorioConfiguracion › guardarYGenerarBloques › INVÁLIDO: Rechaza bloque sin duración\n\n    expect(received).toBe(expected) // Object.is equality\n\n    Expected: true\n    Received: false\n\n    \u001b[0m \u001b[90m 62 |\u001b[39m       \u001b[36mconst\u001b[39m config \u001b[33m=\u001b[39m [{ psicologo_id\u001b[33m:\u001b[39m \u001b[32m'psi-003'\u001b[39m\u001b[33m,\u001b[39m dia_semana\u001b[33m:\u001b[39m \u001b[35m1\u001b[39m\u001b[33m,\u001b[39m hora_inicio\u001b[33m:\u001b[39m \u001b[32m'10:00'\u001b[39m\u001b[33m,\u001b[39m hora_fin\u001b[33m:\u001b[39m \u001b[32m'10:00'\u001b[39m\u001b[33m,\u001b[39m duracion_bloque_minutos\u001b[33m:\u001b[39m \u001b[35m60\u001b[39m\u001b[33m,\u001b[39m activo\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }]\u001b[33m;\u001b[39m\n     \u001b[90m 63 |\u001b[39m       \u001b[36mconst\u001b[39m resultado \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[33mRepositorioConfiguracion\u001b[39m\u001b[33m.\u001b[39mguardarYGenerarBloques(\u001b[32m'psi-003'\u001b[39m\u001b[33m,\u001b[39m config\u001b[33m,\u001b[39m \u001b[32m'2026-05-18'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'2026-05-24'\u001b[39m)\u001b[33m;\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 64 |\u001b[39m       expect(resultado)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n     \u001b[90m    |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 65 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 66 |\u001b[39m\n     \u001b[90m 67 |\u001b[39m     test(\u001b[32m'INVÁLIDO: Falla si error en Supabase'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\n      at Object.toBe (tests/unit/repositorio/RepositorioConfiguracion.test.js:64:25)\n","name":"C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioConfiguracion.test.js","startTime":1779199987592,"status":"failed","summary":""},{"assertionResults":[{"ancestorTitles":["Historias de Usuario - Integración","HU-01: Configuración del Horario"],"duration":138,"failureDetails":[{"matcherResult":{"actual":false,"expected":true,"message":"expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false","name":"toBe","pass":false}}],"failureMessages":["Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n    at Object.toBe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:38:25)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"],"fullName":"Historias de Usuario - Integración HU-01: Configuración del Horario VÁLIDO: Guardar plantilla válida de 20 bloques semanales","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"VÁLIDO: Guardar plantilla válida de 20 bloques semanales"},{"ancestorTitles":["Historias de Usuario - Integración","HU-01: Configuración del Horario"],"duration":5,"failureDetails":[{"matcherResult":{"actual":false,"expected":true,"message":"expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false","name":"toBe","pass":false}}],"failureMessages":["Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n    at Object.toBe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:53:25)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"],"fullName":"Historias de Usuario - Integración HU-01: Configuración del Horario LÍMITE: Bloque mínimo válido (1 bloque)","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"LÍMITE: Bloque mínimo válido (1 bloque)"},{"ancestorTitles":["Historias de Usuario - Integración","HU-01: Configuración del Horario"],"duration":4,"failureDetails":[{"matcherResult":{"actual":false,"expected":true,"message":"expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false","name":"toBe","pass":false}}],"failureMessages":["Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n    at Object.toBe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:68:25)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)"],"fullName":"Historias de Usuario - Integración HU-01: Configuración del Horario INVÁLIDO: Rechaza bloque con duración 0","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"INVÁLIDO: Rechaza bloque con duración 0"},{"ancestorTitles":["Historias de Usuario - Integración","HU-02: Visualización de Calendario"],"duration":10004,"failureDetails":[{"message":"thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\""}],"failureMessages":["Error: thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n    at test (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:73:5)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:72:3)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at Object.describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:12:1)\n    at Runtime._execModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runTestInternal (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"],"fullName":"Historias de Usuario - Integración HU-02: Visualización de Calendario VÁLIDO: Retorna bloques disponibles excluyendo reservados","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"VÁLIDO: Retorna bloques disponibles excluyendo reservados"},{"ancestorTitles":["Historias de Usuario - Integración","HU-02: Visualización de Calendario"],"duration":10010,"failureDetails":[{"message":"thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\""}],"failureMessages":["Error: thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n    at test (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:91:5)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:72:3)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at Object.describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:12:1)\n    at Runtime._execModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runTestInternal (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"],"fullName":"Historias de Usuario - Integración HU-02: Visualización de Calendario LÍMITE: Un bloque disponible se muestra","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"LÍMITE: Un bloque disponible se muestra"},{"ancestorTitles":["Historias de Usuario - Integración","HU-02: Visualización de Calendario"],"duration":10010,"failureDetails":[{"message":"thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\""}],"failureMessages":["Error: thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n    at test (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:108:5)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:72:3)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at Object.describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js:12:1)\n    at Runtime._execModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runTestInternal (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"],"fullName":"Historias de Usuario - Integración HU-02: Visualización de Calendario INVÁLIDO: Filtra citas sin bloque_horario","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"INVÁLIDO: Filtra citas sin bloque_horario"},{"ancestorTitles":["Historias de Usuario - Integración","HU-03: Reserva de Cita"],"duration":2,"failureDetails":[],"failureMessages":[],"fullName":"Historias de Usuario - Integración HU-03: Reserva de Cita VÁLIDO: Notifica a psicólogo de nuevo turno","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Notifica a psicólogo de nuevo turno"},{"ancestorTitles":["Historias de Usuario - Integración","HU-03: Reserva de Cita"],"duration":3,"failureDetails":[],"failureMessages":[],"fullName":"Historias de Usuario - Integración HU-03: Reserva de Cita INVÁLIDO: No crea notificación sin psicologoId","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: No crea notificación sin psicologoId"}],"endTime":1779200020353,"message":"  ● Historias de Usuario - Integración › HU-01: Configuración del Horario › VÁLIDO: Guardar plantilla válida de 20 bloques semanales\n\n    expect(received).toBe(expected) // Object.is equality\n\n    Expected: true\n    Received: false\n\n    \u001b[0m \u001b[90m 36 |\u001b[39m\n     \u001b[90m 37 |\u001b[39m       \u001b[36mconst\u001b[39m resultado \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m global\u001b[33m.\u001b[39m\u001b[33mRepositorioConfiguracion\u001b[39m\u001b[33m.\u001b[39mguardarYGenerarBloques(psicologoId\u001b[33m,\u001b[39m configuraciones\u001b[33m,\u001b[39m \u001b[32m'2026-05-18'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'2026-05-22'\u001b[39m)\u001b[33m;\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m       expect(resultado)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n     \u001b[90m    |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 39 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 40 |\u001b[39m\n     \u001b[90m 41 |\u001b[39m     test(\u001b[32m'LÍMITE: Bloque mínimo válido (1 bloque)'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\n      at Object.toBe (tests/integration/HU_Integracion.test.js:38:25)\n\n  ● Historias de Usuario - Integración › HU-01: Configuración del Horario › LÍMITE: Bloque mínimo válido (1 bloque)\n\n    expect(received).toBe(expected) // Object.is equality\n\n    Expected: true\n    Received: false\n\n    \u001b[0m \u001b[90m 51 |\u001b[39m       \u001b[36mconst\u001b[39m config \u001b[33m=\u001b[39m [{ psicologo_id\u001b[33m:\u001b[39m \u001b[32m'psi-002'\u001b[39m\u001b[33m,\u001b[39m dia_semana\u001b[33m:\u001b[39m \u001b[35m3\u001b[39m\u001b[33m,\u001b[39m hora_inicio\u001b[33m:\u001b[39m \u001b[32m'10:00'\u001b[39m\u001b[33m,\u001b[39m hora_fin\u001b[33m:\u001b[39m \u001b[32m'11:00'\u001b[39m\u001b[33m,\u001b[39m duracion_bloque_minutos\u001b[33m:\u001b[39m \u001b[35m60\u001b[39m\u001b[33m,\u001b[39m activo\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }]\u001b[33m;\u001b[39m\n     \u001b[90m 52 |\u001b[39m       \u001b[36mconst\u001b[39m resultado \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m global\u001b[33m.\u001b[39m\u001b[33mRepositorioConfiguracion\u001b[39m\u001b[33m.\u001b[39mguardarYGenerarBloques(\u001b[32m'psi-002'\u001b[39m\u001b[33m,\u001b[39m config\u001b[33m,\u001b[39m \u001b[32m'2026-05-18'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'2026-05-24'\u001b[39m)\u001b[33m;\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 53 |\u001b[39m       expect(resultado)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n     \u001b[90m    |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 54 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 55 |\u001b[39m\n     \u001b[90m 56 |\u001b[39m     test(\u001b[32m'INVÁLIDO: Rechaza bloque con duración 0'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\n      at Object.toBe (tests/integration/HU_Integracion.test.js:53:25)\n\n  ● Historias de Usuario - Integración › HU-01: Configuración del Horario › INVÁLIDO: Rechaza bloque con duración 0\n\n    expect(received).toBe(expected) // Object.is equality\n\n    Expected: true\n    Received: false\n\n    \u001b[0m \u001b[90m 66 |\u001b[39m       \u001b[36mconst\u001b[39m config \u001b[33m=\u001b[39m [{ psicologo_id\u001b[33m:\u001b[39m \u001b[32m'psi-003'\u001b[39m\u001b[33m,\u001b[39m dia_semana\u001b[33m:\u001b[39m \u001b[35m1\u001b[39m\u001b[33m,\u001b[39m hora_inicio\u001b[33m:\u001b[39m \u001b[32m'10:00'\u001b[39m\u001b[33m,\u001b[39m hora_fin\u001b[33m:\u001b[39m \u001b[32m'10:00'\u001b[39m\u001b[33m,\u001b[39m duracion_bloque_minutos\u001b[33m:\u001b[39m \u001b[35m60\u001b[39m\u001b[33m,\u001b[39m activo\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }]\u001b[33m;\u001b[39m\n     \u001b[90m 67 |\u001b[39m       \u001b[36mconst\u001b[39m resultado \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m global\u001b[33m.\u001b[39m\u001b[33mRepositorioConfiguracion\u001b[39m\u001b[33m.\u001b[39mguardarYGenerarBloques(\u001b[32m'psi-003'\u001b[39m\u001b[33m,\u001b[39m config\u001b[33m,\u001b[39m \u001b[32m'2026-05-18'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'2026-05-24'\u001b[39m)\u001b[33m;\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 68 |\u001b[39m       expect(resultado)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n     \u001b[90m    |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 69 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 70 |\u001b[39m   })\u001b[33m;\u001b[39m\n     \u001b[90m 71 |\u001b[39m\u001b[0m\n\n      at Object.toBe (tests/integration/HU_Integracion.test.js:68:25)\n\n  ● Historias de Usuario - Integración › HU-02: Visualización de Calendario › VÁLIDO: Retorna bloques disponibles excluyendo reservados\n\n    thrown: \"Exceeded timeout of 10000 ms for a test.\n    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n\n    \u001b[0m \u001b[90m 71 |\u001b[39m\n     \u001b[90m 72 |\u001b[39m   describe(\u001b[32m'HU-02: Visualización de Calendario'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 73 |\u001b[39m     test(\u001b[32m'VÁLIDO: Retorna bloques disponibles excluyendo reservados'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n     \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 74 |\u001b[39m       global\u001b[33m.\u001b[39mclienteSupabase\u001b[33m.\u001b[39m\u001b[36mfrom\u001b[39m \u001b[33m=\u001b[39m jest\u001b[33m.\u001b[39mfn(() \u001b[33m=>\u001b[39m ({\n     \u001b[90m 75 |\u001b[39m         select\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\n     \u001b[90m 76 |\u001b[39m         eq\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\u001b[0m\n\n      at test (tests/integration/HU_Integracion.test.js:73:5)\n      at describe (tests/integration/HU_Integracion.test.js:72:3)\n      at Object.describe (tests/integration/HU_Integracion.test.js:12:1)\n\n  ● Historias de Usuario - Integración › HU-02: Visualización de Calendario › LÍMITE: Un bloque disponible se muestra\n\n    thrown: \"Exceeded timeout of 10000 ms for a test.\n    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n\n    \u001b[0m \u001b[90m 89 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 90 |\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 91 |\u001b[39m     test(\u001b[32m'LÍMITE: Un bloque disponible se muestra'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n     \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 92 |\u001b[39m       global\u001b[33m.\u001b[39mclienteSupabase\u001b[33m.\u001b[39m\u001b[36mfrom\u001b[39m \u001b[33m=\u001b[39m jest\u001b[33m.\u001b[39mfn(() \u001b[33m=>\u001b[39m ({\n     \u001b[90m 93 |\u001b[39m         select\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\n     \u001b[90m 94 |\u001b[39m         eq\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\u001b[0m\n\n      at test (tests/integration/HU_Integracion.test.js:91:5)\n      at describe (tests/integration/HU_Integracion.test.js:72:3)\n      at Object.describe (tests/integration/HU_Integracion.test.js:12:1)\n\n  ● Historias de Usuario - Integración › HU-02: Visualización de Calendario › INVÁLIDO: Filtra citas sin bloque_horario\n\n    thrown: \"Exceeded timeout of 10000 ms for a test.\n    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n\n    \u001b[0m \u001b[90m 106 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 107 |\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 108 |\u001b[39m     test(\u001b[32m'INVÁLIDO: Filtra citas sin bloque_horario'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n     \u001b[90m     |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 109 |\u001b[39m       global\u001b[33m.\u001b[39mclienteSupabase\u001b[33m.\u001b[39m\u001b[36mfrom\u001b[39m \u001b[33m=\u001b[39m jest\u001b[33m.\u001b[39mfn(() \u001b[33m=>\u001b[39m ({\n     \u001b[90m 110 |\u001b[39m         select\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\n     \u001b[90m 111 |\u001b[39m         eq\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\u001b[0m\n\n      at test (tests/integration/HU_Integracion.test.js:108:5)\n      at describe (tests/integration/HU_Integracion.test.js:72:3)\n      at Object.describe (tests/integration/HU_Integracion.test.js:12:1)\n","name":"C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\integration\\HU_Integracion.test.js","startTime":1779199987548,"status":"failed","summary":""},{"assertionResults":[{"ancestorTitles":["RepositorioCitasPsicologo","obtenerPorPeriodo"],"duration":10038,"failureDetails":[{"message":"thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\""}],"failureMessages":["Error: thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n    at test (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:19:5)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:18:3)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at Object.describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:11:1)\n    at Runtime._execModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runTestInternal (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"],"fullName":"RepositorioCitasPsicologo obtenerPorPeriodo VÁLIDO: Retorna bloques disponibles excluyendo reservados","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"VÁLIDO: Retorna bloques disponibles excluyendo reservados"},{"ancestorTitles":["RepositorioCitasPsicologo","obtenerPorPeriodo"],"duration":10002,"failureDetails":[{"message":"thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\""}],"failureMessages":["Error: thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n    at test (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:37:5)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:18:3)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at Object.describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:11:1)\n    at Runtime._execModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runTestInternal (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"],"fullName":"RepositorioCitasPsicologo obtenerPorPeriodo LÍMITE: Un bloque disponible se retorna sin errores","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"LÍMITE: Un bloque disponible se retorna sin errores"},{"ancestorTitles":["RepositorioCitasPsicologo","obtenerPorPeriodo"],"duration":10011,"failureDetails":[{"message":"thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\""}],"failureMessages":["Error: thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n    at test (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:54:5)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:18:3)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at Object.describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:11:1)\n    at Runtime._execModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runTestInternal (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"],"fullName":"RepositorioCitasPsicologo obtenerPorPeriodo INVÁLIDO: Filtra citas sin bloque_horario asociado","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"INVÁLIDO: Filtra citas sin bloque_horario asociado"},{"ancestorTitles":["RepositorioCitasPsicologo","obtenerPorPeriodo"],"duration":10015,"failureDetails":[{"message":"thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\""}],"failureMessages":["Error: thrown: \"Exceeded timeout of 10000 ms for a test.\nAdd a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n    at test (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:71:5)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:18:3)\n    at _dispatchDescribe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:91:26)\n    at describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\index.js:55:5)\n    at Object.describe (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js:11:1)\n    at Runtime._execModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1439:24)\n    at Runtime._loadModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:1022:12)\n    at Runtime.requireModule (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runtime\\build\\index.js:882:12)\n    at jestAdapter (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:77:13)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at runTestInternal (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\node_modules\\jest-runner\\build\\testWorker.js:106:12)"],"fullName":"RepositorioCitasPsicologo obtenerPorPeriodo INVÁLIDO: Retorna array vacío si no hay citas","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"INVÁLIDO: Retorna array vacío si no hay citas"},{"ancestorTitles":["RepositorioCitasPsicologo","crearNotificacion"],"duration":2,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo crearNotificacion VÁLIDO: Crea notificación de cancelación","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Crea notificación de cancelación"},{"ancestorTitles":["RepositorioCitasPsicologo","crearNotificacion"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo crearNotificacion LÍMITE: No lanza error si notificación falla","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"LÍMITE: No lanza error si notificación falla"},{"ancestorTitles":["RepositorioCitasPsicologo","crearNotificacion"],"duration":0,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo crearNotificacion INVÁLIDO: No crea con datos faltantes","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"passed","title":"INVÁLIDO: No crea con datos faltantes"},{"ancestorTitles":["RepositorioCitasPsicologo","crearNotificacionNuevoTurno"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo crearNotificacionNuevoTurno VÁLIDO: Crea notificación para psicólogo","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Crea notificación para psicólogo"},{"ancestorTitles":["RepositorioCitasPsicologo","crearNotificacionNuevoTurno"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo crearNotificacionNuevoTurno LÍMITE: Retorna false si faltan parámetros","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"LÍMITE: Retorna false si faltan parámetros"},{"ancestorTitles":["RepositorioCitasPsicologo","crearNotificacionNuevoTurno"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo crearNotificacionNuevoTurno INVÁLIDO: No crea duplicado","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: No crea duplicado"},{"ancestorTitles":["RepositorioCitasPsicologo","cancelarConNotificacion"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo cancelarConNotificacion VÁLIDO: Cancela cita y notifica paciente","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"VÁLIDO: Cancela cita y notifica paciente"},{"ancestorTitles":["RepositorioCitasPsicologo","cancelarConNotificacion"],"duration":0,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo cancelarConNotificacion LÍMITE: Cancela última cita del día sin errores","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"LÍMITE: Cancela última cita del día sin errores"},{"ancestorTitles":["RepositorioCitasPsicologo","cancelarConNotificacion"],"duration":0,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo cancelarConNotificacion INVÁLIDO: No cancela si cita no existe","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: No cancela si cita no existe"},{"ancestorTitles":["RepositorioCitasPsicologo","cancelarConNotificacion"],"duration":1,"failureDetails":[],"failureMessages":[],"fullName":"RepositorioCitasPsicologo cancelarConNotificacion INVÁLIDO: No cancela si BD retorna error","invocations":1,"location":null,"numPassingAsserts":1,"retryReasons":[],"status":"passed","title":"INVÁLIDO: No cancela si BD retorna error"}],"endTime":1779200030322,"message":"  ● RepositorioCitasPsicologo › obtenerPorPeriodo › VÁLIDO: Retorna bloques disponibles excluyendo reservados\n\n    thrown: \"Exceeded timeout of 10000 ms for a test.\n    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n\n    \u001b[0m \u001b[90m 17 |\u001b[39m\n     \u001b[90m 18 |\u001b[39m   describe(\u001b[32m'obtenerPorPeriodo'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 19 |\u001b[39m     test(\u001b[32m'VÁLIDO: Retorna bloques disponibles excluyendo reservados'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n     \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 20 |\u001b[39m       global\u001b[33m.\u001b[39mclienteSupabase\u001b[33m.\u001b[39m\u001b[36mfrom\u001b[39m \u001b[33m=\u001b[39m jest\u001b[33m.\u001b[39mfn(() \u001b[33m=>\u001b[39m ({\n     \u001b[90m 21 |\u001b[39m         select\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\n     \u001b[90m 22 |\u001b[39m         eq\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\u001b[0m\n\n      at test (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:19:5)\n      at describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:18:3)\n      at Object.describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:11:1)\n\n  ● RepositorioCitasPsicologo › obtenerPorPeriodo › LÍMITE: Un bloque disponible se retorna sin errores\n\n    thrown: \"Exceeded timeout of 10000 ms for a test.\n    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n\n    \u001b[0m \u001b[90m 35 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 36 |\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 37 |\u001b[39m     test(\u001b[32m'LÍMITE: Un bloque disponible se retorna sin errores'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n     \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 38 |\u001b[39m       global\u001b[33m.\u001b[39mclienteSupabase\u001b[33m.\u001b[39m\u001b[36mfrom\u001b[39m \u001b[33m=\u001b[39m jest\u001b[33m.\u001b[39mfn(() \u001b[33m=>\u001b[39m ({\n     \u001b[90m 39 |\u001b[39m         select\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\n     \u001b[90m 40 |\u001b[39m         eq\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\u001b[0m\n\n      at test (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:37:5)\n      at describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:18:3)\n      at Object.describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:11:1)\n\n  ● RepositorioCitasPsicologo › obtenerPorPeriodo › INVÁLIDO: Filtra citas sin bloque_horario asociado\n\n    thrown: \"Exceeded timeout of 10000 ms for a test.\n    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n\n    \u001b[0m \u001b[90m 52 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 53 |\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 54 |\u001b[39m     test(\u001b[32m'INVÁLIDO: Filtra citas sin bloque_horario asociado'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n     \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 55 |\u001b[39m       global\u001b[33m.\u001b[39mclienteSupabase\u001b[33m.\u001b[39m\u001b[36mfrom\u001b[39m \u001b[33m=\u001b[39m jest\u001b[33m.\u001b[39mfn(() \u001b[33m=>\u001b[39m ({\n     \u001b[90m 56 |\u001b[39m         select\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\n     \u001b[90m 57 |\u001b[39m         eq\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\u001b[0m\n\n      at test (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:54:5)\n      at describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:18:3)\n      at Object.describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:11:1)\n\n  ● RepositorioCitasPsicologo › obtenerPorPeriodo › INVÁLIDO: Retorna array vacío si no hay citas\n\n    thrown: \"Exceeded timeout of 10000 ms for a test.\n    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.\"\n\n    \u001b[0m \u001b[90m 69 |\u001b[39m     })\u001b[33m;\u001b[39m\n     \u001b[90m 70 |\u001b[39m\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 71 |\u001b[39m     test(\u001b[32m'INVÁLIDO: Retorna array vacío si no hay citas'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n     \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 72 |\u001b[39m       global\u001b[33m.\u001b[39mclienteSupabase\u001b[33m.\u001b[39m\u001b[36mfrom\u001b[39m \u001b[33m=\u001b[39m jest\u001b[33m.\u001b[39mfn(() \u001b[33m=>\u001b[39m ({\n     \u001b[90m 73 |\u001b[39m         select\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\n     \u001b[90m 74 |\u001b[39m         eq\u001b[33m:\u001b[39m jest\u001b[33m.\u001b[39mfn()\u001b[33m.\u001b[39mmockReturnThis()\u001b[33m,\u001b[39m\u001b[0m\n\n      at test (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:71:5)\n      at describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:18:3)\n      at Object.describe (tests/unit/repositorio/RepositorioCitasPsicologo.test.js:11:1)\n","name":"C:\\Users\\USUARIO\\Documents\\5_SEMESTRE\\Taller de Diseño de Software I\\isw-213-project2\\Code\\tests\\unit\\repositorio\\RepositorioCitasPsicologo.test.js","startTime":1779199987602,"status":"failed","summary":""}],"wasInterrupted":false}

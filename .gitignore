@@ -8,3 +8,5 @@ Thumbs.db
 Code/.dockerignore
 Code/node_modules/
 Supabase.md
+.nyc_output/
+coverage/

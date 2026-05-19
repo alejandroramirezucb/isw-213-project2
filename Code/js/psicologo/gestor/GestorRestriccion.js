@@ -60,3 +60,7 @@ class GestorRestriccion {
     return true;
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = GestorRestriccion;
+}
