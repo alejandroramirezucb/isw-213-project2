@@ -127,3 +127,7 @@ class RenderizadorCitas {
     this.renderizar(citas);
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = RenderizadorCitas;
+}

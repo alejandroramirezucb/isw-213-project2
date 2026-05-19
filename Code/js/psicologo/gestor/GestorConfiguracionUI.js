@@ -84,3 +84,7 @@ class GestorConfiguracionUI {
     );
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = GestorConfiguracionUI;
+}

@@ -1,6 +1,6 @@
-const RepositorioCitasPsicologo = require('../../../js/psicologo/repositorio/RepositorioCitasPsicologo.js');
+const RepositorioCitasPsicologo = require('../js/psicologo/repositorio/RepositorioCitasPsicologo.js');
 
-describe('RepositorioCitasPsicologo', () => {
+describe('HU-03 a HU-14: Operaciones de Citas', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -205,6 +205,109 @@ describe('RepositorioCitasPsicologo', () => {
 
       const resultado = await RepositorioCitasPsicologo.cancelarConNotificacion('cita-1');
       expect(resultado).toBe(false);
+    });
+  });
+
+  describe('obtenerHistorialPacientes', () => {
+    test('VÁLIDO: Obtiene historial de citas por psicólogo', async () => {
+      global.clienteSupabase.from = jest.fn(() => ({
+        select: jest.fn().mockReturnThis(),
+        eq: jest.fn().mockReturnThis(),
+        order: jest.fn().mockResolvedValue({
+          data: [
+            {
+              id: 'cita-101',
+              estado: 'completada',
+              pacientes: { id: 'pac-101', nombre: 'Juan', apellido: 'Pérez', correo: 'juan@example.com', bloqueado: false },
+              bloques_horario: { fecha: '2026-05-20', hora_inicio: '10:00' }
+            }
+          ],
+          error: null
+        }),
+      }));
+
+      const resultado = await RepositorioCitasPsicologo.obtenerHistorialPacientes('psi-101');
+      expect(resultado).toHaveLength(1);
+      expect(resultado[0].paciente.nombre).toBe('Juan');
+      expect(resultado[0].citas).toHaveLength(1);
+    });
+
+    test('LÍMITE: Retorna array vacío si no hay citas', async () => {
+      global.clienteSupabase.from = jest.fn(() => ({
+        select: jest.fn().mockReturnThis(),
+        eq: jest.fn().mockReturnThis(),
+        order: jest.fn().mockResolvedValue({ data: null, error: null }),
+      }));
+
+      const resultado = await RepositorioCitasPsicologo.obtenerHistorialPacientes('psi-102');
+      expect(Array.isArray(resultado)).toBe(true);
+      expect(resultado).toHaveLength(0);
+    });
+
+    test('VÁLIDO: Agrupa citas por paciente correctamente', async () => {
+      global.clienteSupabase.from = jest.fn(() => ({
+        select: jest.fn().mockReturnThis(),
+        eq: jest.fn().mockReturnThis(),
+        order: jest.fn().mockResolvedValue({
+          data: [
+            {
+              id: 'cita-201',
+              estado: 'completada',
+              pacientes: { id: 'pac-201', nombre: 'Juan', apellido: 'Pérez', correo: 'juan@example.com', bloqueado: false },
+              bloques_horario: { fecha: '2026-05-20', hora_inicio: '10:00' }
+            },
+            {
+              id: 'cita-202',
+              estado: 'completada',
+              pacientes: { id: 'pac-201', nombre: 'Juan', apellido: 'Pérez', correo: 'juan@example.com', bloqueado: false },
+              bloques_horario: { fecha: '2026-05-21', hora_inicio: '11:00' }
+            }
+          ],
+          error: null
+        }),
+      }));
+
+      const resultado = await RepositorioCitasPsicologo.obtenerHistorialPacientes('psi-103');
+      expect(resultado).toHaveLength(1);
+      expect(resultado[0].citas).toHaveLength(2);
+    });
+  });
+
+  describe('crearNotificacionNuevoTurno error handling', () => {
+    test('VÁLIDO: Maneja error de duplicado (23505)', async () => {
+      global.clienteSupabase.from = jest.fn(() => ({
+        insert: jest.fn().mockResolvedValue({
+          data: null,
+          error: { code: '23505', message: 'Duplicate' }
+        }),
+      }));
+
+      const resultado = await RepositorioCitasPsicologo.crearNotificacionNuevoTurno('psi-001', 'cita-1');
+      expect(resultado).toBe(true);
+    });
+
+    test('VÁLIDO: Maneja error de permiso (42501)', async () => {
+      global.clienteSupabase.from = jest.fn(() => ({
+        insert: jest.fn().mockResolvedValue({
+          data: null,
+          error: { code: '42501', message: 'Permission denied' }
+        }),
+      }));
+
+      const resultado = await RepositorioCitasPsicologo.crearNotificacionNuevoTurno('psi-001', 'cita-1');
+      expect(resultado).toBe(true);
+    });
+
+    test('VÁLIDO: Maneja error 403 Forbidden', async () => {
+      global.clienteSupabase.from = jest.fn(() => ({
+        insert: jest.fn().mockResolvedValue({
+          data: null,
+          error: { status: 403, message: 'Forbidden' }
+        }),
+      }));
+
+      const resultado = await RepositorioCitasPsicologo.crearNotificacionNuevoTurno('psi-001', 'cita-1');
+      expect(resultado).toBe(true);
     });
   });
 });

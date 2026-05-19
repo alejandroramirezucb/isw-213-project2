@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node index.js",
-    "test": "jest tests/unit",
-    "test:watch": "jest tests/unit --watch",
-    "test:coverage": "jest tests/unit --coverage"
+    "test": "jest tests",
+    "test:watch": "jest tests --watch",
+    "test:coverage": "jest tests --coverage"
   },
   "devDependencies": {
     "jest": "^29.7.0",

@@ -255,3 +255,7 @@ class GestorHistorial {
     doc.save(`historial_${item.paciente.apellido}_${item.paciente.nombre}.pdf`);
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = GestorHistorial;
+}

@@ -1,4 +1,4 @@
-const EstadoPsicologo = require('../../../js/psicologo/estado/EstadoPsicologo');
+const EstadoPsicologo = require('../js/psicologo/estado/EstadoPsicologo');
 
 describe('EstadoPsicologo', () => {
 

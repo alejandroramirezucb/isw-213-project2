@@ -7,6 +7,7 @@ global.RepositorioNotificaciones = {
   marcarTodasLeidas: jest.fn().mockResolvedValue(true),
   marcarComoLeida: jest.fn().mockResolvedValue(true),
   crear: jest.fn().mockResolvedValue({ data: { id: 'notif-1' }, error: null }),
+  suscribirseNuevasNotificaciones: jest.fn(() => () => {}),
 };
-global.document = { getElementById: jest.fn(() => ({ value: '' })) };
+global.document = { getElementById: jest.fn(() => ({ value: '' })), addEventListener: jest.fn() };
 global.window = { clienteSupabase: global.clienteSupabase };

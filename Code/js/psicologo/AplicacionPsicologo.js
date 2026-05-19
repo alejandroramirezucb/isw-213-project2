@@ -42,3 +42,7 @@ class AplicacionPsicologo {
 document.addEventListener('DOMContentLoaded', () =>
   AplicacionPsicologo.inicializar(),
 );
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = AplicacionPsicologo;
+}
