@@ -12,14 +12,20 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "coverage:serve": "npx serve coverage -p 4000"
+    "coverage:serve": "npx serve coverage -p 4000",
+    "lint": "eslint --ext .js,.jsx src/",
+    "lint:fix": "eslint --fix --ext .js,.jsx src/",
+    "lint:reporter": "node eslint-reporter.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@vitest/coverage-istanbul": "^3.2.0",
     "concurrently": "^9.0.0",
+    "eslint": "^10.4.0",
+    "eslint-plugin-sonarjs": "^4.0.3",
     "jsdom": "^29.1.1",
     "vite": "^7.0.0",
     "vite-plugin-handlebars": "^2.0.0",
