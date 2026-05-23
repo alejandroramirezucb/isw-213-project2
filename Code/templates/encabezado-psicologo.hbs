@@ -1,0 +1,27 @@
+<header class="encabezado">
+  <div class="encabezado__contenido">
+    <h1 class="encabezado__logo">Psicoraiden</h1>
+    <nav class="navegacion" aria-label="Navegación principal">
+      <button class="navegacion__boton navegacion__boton--activo" data-vista="panel" aria-current="page">
+        <span>Panel</span>
+      </button>
+      <button class="navegacion__boton" data-vista="configuracion">
+        <span>Horarios</span>
+      </button>
+      <button class="navegacion__boton" data-vista="historial">
+        <span>Historial</span>
+      </button>
+      <button class="navegacion__boton" data-vista="notificaciones">
+        <span>Notificaciones</span>
+        <span class="notificaciones__contador" id="contador-notificaciones" style="display: none;" aria-label="Notificaciones sin leer"></span>
+      </button>
+      <button class="navegacion__boton" data-vista="perfil">
+        <span>Perfil</span>
+      </button>
+    </nav>
+    <div class="encabezado__usuario">
+      <span class="encabezado__nombre" id="nombre-usuario">Psicólogo</span>
+      <button class="boton boton--secundario boton--pequeno" id="btn-cerrar-sesion">Salir</button>
+    </div>
+  </div>
+</header>

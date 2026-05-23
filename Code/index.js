@@ -1,4 +1,4 @@
-const Servidor = require('./server/Servidor');
+import { Servidor } from './src/servidor/Servidor.js';
 
 const servidor = new Servidor();
 servidor.iniciar(process.env.PORT || 3000);

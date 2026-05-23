@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Psicoraiden — Portal del Paciente</title>
+  <link rel="icon" href="/assets/psicoraiden-logo.png">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/compartido/comun.css">
+  <link rel="stylesheet" href="/css/paciente/estilos.css">
+</head>
+<body class="pagina pagina--panel">
+  {{> encabezado-paciente}}
+
+  <main class="contenido-principal">
+    <section class="vista vista--activa" id="vista-calendario">
+      {{> paciente/vista-calendario}}
+    </section>
+    <section class="vista" id="vista-mis-citas">
+      {{> paciente/vista-citas}}
+    </section>
+    <section class="vista" id="vista-notificaciones">
+      {{> paciente/vista-notificaciones}}
+    </section>
+    <section class="vista" id="vista-perfil">
+      {{> paciente/vista-perfil}}
+    </section>
+  </main>
+
+  <div class="mensaje mensaje--oculto mensaje--flotante" id="mensaje-estado" role="status" aria-live="polite">
+    <p class="mensaje__texto"></p>
+  </div>
+
+  <div class="modal modal--oculto" id="modal-cancelacion" role="dialog" aria-modal="true">
+    <div class="modal__contenido">
+      <header class="modal__encabezado">
+        <h3 class="modal__titulo">Cancelar Cita</h3>
+        <button class="modal__boton-cerrar" id="btn-cerrar-modal-cancelacion" aria-label="Cerrar">&times;</button>
+      </header>
+      <div class="modal__cuerpo">
+        <p class="modal__advertencia">¿Estás seguro de que deseas cancelar esta cita?</p>
+        <p class="modal__info">El horario quedará disponible para otros pacientes.</p>
+      </div>
+      <footer class="modal__acciones">
+        <button class="boton boton--peligro" id="btn-si-cancelar">Sí, cancelar</button>
+      </footer>
+    </div>
+  </div>
+
+  <script type="module" src="/src/cliente/paciente/AplicacionPaciente.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<section class="entrada" id="seccion-login">
+  <header class="entrada__encabezado">
+    <h1 class="entrada__titulo">Psicoraiden</h1>
+    <p class="entrada__subtitulo">Sistema de gestión de citas psicológicas</p>
+  </header>
+
+  <form class="formulario" id="formulario-login" novalidate>
+    <div class="formulario__grupo">
+      <label class="formulario__etiqueta" for="correo-login">Correo electrónico</label>
+      <input
+        type="email"
+        class="formulario__campo"
+        id="correo-login"
+        name="correo"
+        placeholder="tu@correo.com"
+        autocomplete="email"
+        required
+      >
+    </div>
+
+    <div class="formulario__grupo">
+      <label class="formulario__etiqueta" for="contrasena-login">Contraseña</label>
+      <input
+        type="password"
+        class="formulario__campo"
+        id="contrasena-login"
+        name="contrasena"
+        placeholder="••••••••"
+        autocomplete="current-password"
+        required
+      >
+    </div>
+
+    <button type="submit" class="boton boton--primario boton--completo">Iniciar sesión</button>
+    <p class="formulario__enlace">
+      ¿No tienes cuenta?
+      <a href="#" id="btn-mostrar-registro" class="enlace">Regístrate aquí</a>
+    </p>
+  </form>
+</section>

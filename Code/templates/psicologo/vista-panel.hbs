@@ -1,0 +1,44 @@
+<header class="vista__encabezado">
+  <h2 class="vista__titulo">Panel de Citas</h2>
+  <p class="vista__descripcion">Gestiona tus citas del día y semana</p>
+</header>
+
+<div class="periodo" role="group" aria-label="Periodo de visualización">
+  <button class="periodo__boton periodo__boton--activo" data-periodo="hoy">Hoy</button>
+  <button class="periodo__boton" data-periodo="semana">Esta Semana</button>
+</div>
+
+<article class="resumen" id="resumen-dia">
+  <div class="resumen__tarjeta">
+    <span class="resumen__numero" id="total-citas-dia">0</span>
+    <span class="resumen__texto">Citas</span>
+  </div>
+  <div class="resumen__tarjeta">
+    <span class="resumen__numero" id="siguiente-cita-hora">--:--</span>
+    <span class="resumen__texto">Siguiente</span>
+  </div>
+</article>
+
+<section class="panel-citas" id="panel-citas">
+  <h3 class="panel-citas__encabezado">
+    <span id="titulo-periodo">Citas de Hoy</span>
+    <span class="panel-citas__fecha" id="fecha-actual"></span>
+  </h3>
+
+  <div class="calendario" id="calendario-psicologo">
+    <header class="calendario__encabezado">
+      <button class="calendario__nav" id="btn-mes-anterior" aria-label="Mes anterior">&#8249;</button>
+      <h3 class="calendario__mes" id="calendario-mes"></h3>
+      <button class="calendario__nav" id="btn-mes-siguiente" aria-label="Mes siguiente">&#8250;</button>
+    </header>
+    <div class="calendario__dias-semana" aria-hidden="true">
+      <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+    </div>
+    <div class="calendario__dias" id="calendario-dias"></div>
+  </div>
+
+  <div class="panel-citas__lista" id="lista-citas-panel" aria-live="polite"></div>
+  <p class="mensaje-vacio mensaje-vacio--oculto" id="sin-citas-panel">
+    No hay citas programadas para este período.
+  </p>
+</section>

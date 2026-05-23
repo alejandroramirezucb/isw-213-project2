@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Psicoraiden</title>
+  <link rel="icon" href="/assets/psicoraiden-logo.png">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/compartido/comun.css">
+  <link rel="stylesheet" href="/css/entrada.css">
+</head>
+<body class="pagina pagina--entrada">
+  <main class="contenedor-entrada">
+    {{> auth/formulario-login}}
+    {{> auth/formulario-registro}}
+    <div class="mensaje mensaje--oculto" id="mensaje-estado" role="status" aria-live="polite">
+      <p class="mensaje__texto"></p>
+    </div>
+  </main>
+  <script type="module" src="/src/cliente/auth/inicio.js"></script>
+</body>
+</html>

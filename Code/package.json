@@ -2,16 +2,26 @@
   "name": "psicoraiden",
   "version": "1.0.0",
   "description": "Sistema de gestión de citas psicológicas",
+  "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently --names \"vite,api\" --prefix-colors \"cyan,yellow\" \"vite\" \"node --watch index.js\"",
+    "build": "vite build",
+    "preview": "vite preview",
     "start": "node index.js",
-    "dev": "node index.js",
-    "test": "jest tests",
-    "test:watch": "jest tests --watch",
-    "test:coverage": "jest tests --coverage"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "coverage:serve": "npx serve coverage -p 4000"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
-    "nyc": "^18.0.0"
+    "@vitest/coverage-istanbul": "^3.2.0",
+    "concurrently": "^9.0.0",
+    "vite": "^7.0.0",
+    "vite-plugin-handlebars": "^2.0.0",
+    "vitest": "^3.2.0"
   }
 }

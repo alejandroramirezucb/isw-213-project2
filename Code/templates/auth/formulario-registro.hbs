@@ -1,0 +1,54 @@
+<section class="entrada entrada--oculta" id="seccion-registro">
+  <header class="entrada__encabezado">
+    <h1 class="entrada__titulo">Crear cuenta</h1>
+    <p class="entrada__subtitulo">Únete a Psicoraiden</p>
+  </header>
+
+  <form class="formulario" id="formulario-registro" novalidate>
+    <div class="formulario__fila">
+      <div class="formulario__grupo formulario__grupo--mitad">
+        <label class="formulario__etiqueta" for="nombre-registro">Nombre</label>
+        <input type="text" class="formulario__campo" id="nombre-registro" name="nombre" placeholder="Tu nombre" autocomplete="given-name" required>
+      </div>
+      <div class="formulario__grupo formulario__grupo--mitad">
+        <label class="formulario__etiqueta" for="apellido-registro">Apellido</label>
+        <input type="text" class="formulario__campo" id="apellido-registro" name="apellido" placeholder="Tu apellido" autocomplete="family-name" required>
+      </div>
+    </div>
+
+    <div class="formulario__grupo">
+      <label class="formulario__etiqueta" for="correo-registro">Correo electrónico</label>
+      <input type="email" class="formulario__campo" id="correo-registro" name="correo" placeholder="tu@correo.com" autocomplete="email" required>
+    </div>
+
+    <div class="formulario__grupo">
+      <label class="formulario__etiqueta" for="telefono-registro">Teléfono</label>
+      <input type="tel" class="formulario__campo" id="telefono-registro" name="telefono" placeholder="+591 70000000" autocomplete="tel">
+    </div>
+
+    <div class="formulario__grupo">
+      <label class="formulario__etiqueta" for="contrasena-registro">Contraseña</label>
+      <input type="password" class="formulario__campo" id="contrasena-registro" name="contrasena" placeholder="Mínimo 6 caracteres" minlength="6" autocomplete="new-password" required>
+    </div>
+
+    <div class="formulario__grupo">
+      <label class="formulario__etiqueta">Tipo de cuenta</label>
+      <div class="formulario__opciones">
+        <label class="formulario__opcion">
+          <input type="radio" name="tipo-cuenta" value="paciente" checked>
+          <span>Paciente</span>
+        </label>
+        <label class="formulario__opcion">
+          <input type="radio" name="tipo-cuenta" value="psicologo">
+          <span>Psicólogo</span>
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" class="boton boton--primario boton--completo">Crear cuenta</button>
+    <p class="formulario__enlace">
+      ¿Ya tienes cuenta?
+      <a href="#" id="btn-mostrar-login" class="enlace">Inicia sesión</a>
+    </p>
+  </form>
+</section>
