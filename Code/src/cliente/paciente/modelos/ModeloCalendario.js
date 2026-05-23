@@ -1,5 +1,4 @@
 import { supabase } from '../../compartido/config/ClienteSupabase.js';
-import { FormateadorFecha } from '../../compartido/formateadores/FormateadorFecha.js';
 
 export class ModeloCalendario {
   constructor(repositorioBloques, repositorioCitas) {

@@ -7,6 +7,10 @@ const MENSAJES = {
   lista_espera: '¡Hay un turno libre para agendar!',
 };
 
+const SEGUNDOS_POR_MINUTO = 60;
+const SEGUNDOS_POR_HORA = 3600;
+const SEGUNDOS_POR_DIA = 86400;
+
 export class VistaNotificaciones {
   constructor() {
     this._bindEventos();
@@ -63,9 +67,9 @@ export class VistaNotificaciones {
 
   _formatearFecha(fechaISO) {
     const diff = Math.floor((new Date() - new Date(fechaISO)) / 1000);
-    if (diff < 60) return 'Hace menos de un minuto';
-    if (diff < 3600) return `Hace ${Math.floor(diff / 60)} minutos`;
-    if (diff < 86400) return `Hace ${Math.floor(diff / 3600)} horas`;
+    if (diff < SEGUNDOS_POR_MINUTO) return 'Hace menos de un minuto';
+    if (diff < SEGUNDOS_POR_HORA) return `Hace ${Math.floor(diff / SEGUNDOS_POR_MINUTO)} minutos`;
+    if (diff < SEGUNDOS_POR_DIA) return `Hace ${Math.floor(diff / SEGUNDOS_POR_HORA)} horas`;
     return new Date(fechaISO).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
   }
 }

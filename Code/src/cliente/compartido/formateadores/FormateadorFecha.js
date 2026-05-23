@@ -9,19 +9,19 @@ export class FormateadorFecha {
   ];
 
   static aTexto(fecha) {
-    const f = typeof fecha === 'string' ? new Date(fecha) : fecha;
-    return `${this.DIAS[f.getDay()]}, ${f.getDate()} de ${this.MESES[f.getMonth()]} de ${f.getFullYear()}`;
+    const fechaObj = typeof fecha === 'string' ? new Date(fecha) : fecha;
+    return `${this.DIAS[fechaObj.getDay()]}, ${fechaObj.getDate()} de ${this.MESES[fechaObj.getMonth()]} de ${fechaObj.getFullYear()}`;
   }
 
   static aTextoCorto(fecha) {
-    const f = typeof fecha === 'string' ? new Date(fecha) : fecha;
-    return `${String(f.getDate()).padStart(2, '0')}/${String(f.getMonth() + 1).padStart(2, '0')}/${f.getFullYear()}`;
+    const fechaObj = typeof fecha === 'string' ? new Date(fecha) : fecha;
+    return `${String(fechaObj.getDate()).padStart(2, '0')}/${String(fechaObj.getMonth() + 1).padStart(2, '0')}/${fechaObj.getFullYear()}`;
   }
 
   static aISO(fecha) {
-    const a = fecha.getFullYear();
-    const m = String(fecha.getMonth() + 1).padStart(2, '0');
-    const d = String(fecha.getDate()).padStart(2, '0');
-    return `${a}-${m}-${d}`;
+    const año = fecha.getFullYear();
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+    const día = String(fecha.getDate()).padStart(2, '0');
+    return `${año}-${mes}-${día}`;
   }
 }

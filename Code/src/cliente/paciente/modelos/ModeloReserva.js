@@ -24,19 +24,13 @@ export class ModeloReserva {
 
   async seleccionarBloque(bloqueId, fecha) {
     if (this._usuario?.pacientes?.bloqueado) {
-      return this._dispatch('paciente:mensaje', {
-        texto: 'No es posible agendar. Comuníquese con administración.',
-        tipo: 'error',
-      });
+      return this._enviarMensajeError('No es posible agendar. Comuníquese con administración.');
     }
 
     try {
       const exito = await this._repositorioBloques.bloquearTemporal(bloqueId);
       if (!exito) {
-        this._dispatch('paciente:mensaje', {
-          texto: 'Este horario ya no está disponible',
-          tipo: 'error',
-        });
+        this._enviarMensajeError('Este horario ya no está disponible');
         document.dispatchEvent(
           new CustomEvent('paciente:bloqueNoDisponible', { detail: { fecha } }),
         );
@@ -51,10 +45,7 @@ export class ModeloReserva {
         }),
       );
     } catch (e) {
-      this._dispatch('paciente:mensaje', {
-        texto: 'Error al seleccionar horario',
-        tipo: 'error',
-      });
+      this._enviarMensajeError('Error al seleccionar horario');
       document.dispatchEvent(
         new CustomEvent('paciente:bloqueNoDisponible', { detail: { fecha } }),
       );
@@ -64,16 +55,10 @@ export class ModeloReserva {
   async confirmar(esReprogramacion = false, citaAnterior = null) {
     if (this._confirmando) return;
     if (!this._bloqueId || !this._pacienteId) {
-      return this._dispatch('paciente:mensaje', {
-        texto: 'Error: datos de reserva incompletos',
-        tipo: 'error',
-      });
+      return this._enviarMensajeError('Error: datos de reserva incompletos');
     }
     if (this._usuario?.pacientes?.bloqueado) {
-      this._dispatch('paciente:mensaje', {
-        texto: 'No es posible agendar en este momento',
-        tipo: 'error',
-      });
+      this._enviarMensajeError('No es posible agendar en este momento');
       return document.dispatchEvent(
         new CustomEvent('paciente:reservaCerrarModal'),
       );
@@ -132,10 +117,7 @@ export class ModeloReserva {
         }),
       );
     } catch (e) {
-      this._dispatch('paciente:mensaje', {
-        texto: this._mapearError(e.message),
-        tipo: 'error',
-      });
+      this._enviarMensajeError(this._mapearError(e.message));
       document.dispatchEvent(
         new CustomEvent('paciente:reservaError', {
           detail: { fecha: this._fecha },
@@ -159,6 +141,10 @@ export class ModeloReserva {
         detail: { fecha: reservaExitosa ? null : fecha },
       }),
     );
+  }
+
+  _enviarMensajeError(texto) {
+    this._dispatch('paciente:mensaje', { texto, tipo: 'error' });
   }
 
   _mapearError(msg) {
