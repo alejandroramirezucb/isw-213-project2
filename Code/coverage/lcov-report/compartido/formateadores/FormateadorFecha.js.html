@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,57 +91,57 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export class FormateadorFecha {
-  static MESES = <span class="cstat-no" title="statement not covered" >[</span>
+  static MESES = [
     'Enero','Febrero','Marzo','Abril','Mayo','Junio',
     'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre',
   ];
 &nbsp;
-  static DIAS = <span class="cstat-no" title="statement not covered" >[</span>
+  static DIAS = [
     'Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado',
   ];
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>aTexto(fecha) {
-    const f = <span class="cstat-no" title="statement not covered" >typeof fecha === 'string' ? new Date(fecha) : fecha;</span>
-<span class="cstat-no" title="statement not covered" >    return `${this.DIAS[f.getDay()]}, ${f.getDate()} de ${this.MESES[f.getMonth()]} de ${f.getFullYear()}`;</span>
+  static aTexto(fecha) {
+    const f = typeof fecha === 'string' ? new Date(fecha) : fecha;
+    return `${this.DIAS[f.getDay()]}, ${f.getDate()} de ${this.MESES[f.getMonth()]} de ${f.getFullYear()}`;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>aTextoCorto(fecha) {
-    const f = <span class="cstat-no" title="statement not covered" >typeof fecha === 'string' ? new Date(fecha) : fecha;</span>
-<span class="cstat-no" title="statement not covered" >    return `${String(f.getDate()).padStart(2, '0')}/${String(f.getMonth() + 1).padStart(2, '0')}/${f.getFullYear()}`;</span>
+  static aTextoCorto(fecha) {
+    const f = typeof fecha === 'string' ? <span class="branch-0 cbranch-no" title="branch not covered" >new Date(fecha) </span>: fecha;
+    return `${String(f.getDate()).padStart(2, '0')}/${String(f.getMonth() + 1).padStart(2, '0')}/${f.getFullYear()}`;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>aISO(fecha) {
-    const a = <span class="cstat-no" title="statement not covered" >fecha.getFullYear();</span>
-    const m = <span class="cstat-no" title="statement not covered" >String(fecha.getMonth() + 1).padStart(2, '0');</span>
-    const d = <span class="cstat-no" title="statement not covered" >String(fecha.getDate()).padStart(2, '0');</span>
-<span class="cstat-no" title="statement not covered" >    return `${a}-${m}-${d}`;</span>
+  static aISO(fecha) {
+    const a = fecha.getFullYear();
+    const m = String(fecha.getMonth() + 1).padStart(2, '0');
+    const d = String(fecha.getDate()).padStart(2, '0');
+    return `${a}-${m}-${d}`;
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -151,7 +151,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-23T04:38:10.383Z
+                at 2026-05-23T06:38:13.088Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

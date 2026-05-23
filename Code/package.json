@@ -20,6 +20,7 @@
   "devDependencies": {
     "@vitest/coverage-istanbul": "^3.2.0",
     "concurrently": "^9.0.0",
+    "jsdom": "^29.1.1",
     "vite": "^7.0.0",
     "vite-plugin-handlebars": "^2.0.0",
     "vitest": "^3.2.0"

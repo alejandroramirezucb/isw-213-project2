@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -93,57 +93,57 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export class ModeloCancelacion {
-<span class="fstat-no" title="function not covered" >  constructor(</span>repositorioCitas) {
-<span class="cstat-no" title="statement not covered" >    this._repositorioCitas = repositorioCitas;</span>
-<span class="cstat-no" title="statement not covered" >    this._citaId = null;</span>
+  constructor(repositorioCitas) {
+    this._repositorioCitas = repositorioCitas;
+    this._citaId = null;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  setCitaId(</span>citaId) { <span class="cstat-no" title="statement not covered" >this._citaId = citaId; </span>}
-<span class="fstat-no" title="function not covered" >  getCitaId(</span>) { <span class="cstat-no" title="statement not covered" >return this._citaId; </span>}
+  setCitaId(citaId) { this._citaId = citaId; }
+  getCitaId() { return this._citaId; }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  mostrarModal(</span>) {
-<span class="cstat-no" title="statement not covered" >    document.dispatchEvent(new CustomEvent('paciente:modalCancelacionAbrir'));</span>
+  mostrarModal() {
+    document.dispatchEvent(new CustomEvent('paciente:modalCancelacionAbrir'));
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>cancelar() {
-<span class="cstat-no" title="statement not covered" >    if (!this._citaId) <span class="cstat-no" title="statement not covered" >return;</span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const exito = <span class="cstat-no" title="statement not covered" >await this._repositorioCitas.cancelar(this._citaId);</span>
-<span class="cstat-no" title="statement not covered" >      if (exito) {</span>
-<span class="cstat-no" title="statement not covered" >        document.dispatchEvent(new CustomEvent('paciente:mensaje', { detail: { texto: 'Cita cancelada exitosamente', tipo: 'exito' } }));</span>
-<span class="cstat-no" title="statement not covered" >        document.dispatchEvent(new CustomEvent('paciente:cancelacionConfirmada'));</span>
+  async cancelar() {
+    if (!this._citaId) return;
+    try {
+      const exito = await this._repositorioCitas.cancelar(this._citaId);
+      if (exito) {
+        document.dispatchEvent(new CustomEvent('paciente:mensaje', { detail: { texto: 'Cita cancelada exitosamente', tipo: 'exito' } }));
+        document.dispatchEvent(new CustomEvent('paciente:cancelacionConfirmada'));
       } else {
-<span class="cstat-no" title="statement not covered" >        document.dispatchEvent(new CustomEvent('paciente:mensaje', { detail: { texto: 'Error al cancelar la cita', tipo: 'error' } }));</span>
+        document.dispatchEvent(new CustomEvent('paciente:mensaje', { detail: { texto: 'Error al cancelar la cita', tipo: 'error' } }));
       }
     } catch (_) {
-<span class="cstat-no" title="statement not covered" >      document.dispatchEvent(new CustomEvent('paciente:mensaje', { detail: { texto: 'Error al cancelar la cita', tipo: 'error' } }));</span>
+      document.dispatchEvent(new CustomEvent('paciente:mensaje', { detail: { texto: 'Error al cancelar la cita', tipo: 'error' } }));
     }
   }
 }
@@ -154,7 +154,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-23T04:38:10.169Z
+                at 2026-05-23T06:38:12.940Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

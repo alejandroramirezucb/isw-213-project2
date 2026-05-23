@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -88,51 +88,51 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export class ValidadorFormulario {
-  static _EMAIL_REGEX = <span class="cstat-no" title="statement not covered" >/^[^\s@]+@[^\s@]+\.[^\s@]+$/;</span>
-  static _TELEFONO_REGEX = <span class="cstat-no" title="statement not covered" >/^\d{7,}$/;</span>
+  static _EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  static _TELEFONO_REGEX = /^\d{7,}$/;
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>esCorreoValido(correo) {
-<span class="cstat-no" title="statement not covered" >    return this._EMAIL_REGEX.test(correo);</span>
+  static esCorreoValido(correo) {
+    return this._EMAIL_REGEX.test(correo);
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>esTelefonoValido(telefono) {
-<span class="cstat-no" title="statement not covered" >    return this._TELEFONO_REGEX.test(telefono);</span>
+  static esTelefonoValido(telefono) {
+    return this._TELEFONO_REGEX.test(telefono);
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>esPasswordValida(password) {
-<span class="cstat-no" title="statement not covered" >    return !!password &amp;&amp; password.length &gt;= 6;</span>
+  static esPasswordValida(password) {
+    return !!password &amp;&amp; password.length &gt;= 6;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>noEstaVacio(valor) {
-<span class="cstat-no" title="statement not covered" >    return !!valor &amp;&amp; valor.toString().trim().length &gt; 0;</span>
+  static noEstaVacio(valor) {
+    return !!valor &amp;&amp; valor.toString().trim().length &gt; 0;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  static </span>sonIguales(a, b) {
-<span class="cstat-no" title="statement not covered" >    return a === b;</span>
+  static sonIguales(a, b) {
+    return a === b;
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -142,7 +142,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-23T04:38:10.383Z
+                at 2026-05-23T06:38:13.088Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

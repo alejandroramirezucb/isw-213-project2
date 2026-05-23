@@ -10,6 +10,9 @@ export class ControladorCitas {
   }
 
   _bindEventos() {
+    document.addEventListener('paciente:proximaCitaCargada', (evento) => {
+      this._modeloCancelacion.setCitaId(evento.detail.cita?.id ?? null);
+    });
     document.addEventListener('paciente:cancelacionSolicitada', () =>
       this._modeloCancelacion.mostrarModal(),
     );

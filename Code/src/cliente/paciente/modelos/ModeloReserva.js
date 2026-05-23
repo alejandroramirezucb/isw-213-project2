@@ -103,9 +103,6 @@ export class ModeloReserva {
         );
       } catch (e) {
         await this._repositorioBloques.liberarTemporal(this._bloqueId);
-        if (e.message?.includes('bloque ya fue reservado')) {
-          throw new Error('RACE_CONDITION');
-        }
         throw e;
       }
 
@@ -165,8 +162,6 @@ export class ModeloReserva {
   }
 
   _mapearError(msg) {
-    if (msg === 'RACE_CONDITION')
-      return 'Este horario fue tomado justo ahora. Intenta con otro.';
     if (msg?.includes('bloque ya fue reservado'))
       return 'Este horario ya está reservado. Intenta con otro.';
     if (msg?.includes('duplicate'))
