@@ -12,20 +12,33 @@ export class RepositorioCitas {
   static async crear(pacienteId, profesionalId, bloqueId) {
     const { data, error } = await supabase
       .from(TABLA)
-      .insert({ paciente_id: pacienteId, psicologo_id: profesionalId, bloque_id: bloqueId, estado: 'confirmada' })
+      .insert({
+        paciente_id: pacienteId,
+        psicologo_id: profesionalId,
+        bloque_id: bloqueId,
+        estado: 'confirmada',
+      })
       .select('id');
 
     if (error) {
-      const msg = error.message || '';
-      if (error.code?.includes('409') || msg.includes('unique') || msg.includes('duplicate') || msg.includes('violates')) {
+      const msg = (error.message || '').toLowerCase();
+      const esConflictoUnico =
+        error.status === 409 ||
+        error.code === '23505' ||
+        msg.includes('unique') ||
+        msg.includes('duplicate') ||
+        msg.includes('violates') ||
+        msg.includes('constraint');
+      if (esConflictoUnico) {
         throw new Error('Este bloque ya fue reservado por otro usuario');
       }
-      throw new Error('Error al crear cita: ' + msg);
+      throw new Error('Error al crear cita: ' + (error.message || 'Error desconocido'));
     }
 
     citasCache = null;
     const citaId = data?.[0]?.id ?? null;
-    if (citaId) await RepositorioBloques.marcarReservado(bloqueId).catch(() => {});
+    if (citaId)
+      await RepositorioBloques.marcarReservado(bloqueId).catch(() => {});
     return citaId;
   }
 
@@ -50,22 +63,35 @@ export class RepositorioCitas {
     if (citasCache && ahora - tiempoCache < DURACION_CACHE) {
       return citasCache.filter((c) => {
         if (c.paciente_id !== pacienteId) return false;
-        if (filtro === 'proximas') return c.estado === 'confirmada' && c.bloques_horario?.fecha >= hoy;
-        if (filtro === 'pasadas') return c.estado === 'completada' && c.bloques_horario?.fecha < hoy;
+        if (filtro === 'proximas')
+          return c.estado === 'confirmada' && c.bloques_horario?.fecha >= hoy;
+        if (filtro === 'pasadas')
+          return c.estado === 'completada' && c.bloques_horario?.fecha < hoy;
         if (filtro === 'canceladas') return c.estado === 'cancelada';
         return true;
       });
     }
 
-    let query = supabase.from(TABLA)
-      .select('id, estado, creado_en, bloques_horario(fecha, hora_inicio, hora_fin), paciente_id')
+    let query = supabase
+      .from(TABLA)
+      .select(
+        'id, estado, creado_en, bloques_horario(fecha, hora_inicio, hora_fin), paciente_id',
+      )
       .eq('paciente_id', pacienteId);
 
-    if (filtro === 'proximas') query = query.eq('estado', 'confirmada').gte('bloques_horario.fecha', hoy);
-    else if (filtro === 'pasadas') query = query.eq('estado', 'completada').lte('bloques_horario.fecha', hoy);
+    if (filtro === 'proximas')
+      query = query
+        .eq('estado', 'confirmada')
+        .gte('bloques_horario.fecha', hoy);
+    else if (filtro === 'pasadas')
+      query = query
+        .eq('estado', 'completada')
+        .lte('bloques_horario.fecha', hoy);
     else if (filtro === 'canceladas') query = query.eq('estado', 'cancelada');
 
-    const { data } = await query.order('bloques_horario(fecha)', { ascending: filtro === 'proximas' });
+    const { data } = await query.order('bloques_horario(fecha)', {
+      ascending: filtro === 'proximas',
+    });
 
     if (filtro === 'proximas') {
       citasCache = data || [];
@@ -75,14 +101,26 @@ export class RepositorioCitas {
   }
 
   static async cancelar(citaId) {
-    const { error } = await supabase.rpc('cancelar_cita_y_liberar_bloque', { p_cita_id: citaId, p_cancelada_por: 'paciente' });
+    const { error } = await supabase.rpc('cancelar_cita_y_liberar_bloque', {
+      p_cita_id: citaId,
+      p_cancelada_por: 'paciente',
+    });
     citasCache = null;
     return !error;
   }
 
   static async crearNotificacion(pacienteId, tipo, citaId) {
     try {
-      await supabase.from('notificaciones').insert({ destinatario_tipo: 'paciente', destinatario_id: pacienteId, cita_id: citaId, tipo, canal: 'email', enviado: false });
+      await supabase
+        .from('notificaciones')
+        .insert({
+          destinatario_tipo: 'paciente',
+          destinatario_id: pacienteId,
+          cita_id: citaId,
+          tipo,
+          canal: 'email',
+          enviado: false,
+        });
     } catch (_) {}
     return true;
   }

@@ -26,22 +26,35 @@ export class ModeloCalendario {
     const anio = this._fechaActual.getFullYear();
     const mes = this._fechaActual.getMonth();
 
-    const [disponibilidad, citas] = await Promise.all([
-      this._repositorioBloques.obtenerDisponibilidadMes(anio, mes),
-      this._repositorioCitas.obtenerPorFiltro(this._pacienteId, 'proximas'),
-    ]);
+    let disponibilidad = {};
+    let citasPorFecha = {};
 
-    this._citasPorFecha = this._agruparPorFecha(citas);
+    try {
+      const [disponibilidadData, citas] = await Promise.all([
+        this._repositorioBloques.obtenerDisponibilidadMes(anio, mes),
+        this._repositorioCitas.obtenerPorFiltro(this._pacienteId, 'proximas'),
+      ]);
+      disponibilidad = disponibilidadData;
+      this._citasPorFecha = this._agruparPorFecha(citas);
+      citasPorFecha = this._citasPorFecha;
+    } catch (_) {
+      citasPorFecha = this._citasPorFecha;
+    }
 
     document.dispatchEvent(new CustomEvent('paciente:calendarioRenderizar', {
-      detail: { anio, mes, disponibilidad, citasPorFecha: this._citasPorFecha },
+      detail: { anio, mes, disponibilidad, citasPorFecha },
     }));
   }
 
   async seleccionarFecha(fecha) {
-    const bloques = await this._repositorioBloques.obtenerPorFecha(fecha);
-    let psicologoId = bloques.length > 0 ? bloques[0].psicologo_id : null;
-    if (!psicologoId) psicologoId = await this._resolverPsicologo(fecha);
+    let bloques = [];
+    let psicologoId = null;
+
+    try {
+      bloques = await this._repositorioBloques.obtenerPorFecha(fecha);
+      psicologoId = bloques.length > 0 ? bloques[0].psicologo_id : null;
+      if (!psicologoId) psicologoId = await this._resolverPsicologo(fecha);
+    } catch (_) {}
 
     document.dispatchEvent(new CustomEvent('paciente:bloquesDisponibles', {
       detail: { bloques, fecha, psicologoId, citasDelDia: this._citasPorFecha[fecha] || [] },

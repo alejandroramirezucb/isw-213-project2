@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/37</span>
+                <span class='fraction'>0/46</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>0/41</span>
             </div>
         
             
@@ -135,7 +135,20 @@
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,21 +177,34 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -235,22 +261,35 @@ export class ModeloCalendario {
     const anio = <span class="cstat-no" title="statement not covered" >this._fechaActual.getFullYear();</span>
     const mes = <span class="cstat-no" title="statement not covered" >this._fechaActual.getMonth();</span>
 &nbsp;
-    const [disponibilidad, citas] = <span class="cstat-no" title="statement not covered" >await Promise.all([</span>
-      this._repositorioBloques.obtenerDisponibilidadMes(anio, mes),
-      this._repositorioCitas.obtenerPorFiltro(this._pacienteId, 'proximas'),
-    ]);
+    let disponibilidad = <span class="cstat-no" title="statement not covered" >{};</span>
+    let citasPorFecha = <span class="cstat-no" title="statement not covered" >{};</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this._citasPorFecha = this._agruparPorFecha(citas);</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const [disponibilidadData, citas] = <span class="cstat-no" title="statement not covered" >await Promise.all([</span>
+        this._repositorioBloques.obtenerDisponibilidadMes(anio, mes),
+        this._repositorioCitas.obtenerPorFiltro(this._pacienteId, 'proximas'),
+      ]);
+<span class="cstat-no" title="statement not covered" >      disponibilidad = disponibilidadData;</span>
+<span class="cstat-no" title="statement not covered" >      this._citasPorFecha = this._agruparPorFecha(citas);</span>
+<span class="cstat-no" title="statement not covered" >      citasPorFecha = this._citasPorFecha;</span>
+    } catch (_) {
+<span class="cstat-no" title="statement not covered" >      citasPorFecha = this._citasPorFecha;</span>
+    }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    document.dispatchEvent(new CustomEvent('paciente:calendarioRenderizar', {</span>
-      detail: { anio, mes, disponibilidad, citasPorFecha: this._citasPorFecha },
+      detail: { anio, mes, disponibilidad, citasPorFecha },
     }));
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  async </span>seleccionarFecha(fecha) {
-    const bloques = <span class="cstat-no" title="statement not covered" >await this._repositorioBloques.obtenerPorFecha(fecha);</span>
-    let psicologoId = <span class="cstat-no" title="statement not covered" >bloques.length &gt; 0 ? bloques[0].psicologo_id : null;</span>
-<span class="cstat-no" title="statement not covered" >    if (!psicologoId) <span class="cstat-no" title="statement not covered" >psicologoId = await this._resolverPsicologo(fecha);</span></span>
+    let bloques = <span class="cstat-no" title="statement not covered" >[];</span>
+    let psicologoId = <span class="cstat-no" title="statement not covered" >null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      bloques = await this._repositorioBloques.obtenerPorFecha(fecha);</span>
+<span class="cstat-no" title="statement not covered" >      psicologoId = bloques.length &gt; 0 ? bloques[0].psicologo_id : null;</span>
+<span class="cstat-no" title="statement not covered" >      if (!psicologoId) <span class="cstat-no" title="statement not covered" >psicologoId = await this._resolverPsicologo(fecha);</span></span>
+    } catch (_) {}
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    document.dispatchEvent(new CustomEvent('paciente:bloquesDisponibles', {</span>
       detail: { bloques, fecha, psicologoId, citasDelDia: this._citasPorFecha[fecha] || [] },
@@ -286,7 +325,7 @@ export class ModeloCalendario {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-23T00:26:34.363Z
+                at 2026-05-23T04:38:10.169Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

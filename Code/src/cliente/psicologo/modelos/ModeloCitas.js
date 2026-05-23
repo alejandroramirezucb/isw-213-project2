@@ -13,8 +13,11 @@ export class ModeloCitasPsicologo {
 
   async cargarPeriodo(periodo) {
     const fechas = this._calcularFechasPeriodo(periodo);
-    const citas = await this._repositorio.obtenerPorPeriodo(this._psicologoId, fechas.inicio, fechas.fin);
-    this._citasCargadas = citas;
+    let citas = [];
+    try {
+      citas = await this._repositorio.obtenerPorPeriodo(this._psicologoId, fechas.inicio, fechas.fin);
+      this._citasCargadas = citas;
+    } catch (_) {}
     document.dispatchEvent(new CustomEvent('psicologo:citasCargadas', {
       detail: { citas, periodo, fechas },
     }));
@@ -26,7 +29,11 @@ export class ModeloCitasPsicologo {
     const fechaInicio = `${anio}-${mesFormateado}-01`;
     const fechaFin = `${anio}-${mesFormateado}-${String(ultimoDiaMes).padStart(2, '0')}`;
 
-    const citas = await this._repositorio.obtenerPorPeriodo(this._psicologoId, fechaInicio, fechaFin);
+    let citas = [];
+    try {
+      citas = await this._repositorio.obtenerPorPeriodo(this._psicologoId, fechaInicio, fechaFin);
+    } catch (_) {}
+
     document.dispatchEvent(new CustomEvent('psicologo:citasMesCargadas', {
       detail: { citas, anio, mes },
     }));

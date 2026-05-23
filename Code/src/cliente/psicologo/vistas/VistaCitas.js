@@ -137,6 +137,7 @@ export class VistaCitasPsicologo {
 
   _renderizarCalendario(anio, mes) {
     if (!this._contenedorCalendario) return;
+    if (this._tituloMes) this._tituloMes.textContent = `${NOMBRES_MESES[mes]} ${anio}`;
 
     const primerDiaDelMes = new Date(anio, mes, 1);
     const diasEnMes = new Date(anio, mes + 1, 0).getDate();
