@@ -40,5 +40,14 @@ export default [
       'camelcase': ['warn'],
       'no-var': 'warn'
     }
+  },
+  {
+    files: ['tests/**/*.js'],
+    rules: {
+      'no-magic-numbers': 'off',
+      'id-length': 'off',
+      'camelcase': 'off',
+      'sonarjs/no-duplicate-string': 'off'
+    }
   }
 ];

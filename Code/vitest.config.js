@@ -13,11 +13,13 @@ export default defineConfig({
       reporter: ['text', 'html', 'lcov'],
       reportsDirectory: 'coverage',
 
-      // Solo incluir lógica de negocio testeada (HU-06, HU-08, HU-15 + utilidades)
       include: [
         'src/cliente/paciente/modelos/ModeloCancelacion.js',
         'src/cliente/paciente/modelos/ModeloReprogramacion.js',
         'src/cliente/paciente/modelos/ModeloReserva.js',
+        'src/cliente/paciente/modelos/ModeloListaEspera.js',
+        'src/cliente/paciente/modelos/ModeloPerfil.js',
+        'src/cliente/paciente/modelos/ModeloNotificaciones.js',
         'src/cliente/compartido/validadores/ValidadorFormulario.js',
         'src/cliente/compartido/formateadores/FormateadorFecha.js',
         'src/cliente/compartido/formateadores/FormateadorHora.js',

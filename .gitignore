@@ -9,3 +9,7 @@ Code/.dockerignore
 Code/node_modules/
 Supabase.md
 .nyc_output/
+Code/coverage/
+Code/coverage_inicial/
+Code/test-results.json
+Code/.nyc_output/
