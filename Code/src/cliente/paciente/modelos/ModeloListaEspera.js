@@ -12,13 +12,7 @@ export class ModeloListaEspera {
   }
 
   yaEstaInscrito(inscritos, pacienteId) {
-    let encontrado = false;
-    for (let i = 0; i < inscritos.length; i++) {
-      if (inscritos[i].paciente_id === pacienteId) {
-        encontrado = true;
-      }
-    }
-    return encontrado;
+    return inscritos.some((inscrito) => inscrito.paciente_id === pacienteId);
   }
 
   async mostrarModal(fecha, fechaFormato, psicologoId) {
