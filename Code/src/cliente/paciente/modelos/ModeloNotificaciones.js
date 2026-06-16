@@ -1,3 +1,5 @@
+/* globals CustomEvent, setInterval, clearInterval */
+
 export class ModeloNotificaciones {
   constructor(repositorio) {
     this._repositorio = repositorio;
@@ -11,14 +13,30 @@ export class ModeloNotificaciones {
     this._intervalo = setInterval(() => this._actualizarContador(), 30000);
   }
 
+  contarNoLeidas(notificaciones) {
+    let total = 0;
+    for (let i = 0; i < notificaciones.length; i++) {
+      if (!notificaciones[i].leida) {
+        total = total + 1;
+      }
+    }
+    return total;
+  }
+
   async cargar() {
     try {
       const [notificaciones, conteoNoLeidas] = await Promise.all([
         this._repositorio.obtenerTodas(this._pacienteId),
         this._repositorio.obtenerConteoNoLeidas(this._pacienteId),
       ]);
-      document.dispatchEvent(new CustomEvent('paciente:notificacionesCargadas', { detail: { notificaciones, conteoNoLeidas } }));
-    } catch (_) {}
+      document.dispatchEvent(
+        new CustomEvent('paciente:notificacionesCargadas', {
+          detail: { notificaciones, conteoNoLeidas },
+        }),
+      );
+    } catch (error) {
+      console.error('Error al cargar notificaciones:', error);
+    }
   }
 
   async marcarLeida(notifId) {
@@ -27,9 +45,18 @@ export class ModeloNotificaciones {
   }
 
   async limpiarTodas() {
-    const exito = await this._repositorio.marcarTodasLeidasDelPaciente(this._pacienteId);
+    const exito = await this._repositorio.marcarTodasLeidasDelPaciente(
+      this._pacienteId,
+    );
     if (exito) {
-      document.dispatchEvent(new CustomEvent('paciente:mensaje', { detail: { texto: 'Notificaciones marcadas como leídas', tipo: 'exito' } }));
+      document.dispatchEvent(
+        new CustomEvent('paciente:mensaje', {
+          detail: {
+            texto: 'Notificaciones marcadas como leídas',
+            tipo: 'exito',
+          },
+        }),
+      );
       return this.cargar();
     }
   }
@@ -40,8 +67,16 @@ export class ModeloNotificaciones {
 
   async _actualizarContador() {
     try {
-      const conteo = await this._repositorio.obtenerConteoNoLeidas(this._pacienteId);
-      document.dispatchEvent(new CustomEvent('paciente:conteoNotificaciones', { detail: { conteo } }));
-    } catch (_) {}
+      const conteo = await this._repositorio.obtenerConteoNoLeidas(
+        this._pacienteId,
+      );
+      document.dispatchEvent(
+        new CustomEvent('paciente:conteoNotificaciones', {
+          detail: { conteo },
+        }),
+      );
+    } catch (error) {
+      console.error('Error al actualizar contador de notificaciones:', error);
+    }
   }
 }
