@@ -14,13 +14,7 @@ export class ModeloNotificaciones {
   }
 
   contarNoLeidas(notificaciones) {
-    let total = 0;
-    for (let i = 0; i < notificaciones.length; i++) {
-      if (!notificaciones[i].leida) {
-        total = total + 1;
-      }
-    }
-    return total;
+    return notificaciones.filter((notificacion) => !notificacion.leida).length;
   }
 
   async cargar() {
