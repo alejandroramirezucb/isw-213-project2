@@ -2,7 +2,10 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { URL } from 'node:url';
+import { setInterval, clearInterval } from 'node:timers';
 import { Configuracion } from './config/Configuracion.js';
+import { CodigosHttp } from './config/CodigosHttp.js';
 import { ClienteSupabaseAdmin } from './config/ClienteSupabaseAdmin.js';
 import { ControladorRegistro } from './controladores/ControladorRegistro.js';
 import { ControladorRecordatorios } from './controladores/ControladorRecordatorios.js';
@@ -54,7 +57,7 @@ export class Servidor {
     const { pathname } = new URL(req.url, 'http://localhost');
 
     if (pathname === '/') {
-      res.writeHead(302, { Location: '/index.html' });
+      res.writeHead(CodigosHttp.REDIRECCION, { Location: '/index.html' });
       return res.end();
     }
 
@@ -80,12 +83,12 @@ export class Servidor {
 
     fs.readFile(filePath, (err, content) => {
       if (err) {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.writeHead(CodigosHttp.NO_ENCONTRADO, { 'Content-Type': 'text/plain' });
         return res.end(`404 Not found: ${pathname}`);
       }
       const headers = { 'Content-Type': contentType };
       if (ext === '.js' || ext === '.html') headers['Cache-Control'] = 'no-store';
-      res.writeHead(200, headers);
+      res.writeHead(CodigosHttp.OK, headers);
       res.end(content);
     });
   }
