@@ -1,3 +1,5 @@
+/* globals CustomEvent */
+
 export class ModeloReserva {
   constructor(repositorioCitas, repositorioBloques, repositorioCitasPsicologo) {
     this._repositorioCitas = repositorioCitas;
@@ -24,7 +26,9 @@ export class ModeloReserva {
 
   async seleccionarBloque(bloqueId, fecha) {
     if (this._usuario?.pacientes?.bloqueado) {
-      return this._enviarMensajeError('No es posible agendar. Comuníquese con administración.');
+      return this._enviarMensajeError(
+        'No es posible agendar. Comuníquese con administración.',
+      );
     }
 
     try {
@@ -44,7 +48,7 @@ export class ModeloReserva {
           detail: { bloqueId, fecha },
         }),
       );
-    } catch (e) {
+    } catch {
       this._enviarMensajeError('Error al seleccionar horario');
       document.dispatchEvent(
         new CustomEvent('paciente:bloqueNoDisponible', { detail: { fecha } }),
@@ -54,78 +58,99 @@ export class ModeloReserva {
 
   async confirmar(esReprogramacion = false, citaAnterior = null) {
     if (this._confirmando) return;
-    if (!this._bloqueId || !this._pacienteId) {
-      return this._enviarMensajeError('Error: datos de reserva incompletos');
-    }
-    if (this._usuario?.pacientes?.bloqueado) {
-      this._enviarMensajeError('No es posible agendar en este momento');
-      return document.dispatchEvent(
-        new CustomEvent('paciente:reservaCerrarModal'),
-      );
-    }
+    if (!this._datosReservaValidos()) return;
 
     this._confirmando = true;
     try {
       if (esReprogramacion && citaAnterior) {
         await this._repositorioCitas.cancelar(citaAnterior);
       }
-
-      const bloque = await this._repositorioBloques
-        .obtenerProfesional(this._bloqueId)
-        .catch(async (err) => {
-          await this._repositorioBloques.liberarTemporal(this._bloqueId);
-          throw err;
-        });
-
-      if (!bloque?.psicologo_id) throw new Error('Bloque no válido');
-
-      let citaId;
-      try {
-        citaId = await this._repositorioCitas.crear(
-          this._pacienteId,
-          bloque.psicologo_id,
-          this._bloqueId,
-        );
-      } catch (e) {
-        await this._repositorioBloques.liberarTemporal(this._bloqueId);
-        throw e;
-      }
-
-      if (!citaId) throw new Error('Error al crear cita');
-
-      await Promise.allSettled([
-        this._repositorioCitas.crearNotificacion(
-          this._pacienteId,
-          'confirmacion_reserva',
-          citaId,
-        ),
-        this._repositorioCitasPsicologo.crearNotificacionNuevoTurno(
-          bloque.psicologo_id,
-          citaId,
-        ),
-      ]);
-
-      this._dispatch('paciente:mensaje', {
-        texto: esReprogramacion
-          ? 'Cita reprogramada exitosamente'
-          : 'Cita reservada exitosamente',
-        tipo: 'exito',
-      });
-      document.dispatchEvent(
-        new CustomEvent('paciente:reservaConfirmada', {
-          detail: { esReprogramacion, fecha: this._fecha },
-        }),
-      );
+      const bloque = await this._obtenerBloqueProfesional();
+      const citaId = await this._crearCita(bloque.psicologo_id);
+      await this._notificarNuevoTurno(bloque.psicologo_id, citaId);
+      this._anunciarReservaExitosa(esReprogramacion);
     } catch (e) {
-      this._enviarMensajeError(this._mapearError(e.message));
-      document.dispatchEvent(
-        new CustomEvent('paciente:reservaError', {
-          detail: { fecha: this._fecha },
-        }),
-      );
+      this._anunciarReservaFallida(e);
     } finally {
       this._confirmando = false;
     }
+  }
+
+  _datosReservaValidos() {
+    if (!this._bloqueId || !this._pacienteId) {
+      this._enviarMensajeError('Error: datos de reserva incompletos');
+      return false;
+    }
+    if (this._usuario?.pacientes?.bloqueado) {
+      this._enviarMensajeError('No es posible agendar en este momento');
+      document.dispatchEvent(new CustomEvent('paciente:reservaCerrarModal'));
+      return false;
+    }
+    return true;
+  }
+
+  async _obtenerBloqueProfesional() {
+    const bloque = await this._repositorioBloques
+      .obtenerProfesional(this._bloqueId)
+      .catch(async (err) => {
+        await this._repositorioBloques.liberarTemporal(this._bloqueId);
+        throw err;
+      });
+    if (!bloque?.psicologo_id) throw new Error('Bloque no válido');
+    return bloque;
+  }
+
+  async _crearCita(psicologoId) {
+    let citaId;
+    try {
+      citaId = await this._repositorioCitas.crear(
+        this._pacienteId,
+        psicologoId,
+        this._bloqueId,
+      );
+    } catch (e) {
+      await this._repositorioBloques.liberarTemporal(this._bloqueId);
+      throw e;
+    }
+    if (!citaId) throw new Error('Error al crear cita');
+    return citaId;
+  }
+
+  async _notificarNuevoTurno(psicologoId, citaId) {
+    await Promise.allSettled([
+      this._repositorioCitas.crearNotificacion(
+        this._pacienteId,
+        'confirmacion_reserva',
+        citaId,
+      ),
+      this._repositorioCitasPsicologo.crearNotificacionNuevoTurno(
+        psicologoId,
+        citaId,
+      ),
+    ]);
+  }
+
+  _anunciarReservaExitosa(esReprogramacion) {
+    this._dispatch('paciente:mensaje', {
+      texto: esReprogramacion
+        ? 'Cita reprogramada exitosamente'
+        : 'Cita reservada exitosamente',
+      tipo: 'exito',
+    });
+    document.dispatchEvent(
+      new CustomEvent('paciente:reservaConfirmada', {
+        detail: { esReprogramacion, fecha: this._fecha },
+      }),
+    );
+  }
+
+  _anunciarReservaFallida(e) {
+    this._enviarMensajeError(this._mapearError(e.message));
+    document.dispatchEvent(
+      new CustomEvent('paciente:reservaError', {
+        detail: { fecha: this._fecha },
+      }),
+    );
   }
 
   async cerrarModal(reservaExitosa = false) {
