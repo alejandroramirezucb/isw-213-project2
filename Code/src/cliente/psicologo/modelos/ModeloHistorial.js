@@ -15,13 +15,7 @@ export class ModeloHistorial {
   }
 
   filtrarPorEstado(citas, estado) {
-    const resultado = [];
-    for (let i = 0; i < citas.length; i++) {
-      if (citas[i].estado === estado) {
-        resultado.push(citas[i]);
-      }
-    }
-    return resultado;
+    return citas.filter((cita) => cita.estado === estado);
   }
 
   async cargar(busqueda = '') {
