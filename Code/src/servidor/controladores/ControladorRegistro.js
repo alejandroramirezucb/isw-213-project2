@@ -35,11 +35,11 @@ export class ControladorRegistro extends ControladorBase {
     const usersResult = await this.cliente.get(`/auth/v1/admin/users?email=${encodeURIComponent(datos.correo)}`);
     const existente = (usersResult.data?.users || []).find((u) => u.email === datos.correo);
 
-    if (!existente) return this.responder(res, 409, { error: 'El correo ya está registrado' });
+    if (!existente) return this.responder(res, CodigosHttp.CONFLICTO, { error: 'El correo ya está registrado' });
 
     const authRows = await this.cliente.get(`/rest/v1/usuarios_auth?id=eq.${existente.id}&select=id`);
     if (Array.isArray(authRows.data) && authRows.data.length > 0) {
-      return this.responder(res, 409, { error: 'El correo ya está registrado' });
+      return this.responder(res, CodigosHttp.CONFLICTO, { error: 'El correo ya está registrado' });
     }
 
     await this._crearPerfil(res, datos, existente.id);
