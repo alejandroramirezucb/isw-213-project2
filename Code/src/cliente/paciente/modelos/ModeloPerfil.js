@@ -1,3 +1,5 @@
+/* globals CustomEvent */
+
 import { supabase } from '../../compartido/config/ClienteSupabase.js';
 import { ValidadorFormulario } from '../../compartido/validadores/ValidadorFormulario.js';
 
@@ -7,22 +9,30 @@ export class ModeloPerfil {
     document.dispatchEvent(new CustomEvent('paciente:perfilCargado', { detail: { usuario } }));
   }
 
-  async actualizarPassword(nueva, confirmar) {
+  validarNuevaPassword(nueva, confirmar) {
     if (!ValidadorFormulario.noEstaVacio(nueva) || !ValidadorFormulario.noEstaVacio(confirmar)) {
-      return this._msg('Por favor completa todos los campos', 'error');
+      return { valido: false, mensaje: 'Por favor completa todos los campos' };
     }
     if (!ValidadorFormulario.sonIguales(nueva, confirmar)) {
-      return this._msg('Las contraseñas no coinciden', 'error');
+      return { valido: false, mensaje: 'Las contraseñas no coinciden' };
     }
     if (!ValidadorFormulario.esPasswordValida(nueva)) {
-      return this._msg('La contraseña debe tener al menos 6 caracteres', 'error');
+      return { valido: false, mensaje: 'La contraseña debe tener al menos 6 caracteres' };
+    }
+    return { valido: true, mensaje: '' };
+  }
+
+  async actualizarPassword(nueva, confirmar) {
+    const validacion = this.validarNuevaPassword(nueva, confirmar);
+    if (!validacion.valido) {
+      return this._msg(validacion.mensaje, 'error');
     }
     try {
       const { error } = await supabase.auth.updateUser({ password: nueva });
       if (error) throw error;
       this._msg('Contraseña actualizada correctamente', 'exito');
       document.dispatchEvent(new CustomEvent('paciente:passwordActualizado'));
-    } catch (_) {
+    } catch {
       this._msg('Error al cambiar contraseña', 'error');
     }
   }
