@@ -1,6 +1,7 @@
 services:
   - type: web
     name: psicoraiden
+    plan: free
     runtime: docker
     repo: https://github.com/usuario/isw-213-project2
     dockerfilePath: ./Code/Dockerfile
