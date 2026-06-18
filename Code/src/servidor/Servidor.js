@@ -6,6 +6,8 @@ import { URL } from 'node:url';
 import { setInterval, clearInterval } from 'node:timers';
 import { Configuracion } from './config/Configuracion.js';
 import { CodigosHttp } from './config/CodigosHttp.js';
+import swaggerUiDist from 'swagger-ui-dist';
+import { EspecificacionOpenApi } from './config/EspecificacionOpenApi.js';
 import { ClienteSupabaseAdmin } from './config/ClienteSupabaseAdmin.js';
 import { ControladorRegistro } from './controladores/ControladorRegistro.js';
 import { ControladorRecordatorios } from './controladores/ControladorRecordatorios.js';
@@ -15,6 +17,7 @@ import { ControladorListaEspera } from './controladores/ControladorListaEspera.j
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = path.join(__dirname, '..', '..', 'dist');
 const ROOT_DIR = path.join(__dirname, '..', '..');
+const SWAGGER_DIR = swaggerUiDist.getAbsoluteFSPath();
 
 export class Servidor {
   constructor(config = null) {
@@ -61,6 +64,24 @@ export class Servidor {
       return res.end();
     }
 
+    if (pathname === '/openapi.json') {
+      res.writeHead(CodigosHttp.OK, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(EspecificacionOpenApi));
+    }
+
+    if (pathname === '/api-docs' || pathname === '/api-docs/') {
+      return this._servirSwagger('/index.html', res);
+    }
+
+    if (pathname === '/api-docs/swagger-initializer.js') {
+      res.writeHead(CodigosHttp.OK, { 'Content-Type': 'application/javascript' });
+      return res.end(this._inicializadorSwagger());
+    }
+
+    if (pathname.startsWith('/api-docs/')) {
+      return this._servirSwagger(pathname.slice('/api-docs'.length), res);
+    }
+
     const rutas = {
       '/api/registrar': () => this._registro.manejar(req, res),
       '/api/recordatorios': () => this._recordatorios.manejar(req, res),
@@ -72,6 +93,30 @@ export class Servidor {
     if (manejador) return manejador();
 
     this._servirArchivo(pathname, res);
+  }
+
+  _inicializadorSwagger() {
+    return `window.onload = () => {
+  window.ui = SwaggerUIBundle({
+    url: '/openapi.json',
+    dom_id: '#swagger-ui',
+    presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+    layout: 'StandaloneLayout',
+  });
+};`;
+  }
+
+  _servirSwagger(relativo, res) {
+    const filePath = path.join(SWAGGER_DIR, relativo);
+    const contentType = this._config.obtenerMime(path.extname(filePath));
+    fs.readFile(filePath, (err, content) => {
+      if (err) {
+        res.writeHead(CodigosHttp.NO_ENCONTRADO, { 'Content-Type': 'text/plain' });
+        return res.end('404 Not found');
+      }
+      res.writeHead(CodigosHttp.OK, { 'Content-Type': contentType });
+      res.end(content);
+    });
   }
 
   _servirArchivo(pathname, res) {
