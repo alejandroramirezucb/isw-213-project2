@@ -13,3 +13,4 @@ Code/coverage/
 Code/coverage_inicial/
 Code/test-results.json
 Code/.nyc_output/
+Code/eslint-reporter.html
