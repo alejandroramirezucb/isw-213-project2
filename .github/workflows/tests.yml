@@ -1,0 +1,40 @@
+name: Tests y Cobertura
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-y-cobertura:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Code
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: Code/package-lock.json
+
+      - run: npm ci
+
+      - run: npm run test:coverage
+
+      - run: npm run lint:reporter
+        if: always()
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reporte-cobertura
+          path: Code/coverage/
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reporte-lint
+          path: Code/eslint-reporter.html
