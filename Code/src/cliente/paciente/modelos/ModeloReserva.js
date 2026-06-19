@@ -35,24 +35,16 @@ export class ModeloReserva {
       const exito = await this._repositorioBloques.bloquearTemporal(bloqueId);
       if (!exito) {
         this._enviarMensajeError('Este horario ya no está disponible');
-        document.dispatchEvent(
-          new CustomEvent('paciente:bloqueNoDisponible', { detail: { fecha } }),
-        );
+        this._dispatch('paciente:bloqueNoDisponible', { fecha });
         return;
       }
 
       this._bloqueId = bloqueId;
       this._fecha = fecha;
-      document.dispatchEvent(
-        new CustomEvent('paciente:bloqueReservado', {
-          detail: { bloqueId, fecha },
-        }),
-      );
+      this._dispatch('paciente:bloqueReservado', { bloqueId, fecha });
     } catch {
       this._enviarMensajeError('Error al seleccionar horario');
-      document.dispatchEvent(
-        new CustomEvent('paciente:bloqueNoDisponible', { detail: { fecha } }),
-      );
+      this._dispatch('paciente:bloqueNoDisponible', { fecha });
     }
   }
 
@@ -83,7 +75,7 @@ export class ModeloReserva {
     }
     if (this._usuario?.pacientes?.bloqueado) {
       this._enviarMensajeError('No es posible agendar en este momento');
-      document.dispatchEvent(new CustomEvent('paciente:reservaCerrarModal'));
+      this._dispatch('paciente:reservaCerrarModal');
       return false;
     }
     return true;
@@ -137,20 +129,15 @@ export class ModeloReserva {
         : 'Cita reservada exitosamente',
       tipo: 'exito',
     });
-    document.dispatchEvent(
-      new CustomEvent('paciente:reservaConfirmada', {
-        detail: { esReprogramacion, fecha: this._fecha },
-      }),
-    );
+    this._dispatch('paciente:reservaConfirmada', {
+      esReprogramacion,
+      fecha: this._fecha,
+    });
   }
 
   _anunciarReservaFallida(e) {
     this._enviarMensajeError(this._mapearError(e.message));
-    document.dispatchEvent(
-      new CustomEvent('paciente:reservaError', {
-        detail: { fecha: this._fecha },
-      }),
-    );
+    this._dispatch('paciente:reservaError', { fecha: this._fecha });
   }
 
   async cerrarModal(reservaExitosa = false) {
@@ -161,11 +148,9 @@ export class ModeloReserva {
         .catch(() => {});
     }
     this._bloqueId = null;
-    document.dispatchEvent(
-      new CustomEvent('paciente:reservaCerrarModal', {
-        detail: { fecha: reservaExitosa ? null : fecha },
-      }),
-    );
+    this._dispatch('paciente:reservaCerrarModal', {
+      fecha: reservaExitosa ? null : fecha,
+    });
   }
 
   _enviarMensajeError(texto) {
