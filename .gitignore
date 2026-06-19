@@ -5,13 +5,11 @@
 Thumbs.db
 .claude
 .vscode/
-Code/.dockerignore
 Code/node_modules/
 Supabase.md
 .nyc_output/
 Code/dist
 Code/coverage/
-Code/coverage_inicial/
 Code/test-results.json
 Code/.nyc_output/
 Code/eslint-reporter.html
