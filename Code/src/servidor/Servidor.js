@@ -69,7 +69,12 @@ export class Servidor {
       return res.end(JSON.stringify(EspecificacionOpenApi));
     }
 
-    if (pathname === '/api-docs' || pathname === '/api-docs/') {
+    if (pathname === '/api-docs') {
+      res.writeHead(CodigosHttp.REDIRECCION, { Location: '/api-docs/' });
+      return res.end();
+    }
+
+    if (pathname === '/api-docs/') {
       return this._servirSwagger('/index.html', res);
     }
 
