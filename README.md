@@ -568,6 +568,7 @@ Tipos:
 - **Criterios de aceptación:**
   - Dado que la reserva se guarda exitosamente en la base de datos, cuando el proceso termine, entonces el sistema debe crear una notificación de confirmación con el detalle de la cita de que ha sido reservada con éxito.
   - Dado que se genera una nueva reserva, cuando se cree la notificación al paciente, entonces el administrador también debe recibir una notificación de "Nuevo turno agendado".
+  - Dado un conjunto de notificaciones del paciente, cuando el sistema calcule el numero de notificaciones no leídas, entonces debe contar únicamente las notificaciones cuyo campo `leida` es falso.
 - **Estimación:** 3 h
 
 ### HU-10 Vista de "Próxima Cita" del Paciente
@@ -608,6 +609,7 @@ Tipos:
 - **Criterios de aceptación:**
   - Dado que el psicólogo busca el nombre de un paciente, cuando acceda a su perfil básico, entonces el sistema debe listar todas las fechas de citas anteriores y su estado (Completada, Cancelada, Ausente).
   - Dado que el psicólogo está en el historial, cuando aprete “Descargar Historial”, entonces el sistema debe descargar en formato pdf una lista de todas las citas con su información básica y estado.
+  - Dado el historial de citas de un paciente, cuando el psicólogo filtre por un estado (Completada, Cancelada, Ausente), entonces el sistema debe devolver solo las citas que coinciden con ese estado.
 - **Estimación:** 3 h
 
 ### HU-14 Lista de Espera
@@ -618,6 +620,7 @@ Tipos:
 - **Criterios de aceptación:**
   - Dado que un día no tiene bloques disponibles, cuando el paciente lo seleccione, entonces debe aparecer un botón "Avisarme si se libera un turno".
   - Dado que un paciente cancela un turno en un día lleno, cuando ese bloque se libere, entonces el sistema debe enviar una notificación a todos los anotados en la lista de espera de ese día informando que hay un nuevo espacio.
+  - Dado que un paciente ya está anotado en la lista de espera de un día, cuando intente anotarse de nuevo, entonces el sistema debe detectar que ya está inscrito y no duplicar la inscripción.
 - **Estimación:** 5 h
 
 ### HU-15 Restricción de Pacientes
